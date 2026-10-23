@@ -1,0 +1,6 @@
+#ifndef RESENIA_H_INCLUDED
+#define RESENIA_H_INCLUDED
+
+
+
+#endif // RESENIA_H_INCLUDED

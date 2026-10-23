@@ -1,0 +1,13 @@
+
+
+bin/
+obj/
+*.layout
+*.depend
+*.workspace
+*.o
+*.obj
+*.exe
+*.dll
+*.a
+*.lib

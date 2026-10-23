@@ -13,6 +13,7 @@
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-g" />
+					<Add directory="include" />
 				</Compiler>
 			</Target>
 			<Target title="Release">
@@ -22,6 +23,7 @@
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-O2" />
+					<Add directory="include" />
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
@@ -32,6 +34,33 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Unit filename="Categoria.cpp" />
+		<Unit filename="Categoria.h" />
+		<Unit filename="CategoriaArchivo.cpp" />
+		<Unit filename="CategoriaArchivo.h" />
+		<Unit filename="Compra.cpp" />
+		<Unit filename="Compra.h" />
+		<Unit filename="CompraArchivo.cpp" />
+		<Unit filename="CompraArchivo.h" />
+		<Unit filename="Desarrollador.cpp" />
+		<Unit filename="Desarrollador.h" />
+		<Unit filename="DesarrolladorArchivo.cpp" />
+		<Unit filename="DesarrolladorArchivo.h" />
+		<Unit filename="Fecha.cpp" />
+		<Unit filename="Fecha.h" />
+		<Unit filename="Juego.cpp" />
+		<Unit filename="Juego.h" />
+		<Unit filename="JuegoArchivo.cpp" />
+		<Unit filename="JuegoArchivo.h" />
+		<Unit filename="Persona.cpp" />
+		<Unit filename="Persona.h" />
+		<Unit filename="Resenia.cpp" />
+		<Unit filename="Resenia.h" />
+		<Unit filename="ReseniaArchivo.cpp" />
+		<Unit filename="ReseniaArchivo.h" />
+		<Unit filename="Usuario.cpp" />
+		<Unit filename="Usuario.h" />
+		<Unit filename="UsuarioArchivo.cpp" />
 		<Unit filename="main.cpp" />
 		<Extensions />
 	</Project>
