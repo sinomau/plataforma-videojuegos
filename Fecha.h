@@ -13,7 +13,7 @@ class Fecha{
    public:
       Fecha();
       Fecha(int dia, int mes, int anio);
-
+      int toInt();
       int getDia();
       int getMes();
       int getAnio();

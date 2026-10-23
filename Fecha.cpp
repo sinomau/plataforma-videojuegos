@@ -1,6 +1,11 @@
 #include <string>
 #include "Fecha.h"
 
+int Fecha::toInt() {
+    return _anio * 10000 + _mes * 100 + _dia;
+}
+
+
 void Fecha::establecerFechaPorDefecto(){
    _dia = 1;
    _mes = 1;
