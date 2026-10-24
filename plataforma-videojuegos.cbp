@@ -42,16 +42,28 @@
 		<Unit filename="Compra.h" />
 		<Unit filename="CompraArchivo.cpp" />
 		<Unit filename="CompraArchivo.h" />
+		<Unit filename="Consultas.cpp" />
+		<Unit filename="Consultas.h" />
 		<Unit filename="Desarrollador.cpp" />
 		<Unit filename="Desarrollador.h" />
 		<Unit filename="DesarrolladorArchivo.cpp" />
 		<Unit filename="DesarrolladorArchivo.h" />
 		<Unit filename="Fecha.cpp" />
 		<Unit filename="Fecha.h" />
+		<Unit filename="Informes.cpp" />
+		<Unit filename="Informes.h" />
 		<Unit filename="Juego.cpp" />
 		<Unit filename="Juego.h" />
 		<Unit filename="JuegoArchivo.cpp" />
 		<Unit filename="JuegoArchivo.h" />
+		<Unit filename="Listados.cpp" />
+		<Unit filename="Listados.h" />
+		<Unit filename="Menu.cpp" />
+		<Unit filename="Menu.h" />
+		<Unit filename="MenuAdmin.cpp" />
+		<Unit filename="MenuAdmin.h" />
+		<Unit filename="MenuUsuario.cpp" />
+		<Unit filename="MenuUsuario.h" />
 		<Unit filename="Persona.cpp" />
 		<Unit filename="Persona.h" />
 		<Unit filename="Resenia.cpp" />
@@ -61,6 +73,9 @@
 		<Unit filename="Usuario.cpp" />
 		<Unit filename="Usuario.h" />
 		<Unit filename="UsuarioArchivo.cpp" />
+		<Unit filename="UsuarioArchivo.h" />
+		<Unit filename="Utils.cpp" />
+		<Unit filename="Utils.h" />
 		<Unit filename="main.cpp" />
 		<Extensions />
 	</Project>

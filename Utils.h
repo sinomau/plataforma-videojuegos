@@ -4,6 +4,7 @@
 
 int leerEntero();
 float leerFloat();
+void leerCadena(char destino[], int tamanio);
 
 
 

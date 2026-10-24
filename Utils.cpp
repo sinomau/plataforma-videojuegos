@@ -41,6 +41,17 @@ float leerFloat() {
 
 
 
+void leerCadena(char destino[], int tamanio) {
+    if (cin.peek() == '\n') {
+        cin.ignore();
+    }
 
+    cin.getline(destino, tamanio);
+
+    if (cin.fail()) {
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    }
+}
 
 
