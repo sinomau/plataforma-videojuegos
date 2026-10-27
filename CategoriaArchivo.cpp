@@ -36,7 +36,11 @@ Categoria CategoriaArchivo::leerDisco(int id) {
     Categoria reg;
     fseek(pArchivo,id * sizeof(Categoria),SEEK_SET);
 
-    fread(&reg,sizeof(Categoria),1,pArchivo);
+    if (fread(&reg, sizeof(Categoria), 1, pArchivo) != 1) {
+        cout << "Error al leer el registro." << endl;
+        fclose(pArchivo);
+        return Categoria();
+    }
 
     fclose(pArchivo);
 
@@ -67,12 +71,20 @@ int CategoriaArchivo::getCantidadRegistros() {
     FILE* pArchivo = fopen(_nombreArchivo,"rb");
     if(pArchivo==nullptr) {
         cout<< "Error al abrir el archivo " << endl;
+        return 0;
     }
     fseek(pArchivo,0,SEEK_END);
-    int cantidad = ftell(pArchivo) / sizeof(Categoria);
+    long tamanio = ftell(pArchivo);
 
     fclose(pArchivo);
-    return cantidad;
+    if (tamanio < 0) {
+        return 0;
+    }
+
+    return tamanio / sizeof(Categoria);
+
+
+
 
 }
 
