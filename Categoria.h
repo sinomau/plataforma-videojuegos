@@ -4,6 +4,9 @@
 class Categoria
 {
 public:
+    Categoria() {
+    _estado = true;
+}
     void setId(int id);
     int getId();
 
@@ -16,7 +19,7 @@ public:
     void setEstado(bool estado);
     bool getEstado();
 
-    void cargar(int id,const char* nombre,const char* descripcion,bool estado);
+    void cargar(int id, const char* nombre, const char* descripcion);
     void mostrar();
 
 protected:

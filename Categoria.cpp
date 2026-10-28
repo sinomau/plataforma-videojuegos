@@ -42,11 +42,11 @@ bool Categoria::getEstado() {
 }
 
 void Categoria::cargar(int id, const char* nombre,
-                       const char* descripcion, bool estado) {
+                       const char* descripcion) {
     setId(id);
     setNombre(nombre);
     setDescripcion(descripcion);
-    setEstado(estado);
+    setEstado(true);
 }
 
 
@@ -55,7 +55,7 @@ void Categoria::mostrar() {
     cout<< "Nombre :"<<_nombre << endl;
     cout<< "Descripcion :"<<_descripcion << endl;
     cout<< "Estado :";
-    if(_estado == 1) {
+    if(_estado == true) {
         cout<<"Activo"<<endl;
     } else {
         cout<< "Inactivo"<<endl;
