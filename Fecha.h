@@ -21,6 +21,7 @@ class Fecha{
       void cargar();
       void mostrar();
       void setFechaActual();
+      int getAnioActual();
       int getDia();
       int getMes();
       int getAnio();

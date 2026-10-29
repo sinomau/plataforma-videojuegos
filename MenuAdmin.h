@@ -3,7 +3,7 @@
 
 
 void menuCategorias();
-
+void menuDesarrolladores();
 
 
 #endif // MENUADMIN_H_INCLUDED

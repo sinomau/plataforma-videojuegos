@@ -38,6 +38,8 @@
 		<Unit filename="Categoria.h" />
 		<Unit filename="CategoriaArchivo.cpp" />
 		<Unit filename="CategoriaArchivo.h" />
+		<Unit filename="CategoriaManager.cpp" />
+		<Unit filename="CategoriaManager.h" />
 		<Unit filename="Compra.cpp" />
 		<Unit filename="Compra.h" />
 		<Unit filename="CompraArchivo.cpp" />

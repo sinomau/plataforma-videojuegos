@@ -54,7 +54,7 @@ void CategoriaArchivo::escribirDisco(Categoria reg) {
 
     FILE* pArchivo = fopen(_nombreArchivo,"ab");
     if(pArchivo == nullptr) {
-        cout << "Error al abrir el archivo para escribir." << endl;
+       cout << "Error al abrir el archivo."<<endl;
         return;
     }
     if (fwrite(&reg, sizeof(Categoria), 1, pArchivo) != 1) {
@@ -68,7 +68,7 @@ void CategoriaArchivo::escribirDisco(Categoria reg) {
 Categoria CategoriaArchivo::leerDisco(int id) {
     FILE* pArchivo = fopen(_nombreArchivo,"rb");
     if(pArchivo == nullptr) {
-        cout << "Error al abri el archivo para escribir."<<endl;
+        cout << "Error al abrir el archivo."<<endl;
         return Categoria();
     }
     Categoria reg;
@@ -90,7 +90,10 @@ Categoria CategoriaArchivo::leerDisco(int id) {
 
 bool CategoriaArchivo::existe(int id) {
     FILE* pArchivo = fopen(_nombreArchivo, "rb");
-    if (pArchivo == nullptr) return false;
+    if(pArchivo == nullptr) {
+        cout << "Error al abrir el archivo."<<endl;
+        return false;
+    }
 
     Categoria reg;
     while (fread(&reg, sizeof(Categoria), 1, pArchivo) == 1) {
@@ -106,7 +109,10 @@ bool CategoriaArchivo::existe(int id) {
 
 bool CategoriaArchivo::existeNombre(const char* nombre) {
     FILE* pArchivo = fopen(_nombreArchivo, "rb");
-    if (pArchivo == nullptr) return false;
+        if(pArchivo == nullptr) {
+        cout << "Error al abrir el archivo."<<endl;
+        return false;
+    }
 
     Categoria reg;
 
@@ -125,8 +131,9 @@ bool CategoriaArchivo::existeNombre(const char* nombre) {
 int CategoriaArchivo::getCantidadRegistros() {
     FILE* pArchivo = fopen(_nombreArchivo, "rb");
 
-    if (pArchivo == nullptr) {
-        return 0;
+      if(pArchivo == nullptr) {
+        cout << "Error al abrir el archivo."<<endl;
+        return -1;
     }
 
     fseek(pArchivo, 0, SEEK_END);

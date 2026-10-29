@@ -13,3 +13,4 @@ obj/
 *.lib
 tests/
 .atl/
+*.dat

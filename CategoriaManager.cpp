@@ -10,7 +10,7 @@ using namespace std;
 
 
 void CategoriaManager::cargarCategoria() {
-    Categoria cat;
+    Categoria reg;
     CategoriaArchivo archivo("categorias.dat");
 
     int id = archivo.obtenerNuevoId();
@@ -27,8 +27,8 @@ void CategoriaManager::cargarCategoria() {
     cout << "Ingrese la descripcion de la categoria: ";
     leerCadena(descripcion, 200);
 
-    cat.cargar(id, nombre, descripcion);
-    archivo.escribirDisco(cat);
+    reg.cargar(id, nombre, descripcion);
+    archivo.escribirDisco(reg);
 
 }
 
@@ -46,8 +46,8 @@ void CategoriaManager::buscarPorId() {
         return;
     }
 
-    Categoria cat = archivo.buscarPorId(id);
-    cat.mostrar();
+    Categoria reg = archivo.buscarPorId(id);
+    reg.mostrar();
 }
 
 void CategoriaManager::mostrarCategoria() {
@@ -60,10 +60,10 @@ void CategoriaManager::mostrarCategoria() {
     int cantidad = archivo.getCantidadRegistros();
 
     for (int i = 0; i < cantidad; i++) {
-        Categoria cat = archivo.leerDisco(i);
+        Categoria reg = archivo.leerDisco(i);
 
-        if (strcmp(cat.getNombre(), nombre) == 0) {
-            cat.mostrar();
+        if (strcmp(reg.getNombre(), nombre) == 0) {
+            reg.mostrar();
             return;
         }
     }
@@ -81,7 +81,13 @@ bool CategoriaManager::modificarCategoria() {
         cout << "No existe una categoria con ese ID." << endl;
         return false;
     }
+
+
     Categoria reg = archivo.buscarPorId(id);
+     if(reg.getEstado() == false){
+        cout << "No puede modificar una categoria eliminada" << endl;
+        return false;
+    }
 
     char nombre[50];
     char descripcion[200];

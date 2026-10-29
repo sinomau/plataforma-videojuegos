@@ -145,6 +145,16 @@ void Fecha::setFechaActual(){
    _anio = local->tm_year + 1900;
 }
 
+int Fecha::getAnioActual() {
+    std::time_t ahora = std::time(nullptr);
+    std::tm* local = std::localtime(&ahora);
+
+    _anio = local->tm_year + 1900;
+
+    return _anio;
+}
+
+
 std::string Fecha::toString(std::string formatoFecha){
    std::string fechaFormateada = "";
 
