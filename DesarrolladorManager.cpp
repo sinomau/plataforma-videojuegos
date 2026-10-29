@@ -12,13 +12,13 @@ using namespace std;
 
 void DesarrolladorManager::cargarDesarrollador() {
     Desarrollador reg;
-    DesarrolladorArchivo archivo("Desarrolladores.dat");
+    DesarrolladorArchivo archivo("desarrolladores.dat");
     Fecha anio;
     int id = archivo.obtenerNuevoId();
     char nombre[50];
     char pais[30];
     int anioFundacion;
-
+    const int ANIOMINIMO = 1958;
     cout << "Ingrese el nombre del Desarrollador: ";
     leerCadena(nombre,50);
     while(archivo.existeNombre(nombre)) {
@@ -32,8 +32,8 @@ void DesarrolladorManager::cargarDesarrollador() {
     cout << "Ingrese el anio de fundacion: ";
     anioFundacion = leerEntero();
 
-    while(anioFundacion > anio.getAnioActual() || anioFundacion < 1958) {
-        cout << "Ingrese un anio anterior al actual o mayor a 1958: ";
+    while(anioFundacion > anio.getAnioActual() || anioFundacion < ANIOMINIMO) {
+        cout << "Ingrese un anio menor o igual al actual y mayor 1958: ";
         anioFundacion = leerEntero();
     }
 
@@ -46,7 +46,7 @@ void DesarrolladorManager::cargarDesarrollador() {
 
 
 void DesarrolladorManager::buscarPorId() {
-    DesarrolladorArchivo archivo("Desarrolladores.dat");
+    DesarrolladorArchivo archivo("desarrolladores.dat");
     int id;
 
     cout << "Ingrese el ID del Desarrollador: ";
@@ -62,7 +62,7 @@ void DesarrolladorManager::buscarPorId() {
 }
 
 void DesarrolladorManager::mostrarDesarrollador() {
-    DesarrolladorArchivo archivo("Desarrolladores.dat");
+    DesarrolladorArchivo archivo("desarrolladores.dat");
     char nombre[50];
 
     cout << "Ingrese el nombre del Desarrollador: ";
@@ -84,7 +84,7 @@ void DesarrolladorManager::mostrarDesarrollador() {
 
 bool DesarrolladorManager::modificarDesarrollador() {
     // TODO: buscar la categor¡a y modificar sus datos
-    DesarrolladorArchivo archivo("Desarrolladores.dat");
+    DesarrolladorArchivo archivo("desarrolladores.dat");
 
 
     cout << "Ingrese el id del Desarrollador a modificar" << endl;
@@ -101,6 +101,7 @@ bool DesarrolladorManager::modificarDesarrollador() {
         return false;
     }
     Fecha anio;
+    const int ANIOMINIMO = 1958;
     char nombre[50];
     char pais[30];
     int anioFundacion;
@@ -118,14 +119,15 @@ bool DesarrolladorManager::modificarDesarrollador() {
     leerCadena(pais, 30);
     cout << "Ingrese el nuevo anio de fundacion: ";
     anioFundacion = leerEntero();
-    while(anioFundacion > anio.getAnioActual() || anioFundacion < 1958) {
-        cout << "Ingrese un anio anterior al actual o mayor a 1958: ";
+    while(anioFundacion > anio.getAnioActual() || anioFundacion < ANIOMINIMO) {
+        cout << "Ingrese un anio menor o igual al actual y mayor 1958: ";
         anioFundacion = leerEntero();
     }
 
 
     reg.setNombre(nombre);
     reg.setPais(pais);
+    reg.setAnioFundacion(anioFundacion);
 
     if (archivo.modificarDisco(reg, id)) {
         cout << "Desarrollador modificado correctamente." << endl;
@@ -138,7 +140,7 @@ bool DesarrolladorManager::modificarDesarrollador() {
 
 
 bool DesarrolladorManager::eliminarDesarrollador() {
-    DesarrolladorArchivo archivo("Desarrolladores.dat");
+    DesarrolladorArchivo archivo("desarrolladores.dat");
     Desarrollador reg;
     int cantidad = archivo.getCantidadRegistros();
     if (cantidad == 0) {
@@ -168,7 +170,7 @@ bool DesarrolladorManager::eliminarDesarrollador() {
 }
 
 void DesarrolladorManager::listarDesarrollador() {
-    DesarrolladorArchivo archivo("Desarrolladores.dat");
+    DesarrolladorArchivo archivo("d esarrolladores.dat");
     Desarrollador reg;
     int cantidad = archivo.getCantidadRegistros();
 

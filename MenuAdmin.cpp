@@ -61,7 +61,7 @@ void menuDesarrolladores() {
 
     do {
         system("cls");
-        cout << "Menu Categorias" << endl;
+        cout << "Menu Desarrolladores" << endl;
         cout << "Opcion 1 : CARGAR DESARROLLADORES" << endl;
         cout << "Opcion 2 : MODIFICAR DESARROLLADORES" << endl;
         cout << "Opcion 3 : ELIMINAR DESARROLLADORES" << endl;

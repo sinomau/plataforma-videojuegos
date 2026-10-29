@@ -110,7 +110,6 @@ bool CategoriaArchivo::existe(int id) {
 bool CategoriaArchivo::existeNombre(const char* nombre) {
     FILE* pArchivo = fopen(_nombreArchivo, "rb");
         if(pArchivo == nullptr) {
-        cout << "Error al abrir el archivo."<<endl;
         return false;
     }
 
@@ -132,8 +131,7 @@ int CategoriaArchivo::getCantidadRegistros() {
     FILE* pArchivo = fopen(_nombreArchivo, "rb");
 
       if(pArchivo == nullptr) {
-        cout << "Error al abrir el archivo."<<endl;
-        return -1;
+        return 0;
     }
 
     fseek(pArchivo, 0, SEEK_END);
@@ -163,8 +161,9 @@ bool CategoriaArchivo::modificarDisco(Categoria reg, int id) {
         if (aux.getId() == id) {
             fseek(pArchivo, -sizeof(Categoria), SEEK_CUR);
 
-            fwrite(&reg, sizeof(Categoria), 1, pArchivo);
-            encontrado = true;
+        if (fwrite(&reg, sizeof(Categoria), 1, pArchivo) != 1) {
+        cout << "Error al escribir el registro." << endl;
+        }
             break;
         }
     }
