@@ -3,55 +3,62 @@
 #include "CategoriaArchivo.h"
 #include "Categoria.h"
 #include "Utils.h"
-#include <limits>
 #include <cstring>
 using namespace std;
 
 
 
-void CategoriaManager::cargarCategoria() {
+bool CategoriaManager::cargarCategoria() {
+    CategoriaArchivo archivo;
     Categoria reg;
-    CategoriaArchivo archivo("categorias.dat");
 
     int id = archivo.obtenerNuevoId();
     char nombre[50];
     char descripcion[200];
 
     cout << "Ingrese el nombre de la categoria: ";
-    leerCadena(nombre,50);
-    while(archivo.existeNombre(nombre)) {
+    leerCadena(nombre, 50);
+    while (archivo.existeNombre(nombre)) {
         cout << "Ese nombre ya existe. Ingrese otro: ";
-        leerCadena(nombre,50);
+        leerCadena(nombre, 50);
     }
 
     cout << "Ingrese la descripcion de la categoria: ";
     leerCadena(descripcion, 200);
 
     reg.cargar(id, nombre, descripcion);
-    archivo.escribirDisco(reg);
+    if (archivo.escribirDisco(reg)) {
+        cout << "Categoria guardada correctamente." << endl;
+        return true;
+    }
 
+    cout << "No se pudo guardar la categoria." << endl;
+    return false;
 }
 
 
 
 void CategoriaManager::buscarPorId() {
-    CategoriaArchivo archivo("categorias.dat");
-    int id;
+    CategoriaArchivo archivo;
 
     cout << "Ingrese el ID de la categoria: ";
-    id = leerEntero();
+    int id = leerEntero();
 
-    if (!archivo.existe(id)) {
+    Categoria reg = archivo.buscarPorId(id);
+    if (reg.getId() == -1) {
         cout << "No existe una categoria con ese ID." << endl;
         return;
     }
+    if (reg.getEstado() == false) {
+        cout << "La categoria con ese ID esta dada de baja." << endl;
+        return;
+    }
 
-    Categoria reg = archivo.buscarPorId(id);
     reg.mostrar();
 }
 
 void CategoriaManager::mostrarCategoria() {
-    CategoriaArchivo archivo("categorias.dat");
+    CategoriaArchivo archivo;
     char nombre[50];
 
     cout << "Ingrese el nombre de la categoria: ";
@@ -61,6 +68,9 @@ void CategoriaManager::mostrarCategoria() {
 
     for (int i = 0; i < cantidad; i++) {
         Categoria reg = archivo.leerDisco(i);
+        if (reg.getEstado() == false) {
+            continue;
+        }
 
         if (strcmp(reg.getNombre(), nombre) == 0) {
             reg.mostrar();
@@ -72,20 +82,17 @@ void CategoriaManager::mostrarCategoria() {
 }
 
 bool CategoriaManager::modificarCategoria() {
-    // TODO: buscar la categor¡a y modificar sus datos
-    CategoriaArchivo archivo("categorias.dat");
+    CategoriaArchivo archivo;
 
     cout << "Ingrese el id de la categoria a modificar" << endl;
     int id = leerEntero();
-    if (!archivo.existe(id)) {
+    Categoria reg = archivo.buscarPorId(id);
+    if (reg.getId() == -1) {
         cout << "No existe una categoria con ese ID." << endl;
         return false;
     }
-
-
-    Categoria reg = archivo.buscarPorId(id);
-     if(reg.getEstado() == false){
-        cout << "No puede modificar una categoria eliminada" << endl;
+    if (reg.getEstado() == false) {
+        cout << "No puede modificar una categoria dada de baja." << endl;
         return false;
     }
 
@@ -94,7 +101,6 @@ bool CategoriaManager::modificarCategoria() {
 
     cout << "Ingrese el nuevo nombre: ";
     leerCadena(nombre, 50);
-
     while (archivo.existeNombre(nombre) &&
             strcmp(reg.getNombre(), nombre) != 0) {
         cout << "Ese nombre ya existe. Ingrese otro: ";
@@ -118,52 +124,46 @@ bool CategoriaManager::modificarCategoria() {
 
 
 bool CategoriaManager::eliminarCategoria() {
-    CategoriaArchivo archivo("categorias.dat");
-    Categoria reg;
-    int cantidad = archivo.getCantidadRegistros();
-    if (cantidad == 0) {
-        cout << "No hay categorias cargadas." << endl;
+    CategoriaArchivo archivo;
+
+    cout << "Ingrese el id de la categoria a eliminar" << endl;
+    int id = leerEntero();
+    Categoria reg = archivo.buscarPorId(id);
+    if (reg.getId() == -1) {
+        cout << "No existe una categoria con ese ID." << endl;
         return false;
     }
-    int id;
-    cout << "Ingresa el id de la categoria a borrar" << endl;
-    id = leerEntero();
-    while(!archivo.existe(id)) {
-        cout << "No existe la categoria con ese id. Ingrese ID correcto" << endl;
-        id = leerEntero();
-    }
-
-    reg = archivo.buscarPorId(id);
-    if(reg.getEstado() == false) {
+    if (reg.getEstado() == false) {
         cout << "Esta categoria ya se encuentra eliminada." << endl;
         return false;
     }
+
     reg.setEstado(false);
+
     if (archivo.modificarDisco(reg, id)) {
         cout << "Categoria eliminada correctamente." << endl;
         return true;
     }
+
     cout << "No se pudo eliminar la categoria." << endl;
     return false;
 }
 
 void CategoriaManager::listarCategoria() {
-    CategoriaArchivo archivo("categorias.dat");
-    Categoria reg;
+    CategoriaArchivo archivo;
     int cantidad = archivo.getCantidadRegistros();
-
-    if (cantidad == 0) {
-        cout << "No hay categorias cargadas." << endl;
-        return;
-    }
+    int mostrados = 0;
 
     for (int i = 0; i < cantidad; i++) {
-        reg = archivo.leerDisco(i);
-        if(reg.getEstado()) {
+        Categoria reg = archivo.leerDisco(i);
+        if (reg.getEstado()) {
             cout << "------------------------" << endl;
             reg.mostrar();
+            mostrados++;
         }
+    }
 
-
+    if (mostrados == 0) {
+        cout << "No hay categorias cargadas." << endl;
     }
 }

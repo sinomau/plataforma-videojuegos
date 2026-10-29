@@ -1,26 +1,26 @@
 #ifndef DESARROLLADORARCHIVO_H_INCLUDED
 #define DESARROLLADORARCHIVO_H_INCLUDED
-#include "Desarrollador.h"
 
+#include "Desarrollador.h"
 
 class DesarrolladorArchivo
 {
 public:
-    DesarrolladorArchivo(const char* nombreArchivo);
+    DesarrolladorArchivo(const char* nombreArchivo = "desarrolladores.dat");
 
-    void escribirDisco(Desarrollador reg);
-    Desarrollador leerDisco(int posicion);
+    bool escribirDisco(Desarrollador reg);
+    Desarrollador leerDisco(int pos);
+    int buscarPosicion(int id);
     Desarrollador buscarPorId(int id);
+    bool modificarDisco(Desarrollador reg, int id);
 
+    int getCantidadRegistros();
+    int obtenerNuevoId();
     bool existe(int id);
     bool existeNombre(const char* nombre);
-    int getCantidadRegistros();
-    bool modificarDisco(Desarrollador registro, int id);
-    int obtenerNuevoId();
 
 private:
     char _nombreArchivo[100];
 };
-
 
 #endif // DESARROLLADORARCHIVO_H_INCLUDED

@@ -4,7 +4,7 @@
 
 class DesarrolladorManager {
 public:
-    void cargarDesarrollador();
+    bool cargarDesarrollador();
     void buscarPorId();
     bool modificarDesarrollador();
     bool eliminarDesarrollador();

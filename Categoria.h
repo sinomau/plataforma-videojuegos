@@ -5,6 +5,7 @@ class Categoria
 {
 public:
     Categoria() {
+    _id = -1;
     _estado = true;
 }
     void setId(int id);

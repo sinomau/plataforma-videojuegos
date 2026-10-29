@@ -50,6 +50,8 @@
 		<Unit filename="Desarrollador.h" />
 		<Unit filename="DesarrolladorArchivo.cpp" />
 		<Unit filename="DesarrolladorArchivo.h" />
+		<Unit filename="DesarrolladorManager.cpp" />
+		<Unit filename="DesarrolladorManager.h" />
 		<Unit filename="Fecha.cpp" />
 		<Unit filename="Fecha.h" />
 		<Unit filename="Informes.cpp" />

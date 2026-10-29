@@ -1,4 +1,3 @@
-#include <iostream>
 #include "CategoriaArchivo.h"
 #include <cstring>
 #include <cstdio>
@@ -6,131 +5,90 @@
 using namespace std;
 
 CategoriaArchivo::CategoriaArchivo(const char* nombreArchivo) {
-    strncpy(_nombreArchivo,nombreArchivo,sizeof(_nombreArchivo)-1);
-    _nombreArchivo[sizeof(_nombreArchivo)-1] = '\0';
-
+    strncpy(_nombreArchivo, nombreArchivo, sizeof(_nombreArchivo) - 1);
+    _nombreArchivo[sizeof(_nombreArchivo) - 1] = '\0';
 }
-Categoria CategoriaArchivo::buscarPorId(int id) {
-    FILE* pArchivo = fopen(_nombreArchivo, "rb");
 
+bool CategoriaArchivo::escribirDisco(Categoria reg) {
+    FILE* pArchivo = fopen(_nombreArchivo, "ab");
+    if (pArchivo == nullptr) {
+        return false;
+    }
+
+    bool ok = fwrite(&reg, sizeof(Categoria), 1, pArchivo) == 1;
+    fclose(pArchivo);
+    return ok;
+}
+
+Categoria CategoriaArchivo::leerDisco(int pos) {
+    if (pos < 0 || pos >= getCantidadRegistros()) {
+        return Categoria();
+    }
+
+    FILE* pArchivo = fopen(_nombreArchivo, "rb");
     if (pArchivo == nullptr) {
         return Categoria();
     }
 
     Categoria reg;
-
-    while (fread(&reg, sizeof(Categoria), 1, pArchivo) == 1) {
-        if (reg.getId() == id) {
-            fclose(pArchivo);
-            return reg;
-        }
-    }
-
-    fclose(pArchivo);
-    return Categoria();
-}
-
-int CategoriaArchivo::obtenerNuevoId() {
-    FILE* pArchivo = fopen(_nombreArchivo, "rb");
-
-    if (pArchivo == nullptr) {
-        return 1;
-    }
-
-    Categoria reg;
-    int cantidad = 0;
-
-    while (fread(&reg, sizeof(Categoria), 1, pArchivo) == 1) {
-        cantidad++;
-    }
-
-    fclose(pArchivo);
-
-    return cantidad + 1;
-}
-
-
-void CategoriaArchivo::escribirDisco(Categoria reg) {
-
-    FILE* pArchivo = fopen(_nombreArchivo,"ab");
-    if(pArchivo == nullptr) {
-       cout << "Error al abrir el archivo."<<endl;
-        return;
-    }
-    if (fwrite(&reg, sizeof(Categoria), 1, pArchivo) != 1) {
-        cout << "Error al escribir el registro." << endl;
-    }
-    fclose(pArchivo);
-
-
-}
-
-Categoria CategoriaArchivo::leerDisco(int id) {
-    FILE* pArchivo = fopen(_nombreArchivo,"rb");
-    if(pArchivo == nullptr) {
-        cout << "Error al abrir el archivo."<<endl;
-        return Categoria();
-    }
-    Categoria reg;
-    fseek(pArchivo,id * sizeof(Categoria),SEEK_SET);
-
+    fseek(pArchivo, pos * sizeof(Categoria), SEEK_SET);
     if (fread(&reg, sizeof(Categoria), 1, pArchivo) != 1) {
-        cout << "Error al leer el registro." << endl;
         fclose(pArchivo);
         return Categoria();
     }
 
     fclose(pArchivo);
-
     return reg;
-
-
 }
 
-
-bool CategoriaArchivo::existe(int id) {
+int CategoriaArchivo::buscarPosicion(int id) {
     FILE* pArchivo = fopen(_nombreArchivo, "rb");
-    if(pArchivo == nullptr) {
-        cout << "Error al abrir el archivo."<<endl;
-        return false;
+    if (pArchivo == nullptr) {
+        return -1;
     }
 
     Categoria reg;
+    int pos = 0;
     while (fread(&reg, sizeof(Categoria), 1, pArchivo) == 1) {
         if (reg.getId() == id) {
             fclose(pArchivo);
-            return true;
+            return pos;
         }
+        pos++;
     }
+
     fclose(pArchivo);
-    return false;
+    return -1;
 }
 
+Categoria CategoriaArchivo::buscarPorId(int id) {
+    int pos = buscarPosicion(id);
+    if (pos == -1) {
+        return Categoria();
+    }
+    return leerDisco(pos);
+}
 
-bool CategoriaArchivo::existeNombre(const char* nombre) {
-    FILE* pArchivo = fopen(_nombreArchivo, "rb");
-        if(pArchivo == nullptr) {
+bool CategoriaArchivo::modificarDisco(Categoria reg, int id) {
+    int pos = buscarPosicion(id);
+    if (pos == -1) {
         return false;
     }
 
-    Categoria reg;
-
-     while (fread(&reg, sizeof(Categoria), 1, pArchivo) == 1) {
-        if (strcmp(reg.getNombre(),nombre) == 0) {
-            fclose(pArchivo);
-            return true;
-        }
+    FILE* pArchivo = fopen(_nombreArchivo, "rb+");
+    if (pArchivo == nullptr) {
+        return false;
     }
+
+    fseek(pArchivo, pos * sizeof(Categoria), SEEK_SET);
+    bool ok = fwrite(&reg, sizeof(Categoria), 1, pArchivo) == 1;
     fclose(pArchivo);
-    return false;
+    return ok;
 }
-
-
 
 int CategoriaArchivo::getCantidadRegistros() {
     FILE* pArchivo = fopen(_nombreArchivo, "rb");
-
-      if(pArchivo == nullptr) {
+    if (pArchivo == nullptr) {
         return 0;
     }
 
@@ -146,31 +104,28 @@ int CategoriaArchivo::getCantidadRegistros() {
     return tamanio / sizeof(Categoria);
 }
 
-bool CategoriaArchivo::modificarDisco(Categoria reg, int id) {
-    FILE* pArchivo = fopen(_nombreArchivo, "rb+");
+int CategoriaArchivo::obtenerNuevoId() {
+    return getCantidadRegistros() + 1;
+}
 
+bool CategoriaArchivo::existe(int id) {
+    return buscarPosicion(id) != -1;
+}
+
+bool CategoriaArchivo::existeNombre(const char* nombre) {
+    FILE* pArchivo = fopen(_nombreArchivo, "rb");
     if (pArchivo == nullptr) {
-        cout << "Error al abrir el archivo" << endl;
         return false;
     }
 
-    Categoria aux;
-    bool encontrado = false;
-
-    while (fread(&aux, sizeof(Categoria), 1, pArchivo) == 1) {
-        if (aux.getId() == id) {
-            fseek(pArchivo, -sizeof(Categoria), SEEK_CUR);
-
-        if (fwrite(&reg, sizeof(Categoria), 1, pArchivo) != 1) {
-        cout << "Error al escribir el registro." << endl;
-        }
-            break;
+    Categoria reg;
+    while (fread(&reg, sizeof(Categoria), 1, pArchivo) == 1) {
+        if (reg.getEstado() == true && strcmp(reg.getNombre(), nombre) == 0) {
+            fclose(pArchivo);
+            return true;
         }
     }
 
     fclose(pArchivo);
-    return encontrado;
+    return false;
 }
-
-
-

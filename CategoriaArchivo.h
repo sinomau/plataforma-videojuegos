@@ -6,17 +6,18 @@
 class CategoriaArchivo
 {
 public:
-    CategoriaArchivo(const char* nombreArchivo);
+    CategoriaArchivo(const char* nombreArchivo = "categorias.dat");
 
-    void escribirDisco(Categoria reg);
-    Categoria leerDisco(int posicion);
+    bool escribirDisco(Categoria reg);
+    Categoria leerDisco(int pos);
+    int buscarPosicion(int id);
     Categoria buscarPorId(int id);
+    bool modificarDisco(Categoria reg, int id);
 
+    int getCantidadRegistros();
+    int obtenerNuevoId();
     bool existe(int id);
     bool existeNombre(const char* nombre);
-    int getCantidadRegistros();
-    bool modificarDisco(Categoria registro, int id);
-    int obtenerNuevoId();
 
 private:
     char _nombreArchivo[100];

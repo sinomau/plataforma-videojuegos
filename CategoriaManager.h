@@ -3,7 +3,7 @@
 
 class CategoriaManager {
 public:
-    void cargarCategoria();
+    bool cargarCategoria();
     void buscarPorId();
     bool modificarCategoria();
     bool eliminarCategoria();
