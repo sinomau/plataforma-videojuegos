@@ -60,6 +60,8 @@
 		<Unit filename="Juego.h" />
 		<Unit filename="JuegoArchivo.cpp" />
 		<Unit filename="JuegoArchivo.h" />
+		<Unit filename="JuegoManager.cpp" />
+		<Unit filename="JuegoManager.h" />
 		<Unit filename="Listados.cpp" />
 		<Unit filename="Listados.h" />
 		<Unit filename="Menu.cpp" />

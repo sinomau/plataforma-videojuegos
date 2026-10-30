@@ -4,6 +4,7 @@
 
 void menuCategorias();
 void menuDesarrolladores();
+void menuJuegos();
 
 
 #endif // MENUADMIN_H_INCLUDED

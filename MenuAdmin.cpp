@@ -1,8 +1,8 @@
 #include <iostream>
 #include "MenuAdmin.h"
-#include "CategoriaArchivo.h"
 #include "CategoriaManager.h"
 #include "DesarrolladorManager.h"
+#include "JuegoManager.h"
 #include "Utils.h"
 #include <cstdlib>
 
@@ -99,3 +99,49 @@ void menuDesarrolladores() {
 
 
 }
+
+void menuJuegos() {
+    JuegoManager manager;
+    int opcion;
+
+    do {
+        system("cls");
+        cout << "Menu Juegos" << endl;
+        cout << "Opcion 1 : CARGAR JUEGOS" << endl;
+        cout << "Opcion 2 : MODIFICAR JUEGOS" << endl;
+        cout << "Opcion 3 : ELIMINAR JUEGOS" << endl;
+        cout << "Opcion 4 : LISTAR JUEGOS" << endl;
+        cout << "Opcion 0 : SALIR " << endl;
+        cout << "Ingresa una opcion " << endl;
+        opcion = leerEntero();
+        system("cls");
+        switch (opcion) {
+        case 1:
+            manager.cargarJuego();
+            break;
+        case 2:
+            manager.modificarJuego();
+            break;
+        case 3:
+            manager.eliminarJuego();
+            break;
+        case 4:
+            manager.listarJuego();
+            break;
+        case 0:
+            return;
+        default:
+            break;
+        }
+
+        if(opcion != 0){
+            system("pause");
+        }
+
+    } while (opcion != 0);
+
+
+
+
+}
+
