@@ -193,7 +193,7 @@ bool JuegoManager::modificarJuego() {
 			cout << "Categoria inexistente o inactiva." << endl;
 			cout << "Ingrese 0 para salir u otro numero para reintentar: ";
 			if(leerEntero() == 0) {
-				cout << "Carga cancelada." << endl;
+				cout << "Modificacion cancelada." << endl;
 				return false;
 			}
 		}
