@@ -76,6 +76,8 @@
 		<Unit filename="Resenia.h" />
 		<Unit filename="ReseniaArchivo.cpp" />
 		<Unit filename="ReseniaArchivo.h" />
+		<Unit filename="ReseniaManager.cpp" />
+		<Unit filename="ReseniaManager.h" />
 		<Unit filename="Usuario.cpp" />
 		<Unit filename="Usuario.h" />
 		<Unit filename="UsuarioArchivo.cpp" />
