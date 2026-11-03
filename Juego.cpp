@@ -35,7 +35,7 @@ int Juego::getIdCategoria() {
 void Juego::setIdDesarrollador(int id) {
     _idDesarrollador = id;
 
-};
+}
 
 int Juego::getIdDesarrollador() {
     return _idDesarrollador;

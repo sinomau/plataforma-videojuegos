@@ -82,6 +82,8 @@
 		<Unit filename="Usuario.h" />
 		<Unit filename="UsuarioArchivo.cpp" />
 		<Unit filename="UsuarioArchivo.h" />
+		<Unit filename="UsuarioManager.cpp" />
+		<Unit filename="UsuarioManager.h" />
 		<Unit filename="Utils.cpp" />
 		<Unit filename="Utils.h" />
 		<Unit filename="main.cpp" />

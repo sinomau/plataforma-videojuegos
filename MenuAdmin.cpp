@@ -9,6 +9,37 @@
 using namespace std;
 
 
+void menuAdmin() {
+    int opcion;
+
+    do {
+        system("cls");
+        cout << "Menu Administrador" << endl;
+        cout << "Opcion 1 : CATEGORIAS" << endl;
+        cout << "Opcion 2 : DESARROLLADORES" << endl;
+        cout << "Opcion 3 : JUEGOS" << endl;
+        cout << "Opcion 0 : CERRAR SESION " << endl;
+        cout << "Ingresa una opcion " << endl;
+        opcion = leerEntero();
+        switch (opcion) {
+        case 1:
+            menuCategorias();
+            break;
+        case 2:
+            menuDesarrolladores();
+            break;
+        case 3:
+            menuJuegos();
+            break;
+        case 0:
+            return;
+        default:
+            break;
+        }
+
+    } while (opcion != 0);
+}
+
 void menuCategorias() {
     CategoriaManager manager;
     int opcion;
