@@ -5,10 +5,10 @@ class ReseniaManager {
 public:
     bool cargarResenia(int idUsuario);
     void buscarPorId();
-    bool modificarResenia();
-    bool eliminarResenia();
+    bool modificarResenia(int idUsuario);
+    bool eliminarResenia(int idUsuario);
     void listarResenias();
-    void mostrarResenia();
+    void mostrarReseniasJuego();
 
 
 

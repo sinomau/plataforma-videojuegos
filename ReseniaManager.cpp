@@ -6,6 +6,7 @@
 #include "Juego.h"
 #include "JuegoArchivo.h"
 #include "Usuario.h"
+#include "UsuarioArchivo.h"
 #include "Utils.h"
 #include "Fecha.h"
 
@@ -86,61 +87,83 @@ void ReseniaManager::buscarPorId() {
 	return;
 }
 
-/**
- *
- * @return
- */
-bool ReseniaManager::modificarResenia() {
+/// Solo el autor de la resenia puede modificarla. El juego no se cambia.
+bool ReseniaManager::modificarResenia(int idUsuario) {
 	ReseniaArchivo archivo;
-	Resenia reg;
-	cout << "Ingresa el identificador de la Resenia a modificar" << endl;
+	cout << "Ingrese el ID de la resenia a modificar: ";
 	int id = leerEntero();
-	reg = archivo.buscarPorId(id);
+	Resenia reg = archivo.buscarPorId(id);
 	if(reg.getId() == -1) {
-		cout << "No existe una Resenia con ese ID." << endl;
+		cout << "No existe una resenia con ese ID." << endl;
 		return false;
 	}
 	if(reg.getEstado() == false) {
-		cout << "La Resenia con ese ID esta dada de baja." << endl;
+		cout << "La resenia con ese ID esta dada de baja." << endl;
 		return false;
 	}
-	cout << "Ingresa el juego" << endl;
-	int idJuego = leerEntero();
-	cout << "Ingresa el nuevo puntaje" << endl;
+	if(reg.getIdUsuario() != idUsuario) {
+		cout << "Solo puede modificar sus propias resenias." << endl;
+		return false;
+	}
+
+	cout << "Ingrese el nuevo puntaje (1 a 5): ";
 	int puntaje = leerEntero();
-	cout << "Ingresa el nuevo comentario" << endl;
+	while(puntaje < 1 || puntaje > 5) {
+		cout << "Puntaje invalido. Ingrese un puntaje entre 1 y 5: ";
+		puntaje = leerEntero();
+	}
+
 	char comentario[200];
+	cout << "Ingrese el nuevo comentario: ";
 	leerCadena(comentario, 200);
-	cout << "Ingresa la fecha de resenia" << endl;
+	while(strlen(comentario) == 0) {
+		cout << "El comentario no puede estar vacio. Ingrese otro: ";
+		leerCadena(comentario, 200);
+	}
+
 	Fecha fechaResenia;
-	fechaResenia.cargar();
-	reg.setIdJuego(idJuego);
+	fechaResenia.setFechaActual();
+
 	reg.setPuntaje(puntaje);
 	reg.setComentario(comentario);
 	reg.setFechaResenia(fechaResenia);
-	return archivo.modificarDisco(reg, id);
+
+	if(archivo.modificarDisco(reg, id)) {
+		cout << "Resenia modificada correctamente." << endl;
+		return true;
+	}
+	cout << "No se pudo modificar la resenia." << endl;
+	return false;
 }
 
-/**
- *
- * @return
- */
-bool ReseniaManager::eliminarResenia() {
+/// El usuario elimina sus propias resenias; el administrador puede eliminar cualquiera.
+bool ReseniaManager::eliminarResenia(int idUsuario) {
 	ReseniaArchivo archivo;
-	Resenia reg;
-	cout << "Ingresa el identificador de la Resenia a eliminar" << endl;
+	UsuarioArchivo archUsuario;
+	cout << "Ingrese el ID de la resenia a eliminar: ";
 	int id = leerEntero();
-	reg = archivo.buscarPorId(id);
+	Resenia reg = archivo.buscarPorId(id);
 	if(reg.getId() == -1) {
-		cout << "No existe una Resenia con ese ID." << endl;
+		cout << "No existe una resenia con ese ID." << endl;
 		return false;
 	}
 	if(reg.getEstado() == false) {
-		cout << "La Resenia con ese ID esta dada de baja." << endl;
+		cout << "Esta resenia ya se encuentra eliminada." << endl;
 		return false;
 	}
+	bool esAdmin = archUsuario.buscarPorId(idUsuario).getRol() == ROL_ADMIN;
+	if(!esAdmin && reg.getIdUsuario() != idUsuario) {
+		cout << "Solo puede eliminar sus propias resenias." << endl;
+		return false;
+	}
+
 	reg.setEstado(false);
-	return archivo.modificarDisco(reg, id);
+	if(archivo.modificarDisco(reg, id)) {
+		cout << "Resenia eliminada correctamente." << endl;
+		return true;
+	}
+	cout << "No se pudo eliminar la resenia." << endl;
+	return false;
 }
 
 /**
@@ -166,23 +189,30 @@ void ReseniaManager::listarResenias() {
 	return;
 }
 
-/**
- *
- */
-void ReseniaManager::mostrarResenia() {
+/// Muestra todas las resenias activas de un juego.
+void ReseniaManager::mostrarReseniasJuego() {
 	ReseniaArchivo archivo;
-	Resenia reg;
-	cout << "Ingrese identificador de resena" << endl;
-	int id = leerEntero();
-	reg = archivo.buscarPorId(id);
-	if(reg.getId() == -1) {
-		cout << "No hay Resenias con ese identificador" << endl;
+	JuegoArchivo archJuego;
+	cout << "Ingrese el ID del juego: ";
+	int idJuego = leerEntero();
+	Juego juego = archJuego.buscarPorId(idJuego);
+	if(juego.getId() == -1 || juego.getEstado() == false) {
+		cout << "Juego inexistente o inactivo." << endl;
 		return;
 	}
-	if(reg.getEstado() == false) {
-		cout << "La resenia fue eliminada" << endl;
-		return;
+
+	cout << "Resenias de " << juego.getTitulo() << ":" << endl;
+	int cantidad = archivo.getCantidadRegistros();
+	int mostradas = 0;
+	for(int i = 0; i < cantidad; i++) {
+		Resenia reg = archivo.leerDisco(i);
+		if(reg.getEstado() && reg.getIdJuego() == idJuego) {
+			cout << "------------------------" << endl;
+			reg.mostrar();
+			mostradas++;
+		}
 	}
-	reg.mostrar();
-	return;
+	if(mostradas == 0) {
+		cout << "Ese juego todavia no tiene resenias." << endl;
+	}
 }
