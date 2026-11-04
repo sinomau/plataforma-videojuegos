@@ -292,7 +292,7 @@ void JuegoManager::listarJuego() {
 			int cantDes = archDes.getCantidadRegistros();
 			for(int k = 0; k < cantDes; ++k) {
 				des = archDes.leerDisco(k);
-				if(reg.getIdDesarrollador() == reg.getId()) {
+				if(reg.getIdDesarrollador() == des.getId()) {
 					cout << "Desarrollador: " << des.getNombre() << endl;
 					break;
 				}

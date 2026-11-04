@@ -125,7 +125,7 @@ bool ReseniaArchivo::existeResenia(int idUsuario,int idJuego) {
 
     for(int i = 0; i<cantidad; i++) {
         Resenia reg = leerDisco(i);
-        if(reg.getIdUsuario() == idUsuario && reg.getIdJuego() == idJuego) {
+        if(reg.getIdUsuario() == idUsuario && reg.getIdJuego() == idJuego && reg.getEstado()) {
             return true;
         }
     }
