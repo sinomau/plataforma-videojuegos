@@ -23,7 +23,7 @@ int Resenia::getIdUsuario() {
 }
 
 void Resenia::setIdJuego(int idJuego) {
-    idJuego = idJuego;
+    _idJuego = idJuego;
 }
 
 
@@ -70,3 +70,30 @@ bool Resenia::getEstado() {
 }
 
 
+void Resenia::cargar(int id, int idUsuario,int idJuego,int puntaje,const char* comentario ,Fecha fechaResenia) {
+    setId(id);
+    setIdUsuario(idUsuario);
+    setIdJuego(idJuego);
+    setPuntaje(puntaje);
+    setComentario(comentario);
+    setFechaResenia(fechaResenia);
+    setEstado(true);
+}
+
+
+void Resenia::mostrar() {
+    cout<< "Id :"<<_id << endl;
+    cout<< "IdUsuario :"<<_idUsuario << endl;
+    cout<< "IdJuego :"<<_idJuego << endl;
+    cout<< "Puntaje :"<<_puntaje << endl;
+    cout<< "Comentario :"<<_comentario << endl;
+    cout<< "Fecha de rese¤a :"; _fechaResenia.mostrar();
+    cout<< "Estado :";
+    if(_estado == true) {
+        cout<<"Activo"<<endl;
+    } else {
+        cout<< "Inactivo"<<endl;
+    }
+
+
+}

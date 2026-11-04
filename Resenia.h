@@ -32,6 +32,10 @@ public:
     void setEstado(bool estado);
     bool getEstado();
 
+    void cargar(int id,int idUsuario,int idJuego,int puntaje,const char* comentario,Fecha fechaResenia);
+    void mostrar();
+
+
 
 protected:
 private:

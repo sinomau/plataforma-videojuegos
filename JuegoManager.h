@@ -9,6 +9,7 @@ public:
     bool eliminarJuego();
     void listarJuego();
     void mostrarJuego();
+
 protected:
 private:
 };
