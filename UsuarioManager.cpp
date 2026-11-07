@@ -7,8 +7,7 @@
 
 using namespace std;
 
-/// Registro de un usuario nuevo.
-/// Si es el primero que se registra (archivo vacio), queda como administrador.
+
 bool UsuarioManager::cargarUsuario() {
     UsuarioArchivo archivo;
     Usuario reg;
@@ -75,8 +74,7 @@ bool UsuarioManager::cargarUsuario() {
     return false;
 }
 
-/// Pide usuario y contrasenia.
-/// Devuelve el id del usuario si son correctos, o -1 si no.
+
 int UsuarioManager::iniciarSesion() {
     UsuarioArchivo archivo;
     char nombreUsuario[30];

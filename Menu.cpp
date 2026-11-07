@@ -50,7 +50,7 @@ void menuInicio() {
 
     } while (opcion != 0);
 }
-/// Rol Usuario
+
 void menuSegunRol(int idUsuario) {
     UsuarioArchivo archivo;
     Usuario reg = archivo.buscarPorId(idUsuario);

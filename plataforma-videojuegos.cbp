@@ -44,6 +44,8 @@
 		<Unit filename="Compra.h" />
 		<Unit filename="CompraArchivo.cpp" />
 		<Unit filename="CompraArchivo.h" />
+		<Unit filename="CompraManager.cpp" />
+		<Unit filename="CompraManager.h" />
 		<Unit filename="Consultas.cpp" />
 		<Unit filename="Consultas.h" />
 		<Unit filename="Desarrollador.cpp" />
