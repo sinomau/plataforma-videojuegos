@@ -5,6 +5,7 @@
 #include "ReseniaArchivo.h"
 #include "JuegoArchivo.h"
 #include "UsuarioArchivo.h"
+#include "CompraArchivo.h"
 
 ReseniaArchivo::ReseniaArchivo(const char* nombreArchivo) {
     strncpy(_nombreArchivo, nombreArchivo, sizeof(_nombreArchivo) - 1);

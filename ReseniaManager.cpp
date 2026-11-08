@@ -7,6 +7,7 @@
 #include "JuegoArchivo.h"
 #include "Usuario.h"
 #include "UsuarioArchivo.h"
+#include "CompraArchivo.h"
 #include "Utils.h"
 #include "Fecha.h"
 
@@ -20,6 +21,7 @@ using namespace std;
 bool ReseniaManager::cargarResenia(int idUsuario) {
 	ReseniaArchivo archivo;
 	Resenia reg;
+	CompraArchivo archCompra;
 	int id = archivo.obtenerNuevoId(), idJuego, puntaje;
 	char comentario[200];
 	Fecha fechaResenia;
@@ -39,7 +41,12 @@ bool ReseniaManager::cargarResenia(int idUsuario) {
 			}
 		}
 	}
-	// TODO: validar con existeCompra(idUsuario, idJuego) cuando Compra este hecha
+
+    if(!archCompra.existeCompra(idUsuario,idJuego)){
+        cout << "No puedes dejar una reseña en un juego que no compraste." << endl;
+		return false;
+    }
+
 	if(archivo.existeResenia(idUsuario, idJuego)) {
 		cout << "Ya dejaste una resenia para ese juego." << endl;
 		return false;
