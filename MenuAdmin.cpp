@@ -4,6 +4,8 @@
 #include "DesarrolladorManager.h"
 #include "JuegoManager.h"
 #include "CompraManager.h"
+#include "Listados.h"
+#include "Consultas.h"
 #include "Utils.h"
 #include <cstdlib>
 
@@ -21,9 +23,13 @@ void menuAdmin() {
         cout << "Opcion 2 : DESARROLLADORES" << endl;
         cout << "Opcion 3 : JUEGOS" << endl;
         cout << "Opcion 4 : ANULAR COMPRA" << endl;
-        cout << "Opcion 0 : CERRAR SESION " << endl;
-        cout << "Ingresa una opcion " << endl;
+        cout << "Opcion 5 : LISTADOS" << endl;
+        cout << "Opcion 6 : CONSULTAS" << endl;
+        cout << "Opcion 0 : CERRAR SESION" << endl;
+        cout << "Ingresa una opcion" << endl;
+
         opcion = leerEntero();
+
         switch (opcion) {
         case 1:
             menuCategorias();
@@ -39,6 +45,12 @@ void menuAdmin() {
             compraManager.eliminarCompra();
             system("pause");
             break;
+        case 5:
+            menuListados();
+            break;
+        case 6:
+            menuConsultas();
+            break;
         case 0:
             return;
         default:
@@ -47,7 +59,6 @@ void menuAdmin() {
 
     } while (opcion != 0);
 }
-
 void menuCategorias() {
     CategoriaManager manager;
     int opcion;
@@ -183,4 +194,121 @@ void menuJuegos() {
 
 
 }
+
+void menuListados() {
+    int opcion;
+    do {
+        system("cls");
+        cout << "Menu Listados" << endl;
+        cout << "Opcion 1 : JUEGOS POR ORDENADOS POR TITULO" << endl;
+        cout << "Opcion 2 : JUEGOS POR ORDENADOS POR PRECIO" << endl;
+        cout << "Opcion 3 : JUEGOS POR ORDENADOS POR FECHA DE LANZAMIENTO" << endl;
+        cout << "Opcion 4 : JUEGOS POR ORDENADOS POR CATEGORIA" << endl;
+        cout << "Opcion 5 : DESARROLLADORES ORDENADOS POR NOMBRE" << endl;
+        cout << "Opcion 6 : DESARROLLADORES ORDENADOS POR FECHA DE FUNDACION" << endl;
+        cout << "Opcion 0 : SALIR " << endl;
+        cout << "Ingresa una opcion " << endl;
+        opcion = leerEntero();
+        system("cls");
+        switch (opcion) {
+        case 1:
+            juegosPorTitulo();
+            break;
+        case 2:
+            juegosPorPrecio();
+            break;
+        case 3:
+            juegosPorFecha();
+            break;
+        case 4:
+            juegosListadosPorCategoria();
+            break;
+        case 5:
+            desarrolladoresPorNombre();
+            break;
+        case 6:
+            desarrolladoresPorFecha();
+            break;
+        case 0:
+            return;
+        default:
+            break;
+        }
+
+        if(opcion != 0){
+            system("pause");
+        }
+
+    } while (opcion != 0);
+
+}
+
+
+void menuConsultas() {
+    int opcion;
+    do {
+        system("cls");
+        cout << "Menu Consultas" << endl;
+        cout << "Opcion 1 : USUARIOS POR NOMBRE DE USUARIO" << endl;
+        cout << "Opcion 2 : USUARIOS POR RANGO DE FECHAS DE REGISTRO" << endl;
+        cout << "Opcion 3 : JUEGOS POR CATEGORIAS" << endl;
+        cout << "Opcion 4 : JUEGOS POR DESARROLLADOR" << endl;
+        cout << "Opcion 5 : JUEGOS POR RANGO DE PRECIOS" << endl;
+        cout << "Opcion 6 : JUEGOS POR FECHA DE LANZAMIENTO" << endl;
+        cout << "Opcion 7 : COMPRAS POR RANGO DE FECHAS" << endl;
+        cout << "Opcion 8 : COMPRAS POR USUARIO" << endl;
+        cout << "Opcion 9 : COMPRAS POR JUEGO" << endl;
+        cout << "Opcion 10 : RESE¥AS POR JUEGO" << endl;
+        cout << "Opcion 11 : RESE¥AS POR USUARIO" << endl;
+        cout << "Opcion 0 : SALIR " << endl;
+        cout << "Ingresa una opcion " << endl;
+        opcion = leerEntero();
+        system("cls");
+        switch (opcion) {
+        case 1:
+
+            break;
+        case 2:
+
+            break;
+        case 3:
+            juegosPorCategoria();
+            break;
+        case 4:
+
+            break;
+        case 5:
+
+            break;
+        case 6:
+
+        case 7:
+
+            break;
+        case 8:
+
+            break;
+        case 9:
+
+            break;
+        case 10:
+
+            break;
+        case 11:
+
+            break;
+        case 0:
+            return;
+        default:
+            break;
+        }
+
+        if(opcion != 0){
+            system("pause");
+        }
+
+    } while (opcion != 0);
+
+}
+
 

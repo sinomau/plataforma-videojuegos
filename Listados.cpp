@@ -21,7 +21,7 @@ void juegosPorTitulo() {
     int cantidad = arch.getCantidadRegistros();
 
 
-    if(cantidad == -1) {
+    if(cantidad == 0) {
         cout << "No hay juegos registrados" << endl;
         return;
     }
@@ -76,7 +76,7 @@ void juegosPorPrecio() {
 
     int cantidad = archivo.getCantidadRegistros();
 
-    if(cantidad == -1) {
+    if(cantidad == 0) {
         cout << "No hay juegos registrados" << endl;
         return;
     }
@@ -125,7 +125,7 @@ void juegosPorFecha() {
     Juego reg;
 
     int cantidad = archivo.getCantidadRegistros();
-    if(cantidad == -1) {
+    if(cantidad == 0) {
         cout << "No hay juegos registrados" << endl;
         return;
     }
@@ -168,7 +168,7 @@ void juegosPorFecha() {
 }
 
 
-void juegosPorCategoria() {
+void juegosListadosPorCategoria() {
     JuegoArchivo archivo;
     CategoriaArchivo archCat;
 
@@ -177,7 +177,7 @@ void juegosPorCategoria() {
 
     int cantidad = archivo.getCantidadRegistros();
 
-    if(cantidad == -1) {
+    if(cantidad == 0) {
         cout << "No hay juegos registrados" << endl;
         return;
     }
@@ -241,8 +241,22 @@ void juegosPorCategoria() {
     }
 
     // Mostrar juegos ordenados
+
+// Mostrar juegos ordenados
     for(int i = 0; i < contador; i++) {
+
         vec[i].mostrar();
+
+        for(int k = 0; k < archCat.getCantidadRegistros(); k++) {
+            cat1 = archCat.leerDisco(k);
+
+            if(cat1.getEstado() && vec[i].getIdCategoria() == cat1.getId()) {
+                cout << "Categoria: " << cat1.getNombre() << endl;
+                break;
+            }
+        }
+
+        cout << "------------------------" << endl;
     }
 
     delete[] vec;
@@ -257,8 +271,8 @@ void desarrolladoresPorNombre() {
     Desarrollador reg;
 
     int cantidad = archivo.getCantidadRegistros();
-    if(cantidad == -1) {
-        cout << "No hay juegos registrados" << endl;
+    if(cantidad == 0) {
+        cout << "No hay Desarrolladores registrados" << endl;
         return;
     }
     int contador = 0;
@@ -301,8 +315,8 @@ void desarrolladoresPorFecha() {
     Desarrollador reg;
 
     int cantidad = archivo.getCantidadRegistros();
-    if(cantidad == -1) {
-        cout << "No hay juegos registrados" << endl;
+    if(cantidad == 0) {
+        cout << "No hay Desarrolladores registrados" << endl;
         return;
     }
     int contador = 0;
@@ -352,7 +366,7 @@ void reseniasPorPuntaje() {
     Resenia reg;
 
     int cantidad = archivo.getCantidadRegistros();
-    if(cantidad == -1) {
+    if(cantidad == 0) {
         cout << "No hay Resenias registradas" << endl;
         return;
     }
@@ -397,7 +411,7 @@ void reseniasPorFecha() {
     Resenia reg;
 
     int cantidad = archivo.getCantidadRegistros();
-    if(cantidad == -1) {
+    if(cantidad == 0) {
         cout << "No hay Resenias registradas" << endl;
         return;
     }
@@ -418,17 +432,17 @@ void reseniasPorFecha() {
         return;
     }
     Resenia aux;
-    for(int i = 0; i<contador -1;i++){
-        for(int j = i +1;j< contador; j++){
-            if(vec[i].getFechaResenia().toInt() > vec[j].getFechaResenia().toInt()){
-            aux = vec[i];
-            vec[i] = vec[j];
-            vec[j] = aux;
+    for(int i = 0; i<contador -1; i++) {
+        for(int j = i +1; j< contador; j++) {
+            if(vec[i].getFechaResenia().toInt() > vec[j].getFechaResenia().toInt()) {
+                aux = vec[i];
+                vec[i] = vec[j];
+                vec[j] = aux;
             }
         }
     }
 
-    for(int i = 0 ; i < contador ; i++){
+    for(int i = 0 ; i < contador ; i++) {
         vec[i].mostrar();
 
     }
