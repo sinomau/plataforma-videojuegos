@@ -3,6 +3,9 @@
 
 class CompraManager {
 public:
+    bool cargarCompra(int idUsuario);
+    void verBiblioteca(int idUsuario);
+    bool eliminarCompra();
 protected:
 private:
 };

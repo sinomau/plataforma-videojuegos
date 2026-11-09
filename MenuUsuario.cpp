@@ -3,12 +3,14 @@
 #include "MenuUsuario.h"
 #include "UsuarioManager.h"
 #include "ReseniaManager.h"
+#include "CompraManager.h"
 #include "Utils.h"
 
 using namespace std;
 
 void menuUsuario(int idUsuario) {
     UsuarioManager manager;
+    CompraManager compraManager;
     ReseniaManager reseniaManager;
     int opcion;
 
@@ -21,6 +23,8 @@ void menuUsuario(int idUsuario) {
         cout << "Opcion 4 : MODIFICAR RESENIA" << endl;
         cout << "Opcion 5 : ELIMINAR RESENIA" << endl;
         cout << "Opcion 6 : VER RESENIAS DE UN JUEGO" << endl;
+        cout << "Opcion 7 : COMPRAR JUEGO" << endl;
+        cout << "Opcion 8 : MI BIBLIOTECA" << endl;
         cout << "Opcion 0 : CERRAR SESION " << endl;
         cout << "Ingresa una opcion " << endl;
         opcion = leerEntero();
@@ -43,6 +47,12 @@ void menuUsuario(int idUsuario) {
             break;
         case 6:
             reseniaManager.mostrarReseniasJuego();
+            break;
+        case 7:
+            compraManager.cargarCompra(idUsuario);
+            break;
+        case 8:
+            compraManager.verBiblioteca(idUsuario);
             break;
         case 0:
             return;

@@ -3,6 +3,7 @@
 #include "CategoriaManager.h"
 #include "DesarrolladorManager.h"
 #include "JuegoManager.h"
+#include "CompraManager.h"
 #include "Utils.h"
 #include <cstdlib>
 
@@ -10,6 +11,7 @@ using namespace std;
 
 
 void menuAdmin() {
+    CompraManager compraManager;
     int opcion;
 
     do {
@@ -18,6 +20,7 @@ void menuAdmin() {
         cout << "Opcion 1 : CATEGORIAS" << endl;
         cout << "Opcion 2 : DESARROLLADORES" << endl;
         cout << "Opcion 3 : JUEGOS" << endl;
+        cout << "Opcion 4 : ANULAR COMPRA" << endl;
         cout << "Opcion 0 : CERRAR SESION " << endl;
         cout << "Ingresa una opcion " << endl;
         opcion = leerEntero();
@@ -30,6 +33,11 @@ void menuAdmin() {
             break;
         case 3:
             menuJuegos();
+            break;
+        case 4:
+            system("cls");
+            compraManager.eliminarCompra();
+            system("pause");
             break;
         case 0:
             return;
