@@ -5,22 +5,22 @@
 
 
 
-//Listados de juegos: título, precio, fecha, categoría:
+//Listados de juegos: titulo, precio, fecha, categoria:
 
 void juegosPorTitulo();
 void juegosPorPrecio();
 void juegosPorFecha();
 void juegosPorCategoria();
 
-//Listados de desarrolladores y categorías
+//Listados de desarrolladores: nombre y Ordenados por a�o de fundaci�n
 
-void desarrolladores();
-void categorias();
+void desarrolladoresPorNombre();
+void desarrolladoresPorFecha();
 
 
-//Listado de reseñas: puntaje, fecha
-void reseñasPorPuntaje();
-void reseñasPorFecha();
+//Listado de resenias: puntaje, fecha
+void reseniasPorPuntaje();
+void reseniasPorFecha();
 
 
 #endif // LISTADOS_H_INCLUDED
