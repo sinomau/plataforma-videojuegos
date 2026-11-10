@@ -121,6 +121,10 @@ int ReseniaArchivo::obtenerNuevoId() {
     return getCantidadRegistros() + 1;
 }
 
+bool ReseniaArchivo::existe(int id) {
+    return buscarPosicion(id) != -1;
+}
+
 bool ReseniaArchivo::existeResenia(int idUsuario,int idJuego) {
     int cantidad = getCantidadRegistros();
 

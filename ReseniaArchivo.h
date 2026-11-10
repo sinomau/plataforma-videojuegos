@@ -17,6 +17,7 @@ public:
 
     int getCantidadRegistros();
     int obtenerNuevoId();
+    bool existe(int id);
     bool existeResenia(int idUsuario, int idJuego);
 
 
