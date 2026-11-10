@@ -20,12 +20,21 @@ void juegosPorCategoria() {
     cout << "Categorias disponibles"<< endl;
     managerCat.listarCategoria();
     cout << "Seleccione del listado la categoria de los juegos a visualizar"<< endl;
-    int id = leerEntero();
-    while(!archivoCat.existe(id)) {
-        cout << "La categoria seleccionada no existe. Ingrese nuevamente:" << endl;
-
+    int id;
+    bool categoriaValida = false;
+    while(!categoriaValida) {
         id = leerEntero();
+        Categoria cat = archivoCat.buscarPorId(id);
+        categoriaValida = cat.getId() != -1 && cat.getEstado();
 
+        if(!categoriaValida) {
+            cout << "Categoria inexistente o inactiva." << endl;
+            cout << "Ingrese 0 para salir u otro numero para reintentar: ";
+            if(leerEntero() == 0) {
+                return;
+            }
+            cout << "Ingrese el ID de la categoria: ";
+        }
     }
 
     int cantidad = archivo.getCantidadRegistros();
@@ -38,7 +47,7 @@ void juegosPorCategoria() {
     Juego *vec = new Juego[cantidad];
     for(int i = 0; i < cantidad ; i++) {
         reg = archivo.leerDisco(i);
-        if(reg.getIdCategoria() == id) {
+        if(reg.getEstado() && reg.getIdCategoria() == id) {
             vec[contador] = reg;
             contador++;
         }

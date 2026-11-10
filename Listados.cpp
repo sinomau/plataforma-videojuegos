@@ -173,7 +173,6 @@ void juegosListadosPorCategoria() {
     CategoriaArchivo archCat;
 
     Juego reg, aux;
-    Categoria cat1, cat2;
 
     int cantidad = archivo.getCantidadRegistros();
 
@@ -202,63 +201,38 @@ void juegosListadosPorCategoria() {
         return;
     }
 
-    // Ordenar por nombre de categoria
+    // Buscar una sola vez la categoria de cada juego (vector paralelo a vec)
+    Categoria *cats = new Categoria[contador];
+    for(int i = 0; i < contador; i++) {
+        cats[i] = archCat.buscarPorId(vec[i].getIdCategoria());
+        if(cats[i].getId() == -1 || !cats[i].getEstado()) {
+            cats[i].setNombre("(sin categoria)");
+        }
+    }
+
+    // Ordenar por nombre de categoria (se intercambian los dos vectores juntos)
     for(int i = 0; i < contador - 1; i++) {
         for(int j = i + 1; j < contador; j++) {
+            if(strcmp(cats[i].getNombre(), cats[j].getNombre()) > 0) {
+                aux = vec[i];
+                vec[i] = vec[j];
+                vec[j] = aux;
 
-            bool encontro1 = false;
-            bool encontro2 = false;
-
-            // Buscar categoria del juego i
-            for(int k = 0; k < archCat.getCantidadRegistros(); k++) {
-                cat1 = archCat.leerDisco(k);
-
-                if(cat1.getEstado() && vec[i].getIdCategoria() == cat1.getId()) {
-                    encontro1 = true;
-                    break;
-                }
-            }
-
-            // Buscar categoria del juego j
-            for(int k = 0; k < archCat.getCantidadRegistros(); k++) {
-                cat2 = archCat.leerDisco(k);
-
-                if(cat2.getEstado() && vec[j].getIdCategoria() == cat2.getId()) {
-                    encontro2 = true;
-                    break;
-                }
-            }
-
-            // Comparar nombres de categorias
-            if(encontro1 && encontro2) {
-                if(strcmp(cat1.getNombre(), cat2.getNombre()) > 0) {
-                    aux = vec[i];
-                    vec[i] = vec[j];
-                    vec[j] = aux;
-                }
+                Categoria auxCat = cats[i];
+                cats[i] = cats[j];
+                cats[j] = auxCat;
             }
         }
     }
 
     // Mostrar juegos ordenados
-
-// Mostrar juegos ordenados
     for(int i = 0; i < contador; i++) {
-
         vec[i].mostrar();
-
-        for(int k = 0; k < archCat.getCantidadRegistros(); k++) {
-            cat1 = archCat.leerDisco(k);
-
-            if(cat1.getEstado() && vec[i].getIdCategoria() == cat1.getId()) {
-                cout << "Categoria: " << cat1.getNombre() << endl;
-                break;
-            }
-        }
-
+        cout << "Categoria: " << cats[i].getNombre() << endl;
         cout << "------------------------" << endl;
     }
 
+    delete[] cats;
     delete[] vec;
 }
 
