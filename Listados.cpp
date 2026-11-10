@@ -9,6 +9,8 @@
 #include "DesarrolladorArchivo.h"
 #include "Resenia.h"
 #include "ReseniaArchivo.h"
+#include "Usuario.h"
+#include "UsuarioArchivo.h"
 #include <cstring>
 
 using namespace std;
@@ -474,10 +476,113 @@ void categoriasPorNombre(){
 
     for(int i = 0 ; i < contador ; i++){
         cout << "------------------------" << endl;
-        
+
         vec[i].mostrar();
     }
 
+
+    delete[]vec;
+
+}
+
+//INICIO LISTADOS USUARIOS
+
+void usuariosPorApellido() {
+    UsuarioArchivo arch;
+    Usuario reg;
+    Usuario aux;
+    int cantidad = arch.getCantidadRegistros();
+
+
+    if(cantidad == 0) {
+        cout << "No hay usuarios registrados" << endl;
+        return;
+    }
+
+    Usuario *vec = new Usuario[cantidad];
+
+
+
+    int contador = 0;
+    for(int i = 0; i < cantidad; i++) {
+        reg = arch.leerDisco(i);
+        if(reg.getEstado()) {
+            vec[contador] = reg;
+            contador++;
+
+        }
+    }
+
+    if(contador == 0) {
+        cout << "No hay usuarios activos" << endl;
+        delete[] vec;
+        return;
+    }
+
+    for(int i = 0; i < contador -1 ; i++) {
+        for(int j = i + 1; j < contador ; j++) {
+            if(strcmp(vec[i].getApellido(), vec[j].getApellido()) > 0) {
+                aux = vec[i];
+                vec[i] = vec[j];
+                vec[j] = aux;
+            }
+
+
+        }
+
+
+    }
+
+    for(int i = 0 ; i < contador ; i++) {
+        vec[i].mostrar();
+        cout << "------------------------" << endl;
+    }
+
+    delete[] vec;
+
+}
+
+void usuariosPorFechaRegistro() {
+    UsuarioArchivo arch;
+    Usuario reg;
+
+    int cantidad = arch.getCantidadRegistros();
+    if(cantidad == 0) {
+        cout << "No hay usuarios registrados" << endl;
+        return;
+    }
+
+    int contador=0;
+    Usuario *vec = new Usuario[cantidad];
+    for(int i = 0; i<cantidad; i++) {
+        reg = arch.leerDisco(i);
+        if(reg.getEstado()) {
+            vec[contador] = reg;
+            contador++;
+        }
+    }
+    if(contador == 0) {
+        cout << "No hay usuarios activos" << endl;
+        delete[] vec;
+        return;
+    }
+
+    Usuario aux;
+    for(int i = 0; i<contador -1; i++) {
+        for(int j = i+1 ; j<contador; j++) {
+            if(vec[i].getFechaRegistro().toInt() > vec[j].getFechaRegistro().toInt()) {
+                aux= vec[i];
+                vec[i]= vec[j];
+                vec[j] = aux;
+            }
+        }
+    }
+
+
+    for(int i = 0; i<contador; i++) {
+        cout << "------------------------" << endl;
+        vec[i].mostrar();
+    }
 
     delete[]vec;
 

@@ -24,4 +24,8 @@ void reseniasPorFecha();
 
 void categoriasPorNombre();
 
+//Listados de usuarios por apellido
+void usuariosPorApellido();
+void usuariosPorFechaRegistro();
+
 #endif // LISTADOS_H_INCLUDED
