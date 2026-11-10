@@ -5,6 +5,10 @@
 #include "Categoria.h"
 #include "CategoriaArchivo.h"
 #include "CategoriaManager.h"
+#include "DesarrolladorArchivo.h"
+#include "DesarrolladorManager.h"
+#include "Desarrollador.h"
+
 #include "Utils.h"
 
 
@@ -70,4 +74,19 @@ void juegosPorCategoria() {
 }
 
 
+void juegosPorDesarrollador(){
+    JuegoArchivo archivo;
+    Juego reg;
+    DesarrolladorArchivo archDes;
+    Desarrollador regDes;
+    DesarrolladorManager managerDes;
+    
+    cout << "Desarrolladores disponibles"<< endl;
+    managerDes.listarDesarrollador();
+    
+    
+
+
+
+}
 

@@ -293,7 +293,7 @@ void menuConsultas() {
 
             break;
         case 6:
-
+            break;
         case 7:
 
             break;
