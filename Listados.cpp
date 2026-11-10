@@ -62,6 +62,7 @@ void juegosPorTitulo() {
 
     for(int i = 0 ; i < contador ; i++) {
         vec[i].mostrar();
+        cout << "------------------------" << endl;
     }
 
     delete[] vec;
@@ -110,6 +111,7 @@ void juegosPorPrecio() {
     }
 
     for(int i=0; i<contador; i++) {
+        cout << "------------------------" << endl;
         vec[i].mostrar();
 
     }
@@ -158,6 +160,7 @@ void juegosPorFecha() {
 
 
     for(int i = 0; i<contador; i++) {
+        cout << "------------------------" << endl;
         vec[i].mostrar();
     }
 
@@ -276,6 +279,7 @@ void desarrolladoresPorNombre() {
     }
 
     for(int i = 0; i < contador ; i++) {
+        cout << "------------------------" << endl;
         vec[i].mostrar();
     }
 
@@ -321,6 +325,7 @@ void desarrolladoresPorFecha() {
 
 
     for(int i = 0 ; i < contador ; i ++) {
+        cout << "------------------------" << endl;
         vec[i].mostrar();
     }
 
@@ -355,7 +360,7 @@ void reseniasPorPuntaje() {
         }
     }
     if(contador == 0) {
-        cout << "No hay rese¤as activas" << endl;
+        cout << "No hay reseï¿½as activas" << endl;
         delete[] vec;
         return;
     }
@@ -372,6 +377,7 @@ void reseniasPorPuntaje() {
     }
 
     for(int i = 0 ; i < contador ; i++) {
+        cout << "------------------------" << endl;
         vec[i].mostrar();
     }
 
@@ -401,7 +407,7 @@ void reseniasPorFecha() {
     }
 
     if(contador == 0) {
-        cout << "No hay rese¤as activas" << endl;
+        cout << "No hay reseÃ±as activas" << endl;
         delete[] vec;
         return;
     }
@@ -417,6 +423,7 @@ void reseniasPorFecha() {
     }
 
     for(int i = 0 ; i < contador ; i++) {
+        cout << "------------------------" << endl;
         vec[i].mostrar();
 
     }
@@ -427,4 +434,51 @@ void reseniasPorFecha() {
 
 //FIN LISTADOS RESENIAS
 
+//INICIO LISTADOS CATEGORIAS
 
+void categoriasPorNombre(){
+    CategoriaArchivo archivo;
+    Categoria reg;
+
+    int cantidad = archivo.getCantidadRegistros();
+    if(cantidad == 0) {
+        cout << "No hay Categorias registradas" << endl;
+        return;
+    }
+    int contador = 0;
+    Categoria *vec = new Categoria[cantidad];
+
+    for(int i = 0 ; i < cantidad ;i++){
+        reg = archivo.leerDisco(i);
+        if(reg.getEstado()){
+            vec[contador] = reg;
+            contador ++;
+        }
+    }
+
+    if(contador == 0) {
+        cout << "No hay Categorias activas" << endl;
+        delete[] vec;
+        return;
+    }
+    Categoria aux;
+    for(int i = 0; i < contador; i++){
+        for(int j = i + 1 ; j < contador ; j++){
+            if(strcmp(vec[i].getNombre(),vec[j].getNombre()) > 0 ){
+            aux = vec[i];
+            vec[i] = vec[j];
+            vec[j] = aux;
+            }
+        }
+    }
+
+    for(int i = 0 ; i < contador ; i++){
+        cout << "------------------------" << endl;
+        
+        vec[i].mostrar();
+    }
+
+
+    delete[]vec;
+
+}

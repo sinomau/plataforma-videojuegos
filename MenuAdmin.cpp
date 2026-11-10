@@ -206,6 +206,9 @@ void menuListados() {
         cout << "Opcion 4 : JUEGOS POR ORDENADOS POR CATEGORIA" << endl;
         cout << "Opcion 5 : DESARROLLADORES ORDENADOS POR NOMBRE" << endl;
         cout << "Opcion 6 : DESARROLLADORES ORDENADOS POR FECHA DE FUNDACION" << endl;
+        cout << "Opcion 7 : RESEÃ‘AS ORDENADAS POR PUNTAJE" << endl;
+        cout << "Opcion 8 : RESEÃ‘AS ORDENADAS POR FECHA" << endl;
+        cout << "Opcion 9 : CATEGORIAS ORDENADAS POR NOMBRE" << endl;
         cout << "Opcion 0 : SALIR " << endl;
         cout << "Ingresa una opcion " << endl;
         opcion = leerEntero();
@@ -228,6 +231,15 @@ void menuListados() {
             break;
         case 6:
             desarrolladoresPorFecha();
+            break;
+        case 7:
+            reseniasPorPuntaje();
+            break;
+        case 8:
+            reseniasPorFecha();
+            break;
+        case 9:
+            categoriasPorNombre();
             break;
         case 0:
             return;
@@ -258,8 +270,8 @@ void menuConsultas() {
         cout << "Opcion 7 : COMPRAS POR RANGO DE FECHAS" << endl;
         cout << "Opcion 8 : COMPRAS POR USUARIO" << endl;
         cout << "Opcion 9 : COMPRAS POR JUEGO" << endl;
-        cout << "Opcion 10 : RESE¥AS POR JUEGO" << endl;
-        cout << "Opcion 11 : RESE¥AS POR USUARIO" << endl;
+        cout << "Opcion 10 : RESEï¿½AS POR JUEGO" << endl;
+        cout << "Opcion 11 : RESEï¿½AS POR USUARIO" << endl;
         cout << "Opcion 0 : SALIR " << endl;
         cout << "Ingresa una opcion " << endl;
         opcion = leerEntero();

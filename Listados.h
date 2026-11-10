@@ -2,9 +2,6 @@
 #define LISTADOS_H_INCLUDED
 
 
-
-
-
 //Listados de juegos: titulo, precio, fecha, categoria:
 
 void juegosPorTitulo();
@@ -12,7 +9,7 @@ void juegosPorPrecio();
 void juegosPorFecha();
 void juegosListadosPorCategoria();
 
-//Listados de desarrolladores: nombre y Ordenados por a¤o de fundaci¢n
+//Listados de desarrolladores: nombre y Ordenados por aï¿½o de fundaciï¿½n
 
 void desarrolladoresPorNombre();
 void desarrolladoresPorFecha();
@@ -22,5 +19,9 @@ void desarrolladoresPorFecha();
 void reseniasPorPuntaje();
 void reseniasPorFecha();
 
+
+//listados de categorias:por nombre,
+
+void categoriasPorNombre();
 
 #endif // LISTADOS_H_INCLUDED
