@@ -209,6 +209,8 @@ void menuListados() {
         cout << "Opcion 7 : RESEÑAS ORDENADAS POR PUNTAJE" << endl;
         cout << "Opcion 8 : RESEÑAS ORDENADAS POR FECHA" << endl;
         cout << "Opcion 9 : CATEGORIAS ORDENADAS POR NOMBRE" << endl;
+        cout << "Opcion 10 : USUARIOS ORDENADOS POR APELLIDO" << endl;
+        cout << "Opcion 11 : USUARIOS ORDENADOS POR FECHA DE REGISTRO" << endl;
         cout << "Opcion 0 : SALIR " << endl;
         cout << "Ingresa una opcion " << endl;
         opcion = leerEntero();
@@ -240,6 +242,13 @@ void menuListados() {
             break;
         case 9:
             categoriasPorNombre();
+            break;
+
+        case 10:
+            usuariosPorApellido();
+            break;
+        case 11:
+            usuariosPorFechaRegistro();
             break;
         case 0:
             return;
