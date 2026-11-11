@@ -287,15 +287,16 @@ void menuConsultas() {
             juegosPorCategoria();
             break;
         case 4:
-
+            juegosPorDesarrollador();
             break;
         case 5:
-
+            juegosPorRangoPrecio();
             break;
         case 6:
+            juegosPorFechaLanzamiento();
             break;
         case 7:
-
+            reseniasPorJuego();
             break;
         case 8:
 
@@ -304,10 +305,10 @@ void menuConsultas() {
 
             break;
         case 10:
-
+            reseniasPorJuego();
             break;
         case 11:
-
+            reseniaPorUsuario();
             break;
         case 0:
             return;

@@ -10,4 +10,5 @@ void menuListados();
 void menuConsultas();
 
 
+
 #endif // MENUADMIN_H_INCLUDED
