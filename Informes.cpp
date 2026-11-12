@@ -76,6 +76,9 @@ void recaudacionPorCategoria() {
 //todas las compras, falta ver qeu juegos y que categorias son.
     for(int i = 0 ; i < cantCompra ; i++) {
         Compra regCompra = archCompra.leerDisco(i);
+        if(!regCompra.getEstado()) {
+            continue;   // las compras anuladas no suman
+        }
 
         for(int j = 0 ; j < cantJuegos ; j++ ) {
             regJuego = archJuego.leerDisco(j);

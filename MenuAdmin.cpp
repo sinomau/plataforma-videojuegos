@@ -310,7 +310,7 @@ void menuConsultas() {
             juegosPorFechaLanzamiento();
             break;
         case 7:
-            reseniasPorJuego();
+
             break;
         case 8:
 
