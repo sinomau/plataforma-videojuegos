@@ -8,7 +8,7 @@ void menuDesarrolladores();
 void menuJuegos();
 void menuListados();
 void menuConsultas();
-
+void menuInformes();
 
 
 #endif // MENUADMIN_H_INCLUDED

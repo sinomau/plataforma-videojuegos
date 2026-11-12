@@ -6,6 +6,7 @@
 #include "CompraManager.h"
 #include "Listados.h"
 #include "Consultas.h"
+#include "Informes.h"
 #include "Utils.h"
 #include <cstdlib>
 
@@ -25,6 +26,7 @@ void menuAdmin() {
         cout << "Opcion 4 : ANULAR COMPRA" << endl;
         cout << "Opcion 5 : LISTADOS" << endl;
         cout << "Opcion 6 : CONSULTAS" << endl;
+        cout << "Opcion 7 : INFORMES" << endl;
         cout << "Opcion 0 : CERRAR SESION" << endl;
         cout << "Ingresa una opcion" << endl;
 
@@ -50,6 +52,9 @@ void menuAdmin() {
             break;
         case 6:
             menuConsultas();
+            break;
+        case 7:
+            menuInformes();
             break;
         case 0:
             return;
@@ -279,8 +284,8 @@ void menuConsultas() {
         cout << "Opcion 7 : COMPRAS POR RANGO DE FECHAS" << endl;
         cout << "Opcion 8 : COMPRAS POR USUARIO" << endl;
         cout << "Opcion 9 : COMPRAS POR JUEGO" << endl;
-        cout << "Opcion 10 : RESEï¿½AS POR JUEGO" << endl;
-        cout << "Opcion 11 : RESEï¿½AS POR USUARIO" << endl;
+        cout << "Opcion 10 : RESE¥AS POR JUEGO" << endl;
+        cout << "Opcion 11 : RESE¥AS POR USUARIO" << endl;
         cout << "Opcion 0 : SALIR " << endl;
         cout << "Ingresa una opcion " << endl;
         opcion = leerEntero();
@@ -318,6 +323,75 @@ void menuConsultas() {
             break;
         case 11:
             reseniaPorUsuario();
+            break;
+        case 0:
+            return;
+        default:
+            break;
+        }
+
+        if(opcion != 0){
+            system("pause");
+        }
+
+    } while (opcion != 0);
+
+}
+
+
+void menuInformes() {
+    int opcion;
+    do {
+        system("cls");
+        cout << "Menu Informes" << endl;
+        cout << "Opcion 1 : RECAUDACION POR CATEGORIAS" << endl;
+        cout << "Opcion 2 : -" << endl;
+        cout << "Opcion 3 : -" << endl;
+        cout << "Opcion 4 : -" << endl;
+        cout << "Opcion 5 : -" << endl;
+        cout << "Opcion 6 : -" << endl;
+        cout << "Opcion 7 : -" << endl;
+        cout << "Opcion 8 : -" << endl;
+        cout << "Opcion 9 : -" << endl;
+        cout << "Opcion 10 : -" << endl;
+        cout << "Opcion 11 : -" << endl;
+        cout << "Opcion 0 : SALIR " << endl;
+        cout << "Ingresa una opcion " << endl;
+        opcion = leerEntero();
+        system("cls");
+        switch (opcion) {
+        case 1:
+            recaudacionPorCategoria();
+            break;
+        case 2:
+
+            break;
+        case 3:
+
+            break;
+        case 4:
+
+            break;
+        case 5:
+
+            break;
+        case 6:
+
+            break;
+        case 7:
+
+            break;
+        case 8:
+
+            break;
+        case 9:
+
+            break;
+        case 10:
+
+            break;
+        case 11:
+
             break;
         case 0:
             return;
