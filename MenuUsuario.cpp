@@ -26,7 +26,7 @@ void menuUsuario(int idUsuario) {
         cout << "Opcion 7 : COMPRAR JUEGO" << endl;
         cout << "Opcion 8 : MI BIBLIOTECA" << endl;
         cout << "Opcion 0 : CERRAR SESION " << endl;
-        cout << "Ingresa una opcion " << endl;
+        cout << "Ingrese una opcion " << endl;
         opcion = leerEntero();
         system("cls");
         switch (opcion) {

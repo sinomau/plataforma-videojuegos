@@ -21,7 +21,7 @@ void menuInicio() {
         cout << "Opcion 1 : INGRESAR" << endl;
         cout << "Opcion 2 : REGISTRARSE" << endl;
         cout << "Opcion 0 : SALIR " << endl;
-        cout << "Ingresa una opcion " << endl;
+        cout << "Ingrese una opcion " << endl;
         opcion = leerEntero();
         system("cls");
         switch (opcion) {

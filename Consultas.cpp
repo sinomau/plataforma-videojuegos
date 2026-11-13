@@ -103,7 +103,7 @@ void juegosPorDesarrollador() {
     int opcion;
     bool desarrolladorValido = false;
     while(!desarrolladorValido) {
-        cout << "Ingresa el numero de desarrollador a elegir"<<endl;
+        cout << "Ingrese el numero de desarrollador a elegir"<<endl;
         opcion = leerEntero();
         Desarrollador des = archDes.buscarPorId(opcion);
         desarrolladorValido = des.getEstado() && des.getId() != -1;
@@ -113,7 +113,6 @@ void juegosPorDesarrollador() {
             if(leerEntero() == 0) {
                 return;
             }
-            cout << "Ingrese el ID de la categoria: ";
         }
 
     }
@@ -138,6 +137,9 @@ void juegosPorDesarrollador() {
         }
     }
 
+    if(!hayJuegos) {
+        cout << "No hay juegos del desarrollador seleccionado" << endl;
+    }
 }
 
 
@@ -185,22 +187,32 @@ void juegosPorRangoPrecio() {
 
     }
 
-    cout << "Ingresa los valores para el rango de precios" << endl;
-    cout << "Ingresa el precio inicial"<< endl;
+    cout << "Ingrese los valores para el rango de precios" << endl;
+    cout << "Ingrese el precio inicial"<< endl;
     vInicial = leerFloat();
-    cout << "Ingresa el precio final"<<endl;
+    cout << "Ingrese el precio final"<<endl;
     vFinal = leerFloat();
+    if(vInicial < 0 || vFinal < 0) {
+        cout << "Los precios no pueden ser negativos." << endl;
+        delete[] vec;
+        return;
+    }
     if(vInicial > vFinal) {
         cout << "El rango de precios es incorrecto." << endl;
         delete[] vec;
         return;
     }
+    bool encontrado = false;
     for(int i = 0 ; i < contador ; i++) {
         if(vec[i].getPrecio() <= vFinal && vec[i].getPrecio() >= vInicial) {
             cout << "============================================" << endl;
             vec[i].mostrar();
+            encontrado = true;
         }
 
+    }
+    if(!encontrado) {
+        cout << "No hay juegos en ese rango de precios" << endl;
     }
     delete[]vec;
 
@@ -217,14 +229,14 @@ void juegosPorFechaLanzamiento() {
         return;
     }
 
-    cout << "Ingresa la fecha de lanzamiento del juego a buscar" << endl;
-    cout << "Ingresa el dia" << endl;
+    cout << "Ingrese la fecha de lanzamiento del juego a buscar" << endl;
+    cout << "Ingrese el dia" << endl;
     int dia = leerEntero();
 
-    cout << "Ingresa el mes" << endl;
+    cout << "Ingrese el mes" << endl;
     int mes = leerEntero();
 
-    cout << "Ingresa el anio" << endl;
+    cout << "Ingrese el anio" << endl;
     int anio = leerEntero();
     Fecha fecha(dia,mes,anio);
 
@@ -288,7 +300,7 @@ void reseniasPorJuego() {
 
     int opcion;
 
-    cout << "Ingresa el id del juego a ver las resenias" << endl;
+    cout << "Ingrese el id del juego a ver las resenias" << endl;
     opcion = leerEntero();
 
     if(!archJuego.existe(opcion)) {
@@ -359,7 +371,7 @@ void reseniaPorUsuario() {
     }
 
     int opcion;
-    cout << "Ingresa el numero de usuario para ver sus resenias" << endl;
+    cout << "Ingrese el numero de usuario para ver sus resenias" << endl;
     opcion = leerEntero();
 
 

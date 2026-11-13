@@ -43,12 +43,12 @@ bool ReseniaManager::cargarResenia(int idUsuario) {
 	}
 
     if(!archCompra.existeCompra(idUsuario,idJuego)){
-        cout << "No puedes dejar una reseña en un juego que no compraste." << endl;
+        cout << "No puede dejar una reseña en un juego que no haya comprado." << endl;
 		return false;
     }
 
 	if(archivo.existeResenia(idUsuario, idJuego)) {
-		cout << "Ya dejaste una resenia para ese juego." << endl;
+		cout << "Ya existe una resenia suya para ese juego." << endl;
 		return false;
 	}
 	cout << "Ingrese el puntaje (1 a 5): ";
@@ -79,7 +79,7 @@ bool ReseniaManager::cargarResenia(int idUsuario) {
 void ReseniaManager::buscarPorId() {
 	ReseniaArchivo archivo;
 	Resenia reg;
-	cout << "Ingresa el identificador de la Resenia a buscar" << endl;
+	cout << "Ingrese el identificador de la Resenia a buscar" << endl;
 	int id = leerEntero();
 	reg = archivo.buscarPorId(id);
 	if(reg.getId() == -1) {

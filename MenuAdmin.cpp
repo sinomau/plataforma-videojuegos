@@ -28,7 +28,7 @@ void menuAdmin() {
         cout << "Opcion 6 : CONSULTAS" << endl;
         cout << "Opcion 7 : INFORMES" << endl;
         cout << "Opcion 0 : CERRAR SESION" << endl;
-        cout << "Ingresa una opcion" << endl;
+        cout << "Ingrese una opcion" << endl;
 
         opcion = leerEntero();
 
@@ -59,6 +59,8 @@ void menuAdmin() {
         case 0:
             return;
         default:
+            cout << "Opcion invalida." << endl;
+            system("pause");
             break;
         }
 
@@ -76,7 +78,7 @@ void menuCategorias() {
         cout << "Opcion 3 : ELIMINAR CATEGORIA" << endl;
         cout << "Opcion 4 : LISTAR CATEGORIAS" << endl;
         cout << "Opcion 0 : SALIR " << endl;
-        cout << "Ingresa una opcion " << endl;
+        cout << "Ingrese una opcion " << endl;
         opcion = leerEntero();
         system("cls");
         switch (opcion) {
@@ -95,6 +97,7 @@ void menuCategorias() {
         case 0:
             return;
         default:
+            cout << "Opcion invalida." << endl;
             break;
         }
 
@@ -122,7 +125,7 @@ void menuDesarrolladores() {
         cout << "Opcion 3 : ELIMINAR DESARROLLADORES" << endl;
         cout << "Opcion 4 : LISTAR DESARROLLADORES" << endl;
         cout << "Opcion 0 : SALIR " << endl;
-        cout << "Ingresa una opcion " << endl;
+        cout << "Ingrese una opcion " << endl;
         opcion = leerEntero();
         system("cls");
         switch (opcion) {
@@ -141,6 +144,7 @@ void menuDesarrolladores() {
         case 0:
             return;
         default:
+            cout << "Opcion invalida." << endl;
             break;
         }
 
@@ -167,7 +171,7 @@ void menuJuegos() {
         cout << "Opcion 3 : ELIMINAR JUEGOS" << endl;
         cout << "Opcion 4 : LISTAR JUEGOS" << endl;
         cout << "Opcion 0 : SALIR " << endl;
-        cout << "Ingresa una opcion " << endl;
+        cout << "Ingrese una opcion " << endl;
         opcion = leerEntero();
         system("cls");
         switch (opcion) {
@@ -186,6 +190,7 @@ void menuJuegos() {
         case 0:
             return;
         default:
+            cout << "Opcion invalida." << endl;
             break;
         }
 
@@ -205,59 +210,63 @@ void menuListados() {
     do {
         system("cls");
         cout << "Menu Listados" << endl;
-        cout << "Opcion 1 : JUEGOS POR ORDENADOS POR TITULO" << endl;
-        cout << "Opcion 2 : JUEGOS POR ORDENADOS POR PRECIO" << endl;
-        cout << "Opcion 3 : JUEGOS POR ORDENADOS POR FECHA DE LANZAMIENTO" << endl;
-        cout << "Opcion 4 : JUEGOS POR ORDENADOS POR CATEGORIA" << endl;
-        cout << "Opcion 5 : DESARROLLADORES ORDENADOS POR NOMBRE" << endl;
-        cout << "Opcion 6 : DESARROLLADORES ORDENADOS POR FECHA DE FUNDACION" << endl;
-        cout << "Opcion 7 : RESEÃ‘AS ORDENADAS POR PUNTAJE" << endl;
-        cout << "Opcion 8 : RESEÃ‘AS ORDENADAS POR FECHA" << endl;
-        cout << "Opcion 9 : CATEGORIAS ORDENADAS POR NOMBRE" << endl;
-        cout << "Opcion 10 : USUARIOS ORDENADOS POR APELLIDO" << endl;
-        cout << "Opcion 11 : USUARIOS ORDENADOS POR FECHA DE REGISTRO" << endl;
+        cout << "Opcion 1 : USUARIOS ORDENADOS POR APELLIDO" << endl;
+        cout << "Opcion 2 : USUARIOS ORDENADOS POR FECHA DE REGISTRO" << endl;
+        cout << "Opcion 3 : JUEGOS ORDENADOS POR TITULO" << endl;
+        cout << "Opcion 4 : JUEGOS ORDENADOS POR PRECIO" << endl;
+        cout << "Opcion 5 : JUEGOS ORDENADOS POR FECHA DE LANZAMIENTO" << endl;
+        cout << "Opcion 6 : JUEGOS ORDENADOS POR CATEGORIA" << endl;
+        cout << "Opcion 7 : DESARROLLADORES ORDENADOS POR NOMBRE" << endl;
+        cout << "Opcion 8 : DESARROLLADORES ORDENADOS POR FECHA DE FUNDACION" << endl;
+        cout << "Opcion 9 : COMPRAS ORDENADAS POR FECHA" << endl;
+        cout << "Opcion 10 : RESE¥AS ORDENADAS POR PUNTAJE" << endl;
+        cout << "Opcion 11 : RESE¥AS ORDENADAS POR FECHA" << endl;
+        cout << "Opcion 12 : CATEGORIAS ORDENADAS POR NOMBRE" << endl;
         cout << "Opcion 0 : SALIR " << endl;
-        cout << "Ingresa una opcion " << endl;
+        cout << "Ingrese una opcion " << endl;
         opcion = leerEntero();
         system("cls");
         switch (opcion) {
         case 1:
-            juegosPorTitulo();
-            break;
-        case 2:
-            juegosPorPrecio();
-            break;
-        case 3:
-            juegosPorFecha();
-            break;
-        case 4:
-            juegosListadosPorCategoria();
-            break;
-        case 5:
-            desarrolladoresPorNombre();
-            break;
-        case 6:
-            desarrolladoresPorFecha();
-            break;
-        case 7:
-            reseniasPorPuntaje();
-            break;
-        case 8:
-            reseniasPorFecha();
-            break;
-        case 9:
-            categoriasPorNombre();
-            break;
-
-        case 10:
             usuariosPorApellido();
             break;
-        case 11:
+        case 2:
             usuariosPorFechaRegistro();
+            break;
+        case 3:
+            juegosPorTitulo();
+            break;
+        case 4:
+            juegosPorPrecio();
+            break;
+        case 5:
+            juegosPorFecha();
+            break;
+        case 6:
+            juegosListadosPorCategoria();
+            break;
+        case 7:
+            desarrolladoresPorNombre();
+            break;
+        case 8:
+            desarrolladoresPorFecha();
+            break;
+        case 9:
+
+            break;
+        case 10:
+            reseniasPorPuntaje();
+            break;
+        case 11:
+            reseniasPorFecha();
+            break;
+        case 12:
+            categoriasPorNombre();
             break;
         case 0:
             return;
         default:
+            cout << "Opcion invalida." << endl;
             break;
         }
 
@@ -287,7 +296,7 @@ void menuConsultas() {
         cout << "Opcion 10 : RESE¥AS POR JUEGO" << endl;
         cout << "Opcion 11 : RESE¥AS POR USUARIO" << endl;
         cout << "Opcion 0 : SALIR " << endl;
-        cout << "Ingresa una opcion " << endl;
+        cout << "Ingrese una opcion " << endl;
         opcion = leerEntero();
         system("cls");
         switch (opcion) {
@@ -327,6 +336,7 @@ void menuConsultas() {
         case 0:
             return;
         default:
+            cout << "Opcion invalida." << endl;
             break;
         }
 
@@ -347,16 +357,9 @@ void menuInformes() {
         cout << "Opcion 1 : RECAUDACION POR CATEGORIAS" << endl;
         cout << "Opcion 2 : RECAUDACION POR JUEGO" << endl;
         cout << "Opcion 3 : VALORACION PROMEDIO POR JUEGO" << endl;
-        cout << "Opcion 4 : -" << endl;
-        cout << "Opcion 5 : -" << endl;
-        cout << "Opcion 6 : -" << endl;
-        cout << "Opcion 7 : -" << endl;
-        cout << "Opcion 8 : -" << endl;
-        cout << "Opcion 9 : -" << endl;
-        cout << "Opcion 10 : -" << endl;
-        cout << "Opcion 11 : -" << endl;
+        cout << "Opcion 4 : RECAUDACION ANUAL" << endl;
         cout << "Opcion 0 : SALIR " << endl;
-        cout << "Ingresa una opcion " << endl;
+        cout << "Ingrese una opcion " << endl;
         opcion = leerEntero();
         system("cls");
         switch (opcion) {
@@ -372,30 +375,10 @@ void menuInformes() {
         case 4:
 
             break;
-        case 5:
-
-            break;
-        case 6:
-
-            break;
-        case 7:
-
-            break;
-        case 8:
-
-            break;
-        case 9:
-
-            break;
-        case 10:
-
-            break;
-        case 11:
-
-            break;
         case 0:
             return;
         default:
+            cout << "Opcion invalida." << endl;
             break;
         }
 
