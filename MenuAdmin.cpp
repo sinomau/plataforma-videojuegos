@@ -346,7 +346,7 @@ void menuInformes() {
         cout << "Menu Informes" << endl;
         cout << "Opcion 1 : RECAUDACION POR CATEGORIAS" << endl;
         cout << "Opcion 2 : RECAUDACION POR JUEGO" << endl;
-        cout << "Opcion 3 : -" << endl;
+        cout << "Opcion 3 : VALORACION PROMEDIO POR JUEGO" << endl;
         cout << "Opcion 4 : -" << endl;
         cout << "Opcion 5 : -" << endl;
         cout << "Opcion 6 : -" << endl;
@@ -367,7 +367,7 @@ void menuInformes() {
             recaudacionPorJuego();
             break;
         case 3:
-
+            valoracionPromedioPorJuego();
             break;
         case 4:
 

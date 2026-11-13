@@ -6,6 +6,8 @@
 #include "JuegoArchivo.h"
 #include "CompraArchivo.h"
 #include "Compra.h"
+#include "ReseniaArchivo.h"
+#include "Resenia.h"
 #include "Fecha.h"
 #include "Utils.h"
 
@@ -261,4 +263,52 @@ void recaudacionPorJuego() {
 
 
 
+}
+
+
+void valoracionPromedioPorJuego() {
+    Juego regJuego;
+    JuegoArchivo archJuego;
+    Resenia regResenia;
+    ReseniaArchivo archResenia;
+
+    int cantidadJuegos = archJuego.getCantidadRegistros();
+    if(cantidadJuegos == 0) {
+        cout << "No hay juegos registrados" << endl;
+        return;
+    }
+
+    int cantResenias = archResenia.getCantidadRegistros();
+
+    cout << "\n========================================" << endl;
+    cout << "     VALORACION PROMEDIO POR JUEGO" << endl;
+    cout << "========================================" << endl;
+
+    for(int i = 0; i < cantidadJuegos; i++) {
+        regJuego = archJuego.leerDisco(i);
+        if(!regJuego.getEstado()) {
+            continue;
+        }
+
+        int suma = 0;
+        int cantidad = 0;
+
+        for(int j = 0; j < cantResenias; j++) {
+            regResenia = archResenia.leerDisco(j);
+            if(regResenia.getEstado() && regResenia.getIdJuego() == regJuego.getId()) {
+                suma += regResenia.getPuntaje();
+                cantidad++;
+            }
+        }
+
+        cout << "------------------------" << endl;
+        cout << "Juego: " << regJuego.getTitulo() << endl;
+        if(cantidad == 0) {
+            cout << "Puntaje promedio: Sin valoracion" << endl;
+        } else {
+            cout << "Puntaje promedio: " << (float)suma / cantidad << endl;
+        }
+        cout << "Cantidad de resenias: " << cantidad << endl;
+    }
+    cout << "========================================" << endl;
 }
