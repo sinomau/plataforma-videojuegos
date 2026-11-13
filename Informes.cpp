@@ -1,4 +1,5 @@
 #include <iostream>
+#include <iomanip>
 #include "Informes.h"
 #include "CategoriaArchivo.h"
 #include "Categoria.h"
@@ -75,7 +76,8 @@ void recaudacionPorCategoria() {
     int cantCompra = archCompra.getCantidadRegistros();
 
     mostrarTitulo("RECAUDACION POR CATEGORIA ENTRE " + fechaInicial.toString() + " AL " + fechaFinal.toString());
-    cout << "CATEGORIA | TOTAL | CANTIDAD DE JUEGOS VENDIDOS" << endl;
+    cout << left << setw(14) << "CATEGORIA" << setw(14) << "TOTAL"
+         << "CANTIDAD DE JUEGOS VENDIDOS" << endl;
     cout << "------------------------" << endl;
 
     for(int i = 0; i < cantidadCat; i++) {
@@ -104,7 +106,8 @@ void recaudacionPorCategoria() {
             }
         }
 
-        cout << regCat.getNombre() << " | $ " << recaudacion << " | " << cantidad << endl;
+        cout << left << setw(14) << regCat.getNombre()
+             << "$" << setw(13) << recaudacion << cantidad << endl;
     }
     cout << "========================================" << endl;
 }
@@ -163,7 +166,8 @@ void recaudacionPorJuego() {
     int cantCompra = archCompra.getCantidadRegistros();
 
     mostrarTitulo("RECAUDACION POR JUEGO ENTRE " + fechaInicial.toString() + " AL " + fechaFinal.toString());
-    cout << "TITULO | CATEGORIA | DESARROLLADOR | TOTAL | CANTIDAD" << endl;
+    cout << left << setw(12) << "TITULO" << setw(14) << "CATEGORIA"
+         << setw(14) << "DESARROLLADOR" << setw(12) << "TOTAL" << "CANTIDAD" << endl;
     cout << "------------------------" << endl;
 
     for(int i = 0; i < cantidadJuegos; i++) {
@@ -188,8 +192,11 @@ void recaudacionPorJuego() {
         regCat = archCat.buscarPorId(regJuego.getIdCategoria());
         regDes = archDes.buscarPorId(regJuego.getIdDesarrollador());
 
-        cout << regJuego.getTitulo() << " | " << regCat.getNombre() << " | "
-             << regDes.getNombre() << " | $ " << recaudacion << " | " << cantidad << endl;
+        cout << left << setw(12) << regJuego.getTitulo()
+             << setw(14) << regCat.getNombre()
+             << setw(14) << regDes.getNombre()
+             << "$" << setw(11) << recaudacion
+             << cantidad << endl;
     }
     cout << "========================================" << endl;
 }
@@ -210,7 +217,8 @@ void valoracionPromedioPorJuego() {
     int cantResenias = archResenia.getCantidadRegistros();
 
     mostrarTitulo("VALORACION PROMEDIO POR JUEGO");
-    cout << "TITULO | PUNTAJE PROMEDIO | CANTIDAD DE RESENIAS" << endl;
+    cout << left << setw(12) << "TITULO" << setw(18) << "PUNTAJE PROMEDIO"
+         << "CANTIDAD DE RESENIAS" << endl;
     cout << "------------------------" << endl;
 
     for(int i = 0; i < cantidadJuegos; i++) {
@@ -230,13 +238,13 @@ void valoracionPromedioPorJuego() {
             }
         }
 
-        cout << regJuego.getTitulo() << " | ";
+        cout << left << setw(12) << regJuego.getTitulo();
         if(cantidad == 0) {
-            cout << "Sin valoracion";
+            cout << setw(18) << "Sin valoracion";
         } else {
-            cout << (float)suma / cantidad;
+            cout << setw(18) << (float)suma / cantidad;
         }
-        cout << " | " << cantidad << endl;
+        cout << cantidad << endl;
     }
     cout << "========================================" << endl;
 }
