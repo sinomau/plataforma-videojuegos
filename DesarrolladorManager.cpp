@@ -22,13 +22,21 @@ bool DesarrolladorManager::cargarDesarrollador() {
 
     cout << "Ingrese el nombre del Desarrollador: ";
     leerCadena(nombre, 50);
-    while (archivo.existeNombre(nombre)) {
-        cout << "Ese nombre ya existe. Ingrese otro: ";
+    while (strlen(nombre) == 0 || archivo.existeNombre(nombre)) {
+        if (strlen(nombre) == 0) {
+            cout << "El nombre no puede estar vacio. Ingrese otro: ";
+        } else {
+            cout << "Ese nombre ya existe. Ingrese otro: ";
+        }
         leerCadena(nombre, 50);
     }
 
     cout << "Ingrese el pais del Desarrollador: ";
     leerCadena(pais, 30);
+    while (strlen(pais) == 0) {
+        cout << "El pais no puede estar vacio. Ingrese otro: ";
+        leerCadena(pais, 30);
+    }
 
     cout << "Ingrese el anio de fundacion: ";
     anioFundacion = leerEntero();
@@ -115,14 +123,22 @@ bool DesarrolladorManager::modificarDesarrollador() {
 
     cout << "Ingrese el nuevo nombre: ";
     leerCadena(nombre, 50);
-    while (archivo.existeNombre(nombre) &&
-            strcmp(reg.getNombre(), nombre) != 0) {
-        cout << "Ese nombre ya existe. Ingrese otro: ";
+    while (strlen(nombre) == 0 ||
+            (archivo.existeNombre(nombre) && strcmp(reg.getNombre(), nombre) != 0)) {
+        if (strlen(nombre) == 0) {
+            cout << "El nombre no puede estar vacio. Ingrese otro: ";
+        } else {
+            cout << "Ese nombre ya existe. Ingrese otro: ";
+        }
         leerCadena(nombre, 50);
     }
 
     cout << "Ingrese el nuevo pais: ";
     leerCadena(pais, 30);
+    while (strlen(pais) == 0) {
+        cout << "El pais no puede estar vacio. Ingrese otro: ";
+        leerCadena(pais, 30);
+    }
 
     cout << "Ingrese el nuevo anio de fundacion: ";
     anioFundacion = leerEntero();

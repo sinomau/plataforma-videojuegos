@@ -18,8 +18,12 @@ bool CategoriaManager::cargarCategoria() {
 
     cout << "Ingrese el nombre de la categoria: ";
     leerCadena(nombre, 50);
-    while (archivo.existeNombre(nombre)) {
-        cout << "Ese nombre ya existe. Ingrese otro: ";
+    while (strlen(nombre) == 0 || archivo.existeNombre(nombre)) {
+        if (strlen(nombre) == 0) {
+            cout << "El nombre no puede estar vacio. Ingrese otro: ";
+        } else {
+            cout << "Ese nombre ya existe. Ingrese otro: ";
+        }
         leerCadena(nombre, 50);
     }
 
@@ -101,9 +105,13 @@ bool CategoriaManager::modificarCategoria() {
 
     cout << "Ingrese el nuevo nombre: ";
     leerCadena(nombre, 50);
-    while (archivo.existeNombre(nombre) &&
-            strcmp(reg.getNombre(), nombre) != 0) {
-        cout << "Ese nombre ya existe. Ingrese otro: ";
+    while (strlen(nombre) == 0 ||
+            (archivo.existeNombre(nombre) && strcmp(reg.getNombre(), nombre) != 0)) {
+        if (strlen(nombre) == 0) {
+            cout << "El nombre no puede estar vacio. Ingrese otro: ";
+        } else {
+            cout << "Ese nombre ya existe. Ingrese otro: ";
+        }
         leerCadena(nombre, 50);
     }
 

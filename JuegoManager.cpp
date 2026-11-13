@@ -30,8 +30,12 @@ bool JuegoManager::cargarJuego() {
 	float precio = 0;
 	cout << "Ingrese el titulo del Juego: ";
 	leerCadena(titulo, 50);
-	while(archivo.existeTitulo(titulo)) {
-		cout << "Ese titulo ya existe. Ingrese otro: ";
+	while(strlen(titulo) == 0 || archivo.existeTitulo(titulo)) {
+		if(strlen(titulo) == 0) {
+			cout << "El titulo no puede estar vacio. Ingrese otro: ";
+		} else {
+			cout << "Ese titulo ya existe. Ingrese otro: ";
+		}
 		leerCadena(titulo, 50);
 	}
 	int cantidad = archCat.getCantidadRegistros();
@@ -173,8 +177,13 @@ bool JuegoManager::modificarJuego() {
 	float precio = 0;
 	cout << "Ingrese el titulo del Juego: ";
 	leerCadena(titulo, 50);
-	while(archivo.existeTitulo(titulo) && strcmp(titulo, reg.getTitulo()) != 0) {
-		cout << "Ese titulo ya existe. Ingrese otro: ";
+	while(strlen(titulo) == 0 ||
+			(archivo.existeTitulo(titulo) && strcmp(titulo, reg.getTitulo()) != 0)) {
+		if(strlen(titulo) == 0) {
+			cout << "El titulo no puede estar vacio. Ingrese otro: ";
+		} else {
+			cout << "Ese titulo ya existe. Ingrese otro: ";
+		}
 		leerCadena(titulo, 50);
 	}
 	int cantidad = archCat.getCantidadRegistros();
