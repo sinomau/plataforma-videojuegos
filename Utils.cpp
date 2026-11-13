@@ -1,7 +1,6 @@
 #include "Utils.h"
 #include <iostream>
 #include <limits>
-#define NOMINMAX   // evita que windows.h (que incluye rlutil.h) rompa numeric_limits<streamsize>::max()
 #include "rlutil.h"
 
 using namespace std;
@@ -59,7 +58,7 @@ void leerCadena(char destino[], int tamanio) {
 
 
 void mostrarTitulo(string titulo) {
-    rlutil::saveDefaultColor();   
+    rlutil::saveDefaultColor();
     rlutil::setColor(rlutil::LIGHTCYAN);
     cout << titulo << endl;
     cout << "========================================" << endl;
