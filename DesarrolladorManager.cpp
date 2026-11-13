@@ -43,7 +43,7 @@ bool DesarrolladorManager::cargarDesarrollador() {
         return true;
     }
 
-    cout << "No se pudo guardar el Desarrollador." << endl;
+    mostrarError("No se pudo guardar el Desarrollador.");
     return false;
 }
 
@@ -57,11 +57,11 @@ void DesarrolladorManager::buscarPorId() {
 
     Desarrollador reg = archivo.buscarPorId(id);
     if (reg.getId() == -1) {
-        cout << "No existe un Desarrollador con ese ID." << endl;
+        mostrarError("No existe un Desarrollador con ese ID.");
         return;
     }
     if (reg.getEstado() == false) {
-        cout << "El Desarrollador con ese ID esta dado de baja." << endl;
+        mostrarError("El Desarrollador con ese ID esta dado de baja.");
         return;
     }
 
@@ -89,7 +89,7 @@ void DesarrolladorManager::mostrarDesarrollador() {
         }
     }
 
-    cout << "No se encontro un Desarrollador con ese nombre." << endl;
+    mostrarError("No se encontro un Desarrollador con ese nombre.");
 }
 
 bool DesarrolladorManager::modificarDesarrollador() {
@@ -99,11 +99,11 @@ bool DesarrolladorManager::modificarDesarrollador() {
     int id = leerEntero();
     Desarrollador reg = archivo.buscarPorId(id);
     if (reg.getId() == -1) {
-        cout << "No existe un Desarrollador con ese ID." << endl;
+        mostrarError("No existe un Desarrollador con ese ID.");
         return false;
     }
     if (reg.getEstado() == false) {
-        cout << "No puede modificar un Desarrollador dado de baja." << endl;
+        mostrarError("No puede modificar un Desarrollador dado de baja.");
         return false;
     }
 
@@ -140,7 +140,7 @@ bool DesarrolladorManager::modificarDesarrollador() {
         return true;
     }
 
-    cout << "No se pudo modificar el Desarrollador." << endl;
+    mostrarError("No se pudo modificar el Desarrollador.");
     return false;
 }
 
@@ -152,11 +152,11 @@ bool DesarrolladorManager::eliminarDesarrollador() {
     int id = leerEntero();
     Desarrollador reg = archivo.buscarPorId(id);
     if (reg.getId() == -1) {
-        cout << "No existe un Desarrollador con ese ID." << endl;
+        mostrarError("No existe un Desarrollador con ese ID.");
         return false;
     }
     if (reg.getEstado() == false) {
-        cout << "Este Desarrollador ya se encuentra eliminado." << endl;
+        mostrarError("Este Desarrollador ya se encuentra eliminado.");
         return false;
     }
 
@@ -167,7 +167,7 @@ bool DesarrolladorManager::eliminarDesarrollador() {
         return true;
     }
 
-    cout << "No se pudo eliminar el Desarrollador." << endl;
+    mostrarError("No se pudo eliminar el Desarrollador.");
     return false;
 }
 
@@ -186,6 +186,6 @@ void DesarrolladorManager::listarDesarrollador() {
     }
 
     if (mostrados == 0) {
-        cout << "No hay Desarrolladores cargados." << endl;
+        mostrarError("No hay Desarrolladores cargados.");
     }
 }

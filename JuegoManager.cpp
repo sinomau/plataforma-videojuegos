@@ -47,7 +47,7 @@ bool JuegoManager::cargarJuego() {
 		Categoria cat = archCat.buscarPorId(idCategoria);
 		categoriaValida = cat.getId() != -1 && cat.getEstado();
 		if(!categoriaValida) {
-			cout << "Categoria inexistente o inactiva." << endl;
+			mostrarError("Categoria inexistente o inactiva.");
 			cout << "Ingrese 0 para salir u otro numero para reintentar: ";
 			if(leerEntero() == 0) {
 				cout << "Carga cancelada." << endl;
@@ -68,7 +68,7 @@ bool JuegoManager::cargarJuego() {
 		Desarrollador des = archDes.buscarPorId(idDesarrollador);
 		desarrolladorValido = des.getId() != -1 && des.getEstado();
 		if(!desarrolladorValido) {
-			cout << "Desarrollador inexistente o inactivo." << endl;
+			mostrarError("Desarrollador inexistente o inactivo.");
 			cout << "Ingrese 0 para salir u otro numero para reintentar: ";
 			if(leerEntero() == 0) {
 				cout << "Carga cancelada." << endl;
@@ -89,7 +89,7 @@ bool JuegoManager::cargarJuego() {
 		mostrarExito("Juego guardado correctamente.");
 		return true;
 	}
-	cout << "No se pudo guardar el Juego." << endl;
+	mostrarError("No se pudo guardar el Juego.");
 	return false;
 }
 
@@ -104,11 +104,11 @@ void JuegoManager::buscarPorId() {
 	int id = leerEntero();
 	Juego reg = archivo.buscarPorId(id);
 	if(reg.getId() == -1) {
-		cout << "No existe un Juego con ese ID." << endl;
+		mostrarError("No existe un Juego con ese ID.");
 		return;
 	}
 	if(reg.getEstado() == false) {
-		cout << "El Juego con ese ID esta dado de baja." << endl;
+		mostrarError("El Juego con ese ID esta dado de baja.");
 		return;
 	}
 	reg.mostrar();
@@ -142,7 +142,7 @@ void JuegoManager::mostrarJuego() {
 			return;
 		}
 	}
-	cout << "No se encontro un Juego con ese titulo." << endl;
+	mostrarError("No se encontro un Juego con ese titulo.");
 	return;
 }
 
@@ -161,11 +161,11 @@ bool JuegoManager::modificarJuego() {
 	int id = leerEntero();
 	Juego reg = archivo.buscarPorId(id);
 	if(reg.getId() == -1) {
-		cout << "No existe un Juego con ese ID." << endl;
+		mostrarError("No existe un Juego con ese ID.");
 		return false;
 	}
 	if(reg.getEstado() == false) {
-		cout << "No puede modificar un Juego dado de baja." << endl;
+		mostrarError("No puede modificar un Juego dado de baja.");
 		return false;
 	}
 	char titulo[50];
@@ -190,7 +190,7 @@ bool JuegoManager::modificarJuego() {
 		Categoria cat = archCat.buscarPorId(idCategoria);
 		categoriaValida = cat.getId() != -1 && cat.getEstado();
 		if(!categoriaValida) {
-			cout << "Categoria inexistente o inactiva." << endl;
+			mostrarError("Categoria inexistente o inactiva.");
 			cout << "Ingrese 0 para salir u otro numero para reintentar: ";
 			if(leerEntero() == 0) {
 				cout << "Modificacion cancelada." << endl;
@@ -211,7 +211,7 @@ bool JuegoManager::modificarJuego() {
 		Desarrollador des = archDes.buscarPorId(idDesarrollador);
 		desarrolladorValido = des.getId() != -1 && des.getEstado();
 		if(!desarrolladorValido) {
-			cout << "Desarrollador inexistente o inactivo." << endl;
+			mostrarError("Desarrollador inexistente o inactivo.");
 			cout << "Ingrese 0 para salir u otro numero para reintentar: ";
 			if(leerEntero() == 0) {
 				cout << "Modificacion cancelada." << endl;
@@ -236,7 +236,7 @@ bool JuegoManager::modificarJuego() {
 		mostrarExito("Juego modificado correctamente.");
 		return true;
 	}
-	cout << "No se pudo modificar el Juego." << endl;
+	mostrarError("No se pudo modificar el Juego.");
 	return false;
 }
 
@@ -250,11 +250,11 @@ bool JuegoManager::eliminarJuego() {
 	int id = leerEntero();
 	Juego reg = archivo.buscarPorId(id);
 	if(reg.getId() == -1) {
-		cout << "No existe un Juego con ese ID." << endl;
+		mostrarError("No existe un Juego con ese ID.");
 		return false;
 	}
 	if(reg.getEstado() == false) {
-		cout << "Este Juego ya se encuentra eliminado." << endl;
+		mostrarError("Este Juego ya se encuentra eliminado.");
 		return false;
 	}
 	reg.setEstado(false);
@@ -262,7 +262,7 @@ bool JuegoManager::eliminarJuego() {
 		mostrarExito("Juego eliminado correctamente.");
 		return true;
 	}
-	cout << "No se pudo eliminar el Juego." << endl;
+	mostrarError("No se pudo eliminar el Juego.");
 	return false;
 }
 

@@ -1,5 +1,6 @@
 #include <iostream>
 #include "Listados.h"
+#include "Utils.h"
 #include "JuegoManager.h"
 #include "JuegoArchivo.h"
 #include "Juego.h"
@@ -24,7 +25,7 @@ void juegosPorTitulo() {
 
 
     if(cantidad == 0) {
-        cout << "No hay juegos registrados" << endl;
+        mostrarError("No hay juegos registrados");
         return;
     }
 
@@ -43,7 +44,7 @@ void juegosPorTitulo() {
     }
 
     if(contador == 0) {
-        cout << "No hay juegos activos" << endl;
+        mostrarError("No hay juegos activos");
         delete[] vec;
         return;
     }
@@ -80,7 +81,7 @@ void juegosPorPrecio() {
     int cantidad = archivo.getCantidadRegistros();
 
     if(cantidad == 0) {
-        cout << "No hay juegos registrados" << endl;
+        mostrarError("No hay juegos registrados");
         return;
     }
 
@@ -95,7 +96,7 @@ void juegosPorPrecio() {
     }
 
     if(contador == 0) {
-        cout << "No hay juegos activos" << endl;
+        mostrarError("No hay juegos activos");
         delete[] vec;
         return;
     }
@@ -130,7 +131,7 @@ void juegosPorFecha() {
 
     int cantidad = archivo.getCantidadRegistros();
     if(cantidad == 0) {
-        cout << "No hay juegos registrados" << endl;
+        mostrarError("No hay juegos registrados");
         return;
     }
 
@@ -144,7 +145,7 @@ void juegosPorFecha() {
         }
     }
     if(contador == 0) {
-        cout << "No hay juegos activos" << endl;
+        mostrarError("No hay juegos activos");
         delete[] vec;
         return;
     }
@@ -182,7 +183,7 @@ void juegosListadosPorCategoria() {
     int cantidad = archivo.getCantidadRegistros();
 
     if(cantidad == 0) {
-        cout << "No hay juegos registrados" << endl;
+        mostrarError("No hay juegos registrados");
         return;
     }
 
@@ -201,7 +202,7 @@ void juegosListadosPorCategoria() {
     }
 
     if(contador == 0) {
-        cout << "No hay juegos activos" << endl;
+        mostrarError("No hay juegos activos");
         delete[] vec;
         return;
     }
@@ -251,7 +252,7 @@ void desarrolladoresPorNombre() {
 
     int cantidad = archivo.getCantidadRegistros();
     if(cantidad == 0) {
-        cout << "No hay Desarrolladores registrados" << endl;
+        mostrarError("No hay Desarrolladores registrados");
         return;
     }
     int contador = 0;
@@ -265,7 +266,7 @@ void desarrolladoresPorNombre() {
     }
 
     if(contador == 0) {
-        cout << "No hay desarrolladores activos" << endl;
+        mostrarError("No hay desarrolladores activos");
         delete[] vec;
         return;
     }
@@ -296,7 +297,7 @@ void desarrolladoresPorFecha() {
 
     int cantidad = archivo.getCantidadRegistros();
     if(cantidad == 0) {
-        cout << "No hay Desarrolladores registrados" << endl;
+        mostrarError("No hay Desarrolladores registrados");
         return;
     }
     int contador = 0;
@@ -310,7 +311,7 @@ void desarrolladoresPorFecha() {
     }
 
     if(contador == 0) {
-        cout << "No hay desarrolladores activos" << endl;
+        mostrarError("No hay desarrolladores activos");
         delete[] vec;
         return;
     }
@@ -348,7 +349,7 @@ void reseniasPorPuntaje() {
 
     int cantidad = archivo.getCantidadRegistros();
     if(cantidad == 0) {
-        cout << "No hay Resenias registradas" << endl;
+        mostrarError("No hay Resenias registradas");
         return;
     }
 
@@ -362,7 +363,7 @@ void reseniasPorPuntaje() {
         }
     }
     if(contador == 0) {
-        cout << "No hay rese�as activas" << endl;
+        mostrarError("No hay rese�as activas");
         delete[] vec;
         return;
     }
@@ -394,7 +395,7 @@ void reseniasPorFecha() {
 
     int cantidad = archivo.getCantidadRegistros();
     if(cantidad == 0) {
-        cout << "No hay Resenias registradas" << endl;
+        mostrarError("No hay Resenias registradas");
         return;
     }
 
@@ -409,7 +410,7 @@ void reseniasPorFecha() {
     }
 
     if(contador == 0) {
-        cout << "No hay reseñas activas" << endl;
+        mostrarError("No hay reseñas activas");
         delete[] vec;
         return;
     }
@@ -444,7 +445,7 @@ void categoriasPorNombre(){
 
     int cantidad = archivo.getCantidadRegistros();
     if(cantidad == 0) {
-        cout << "No hay Categorias registradas" << endl;
+        mostrarError("No hay Categorias registradas");
         return;
     }
     int contador = 0;
@@ -459,7 +460,7 @@ void categoriasPorNombre(){
     }
 
     if(contador == 0) {
-        cout << "No hay Categorias activas" << endl;
+        mostrarError("No hay Categorias activas");
         delete[] vec;
         return;
     }
@@ -495,7 +496,7 @@ void usuariosPorApellido() {
 
 
     if(cantidad == 0) {
-        cout << "No hay usuarios registrados" << endl;
+        mostrarError("No hay usuarios registrados");
         return;
     }
 
@@ -514,7 +515,7 @@ void usuariosPorApellido() {
     }
 
     if(contador == 0) {
-        cout << "No hay usuarios activos" << endl;
+        mostrarError("No hay usuarios activos");
         delete[] vec;
         return;
     }
@@ -548,7 +549,7 @@ void usuariosPorFechaRegistro() {
 
     int cantidad = arch.getCantidadRegistros();
     if(cantidad == 0) {
-        cout << "No hay usuarios registrados" << endl;
+        mostrarError("No hay usuarios registrados");
         return;
     }
 
@@ -562,7 +563,7 @@ void usuariosPorFechaRegistro() {
         }
     }
     if(contador == 0) {
-        cout << "No hay usuarios activos" << endl;
+        mostrarError("No hay usuarios activos");
         delete[] vec;
         return;
     }

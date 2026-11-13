@@ -35,7 +35,7 @@ bool CompraManager::cargarCompra(int idUsuario){
     }
     if(mostrados==0)
     {
-        cout<<"No hay juegos disponibles"<<endl;
+        mostrarError("No hay juegos disponibles");
         return false;
     }
     bool juegoValido=false;
@@ -47,7 +47,7 @@ bool CompraManager::cargarCompra(int idUsuario){
         juegoValido=juego.getId() !=-1 && juego.getEstado();
         if(!juegoValido)
         {
-            cout << "Juego inexistente o inactivo" << endl;
+            mostrarError("Juego inexistente o inactivo");
             cout << "Ingrese 0 para salir u otro numero para reintentar: ";
             if (leerEntero() == 0)
             {
@@ -57,7 +57,7 @@ bool CompraManager::cargarCompra(int idUsuario){
         }
     }
     if(archivoCompra.existeCompra(idUsuario, idJuego)){
-        cout<<"Ya tenes este juego en tu biblioteca"<<endl;
+        mostrarError("Ya tiene este juego en su biblioteca");
         return false;
     }
     Usuario usuario = archivoUsuario.buscarPorId(idUsuario);
@@ -69,7 +69,7 @@ bool CompraManager::cargarCompra(int idUsuario){
     }
     usuario.setSaldo(usuario.getSaldo() - precio);
     if (!archivoUsuario.modificarDisco(usuario, idUsuario)) {
-        cout << "No se pudo realizar la compra." << endl;
+        mostrarError("No se pudo realizar la compra.");
         return false;
     }
 
@@ -78,7 +78,7 @@ bool CompraManager::cargarCompra(int idUsuario){
     if (!archivoCompra.escribirDisco(reg)) {
         usuario.setSaldo(usuario.getSaldo() + precio);
         archivoUsuario.modificarDisco(usuario, idUsuario);
-        cout << "No se pudo grabar la compra. Se reintegro el saldo" << endl;
+        mostrarError("No se pudo grabar la compra. Se reintegro el saldo");
         return false;
     }
 
@@ -118,7 +118,7 @@ void CompraManager::verBiblioteca(int idUsuario){
 
     if(mostrados == 0)
     {
-        cout << "No hay juegos en tu biblioteca" << endl;
+        mostrarError("No hay juegos en su biblioteca");
     }
 }
 
@@ -145,7 +145,7 @@ bool CompraManager::eliminarCompra(){
     }
     if(mostrados == 0)
     {
-        cout << "No hay compras activas." << endl;
+        mostrarError("No hay compras activas.");
         return false;
     }
 
@@ -154,19 +154,19 @@ bool CompraManager::eliminarCompra(){
     Compra compra = archivoCompra.buscarPorId(id);
     if(compra.getId() == -1)
     {
-        cout << "No existe una compra con ese ID." << endl;
+        mostrarError("No existe una compra con ese ID.");
         return false;
     }
     if(compra.getEstado() == false)
     {
-        cout << "Esta compra ya se encuentra anulada." << endl;
+        mostrarError("Esta compra ya se encuentra anulada.");
         return false;
     }
 
     compra.setEstado(false);
     if(!archivoCompra.modificarDisco(compra, id))
     {
-        cout << "No se pudo anular la compra." << endl;
+        mostrarError("No se pudo anular la compra.");
         return false;
     }
 
@@ -176,7 +176,7 @@ bool CompraManager::eliminarCompra(){
     {
         compra.setEstado(true);
         archivoCompra.modificarDisco(compra, id);
-        cout << "No se pudo reintegrar el saldo. La compra no fue anulada." << endl;
+        mostrarError("No se pudo reintegrar el saldo. La compra no fue anulada.");
         return false;
     }
 
