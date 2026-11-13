@@ -26,7 +26,9 @@ void juegosPorCategoria() {
     CategoriaArchivo archivoCat;
     CategoriaManager managerCat;
     cout << "Categorias disponibles"<< endl;
-    managerCat.listarCategoria();
+    if(managerCat.listarCategoria() == 0) {
+        return;
+    }
     cout << "Seleccione del listado la categoria de los juegos a visualizar"<< endl;
     int opcion;
     bool categoriaValida = false;
@@ -68,8 +70,8 @@ void juegosPorCategoria() {
     }
 
     for(int i = 0 ; i < contador; i++) {
-        cout << "==================================="<< endl;
         vec[i].mostrar();
+        cout << "========================================" << endl;
     }
 
 
@@ -85,19 +87,27 @@ void juegosPorDesarrollador() {
     Desarrollador regDes;
     DesarrolladorManager managerDes;
 
-    cout << "Desarrolladores disponibles"<< endl;
     int cantidadDes = 0;
     cantidadDes = archDes.getCantidadRegistros();
     if(cantidadDes == 0) {
         mostrarError("No hay desarrolladores disponibles");
         return;
     }
+    int activos = 0;
     for(int i = 0; i<cantidadDes; i++) {
         regDes = archDes.leerDisco(i);
         if(regDes.getEstado()) {
-            cout << "nro: "<< regDes.getId()<<" -- Nombre :" <<regDes.getNombre() << endl;
+            if(activos == 0) {
+                cout << "Desarrolladores disponibles" << endl;
+            }
+            cout << regDes.getId() << " - " << regDes.getNombre() << endl;
+            activos++;
         }
 
+    }
+    if(activos == 0) {
+        mostrarError("No hay desarrolladores activos");
+        return;
     }
 
     int opcion;
@@ -132,8 +142,8 @@ void juegosPorDesarrollador() {
                 mostrarTitulo("JUEGOS DEL DESARROLLADOR");
                 hayJuegos = true;
             }
-            cout << "============================================" << endl;
             reg.mostrar();
+            cout << "========================================" << endl;
         }
     }
 
@@ -205,8 +215,8 @@ void juegosPorRangoPrecio() {
     bool encontrado = false;
     for(int i = 0 ; i < contador ; i++) {
         if(vec[i].getPrecio() <= vFinal && vec[i].getPrecio() >= vInicial) {
-            cout << "============================================" << endl;
             vec[i].mostrar();
+            cout << "========================================" << endl;
             encontrado = true;
         }
 
@@ -249,8 +259,8 @@ void juegosPorFechaLanzamiento() {
     for(int i = 0; i < cantidad ; i++) {
         reg = archivo.leerDisco(i);
         if(reg.getEstado() && reg.getFechaLanzamiento().toInt() == fecha.toInt()) {
-            cout << "============================================" << endl;
             reg.mostrar();
+            cout << "========================================" << endl;
             encontrado = true;
         }
 
@@ -293,8 +303,7 @@ void reseniasPorJuego() {
         regJuego = archJuego.leerDisco(i);
 
         if(regJuego.getEstado()) {
-            cout << "Juego id Nro: " << regJuego.getId()
-                 << " - Nombre: " << regJuego.getTitulo() << endl;
+            cout << regJuego.getId() << " - " << regJuego.getTitulo() << endl;
         }
     }
 
@@ -329,7 +338,7 @@ void reseniasPorJuego() {
             }
             cout << "Resenia Puntaje: " << regRes.getPuntaje() << endl;
             cout << "Resenia Comentario: " << regRes.getComentario() << endl;
-            cout << "==================================" << endl;
+            cout << "========================================" << endl;
 
             encontrado = true;
         }
@@ -363,11 +372,20 @@ void reseniaPorUsuario() {
     }
 
     //muestro usuarios
-    cout << "USUARIOS" << endl;
+    int activos = 0;
     for (int i = 0 ; i < cantUsuarios ; i++) {
         regUsuario = archivoUsuario.leerDisco(i);
-        if(regUsuario.getEstado())
-            cout << "Usuario n: " << regUsuario.getId()<< " - "<< regUsuario.getNombreUsuario() << endl;
+        if(regUsuario.getEstado()) {
+            if(activos == 0) {
+                cout << "USUARIOS" << endl;
+            }
+            cout << regUsuario.getId() << " - " << regUsuario.getNombreUsuario() << endl;
+            activos++;
+        }
+    }
+    if(activos == 0) {
+        mostrarError("No hay usuarios activos");
+        return;
     }
 
     int opcion;
@@ -400,7 +418,7 @@ void reseniaPorUsuario() {
             }
             cout << "Resenia Puntaje: " << regResenia.getPuntaje() << endl;
             cout << "Resenia Comentario: " << regResenia.getComentario() << endl;
-            cout << "==================================" << endl;
+            cout << "========================================" << endl;
             existeResenia = true;
 
         }

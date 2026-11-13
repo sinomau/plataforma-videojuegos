@@ -157,7 +157,7 @@ bool CategoriaManager::eliminarCategoria() {
     return false;
 }
 
-void CategoriaManager::listarCategoria() {
+int CategoriaManager::listarCategoria() {
     CategoriaArchivo archivo;
     int cantidad = archivo.getCantidadRegistros();
     int mostrados = 0;
@@ -174,4 +174,6 @@ void CategoriaManager::listarCategoria() {
     if (mostrados == 0) {
         mostrarError("No hay categorias cargadas.");
     }
+
+    return mostrados;
 }
