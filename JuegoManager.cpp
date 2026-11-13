@@ -86,7 +86,7 @@ bool JuegoManager::cargarJuego() {
 	fechaLanzamiento.cargar();
 	reg.cargar(id, titulo, idCategoria, idDesarrollador, precio, fechaLanzamiento);
 	if(archivo.escribirDisco(reg)) {
-		cout << "Juego guardado correctamente." << endl;
+		mostrarExito("Juego guardado correctamente.");
 		return true;
 	}
 	cout << "No se pudo guardar el Juego." << endl;
@@ -233,7 +233,7 @@ bool JuegoManager::modificarJuego() {
 	reg.setPrecio(precio);
 	reg.setFechaLanzamiento(fechaLanzamiento);
 	if(archivo.modificarDisco(reg, id)) {
-		cout << "Juego modificado correctamente." << endl;
+		mostrarExito("Juego modificado correctamente.");
 		return true;
 	}
 	cout << "No se pudo modificar el Juego." << endl;
@@ -259,7 +259,7 @@ bool JuegoManager::eliminarJuego() {
 	}
 	reg.setEstado(false);
 	if(archivo.modificarDisco(reg, id)) {
-		cout << "Juego eliminado correctamente." << endl;
+		mostrarExito("Juego eliminado correctamente.");
 		return true;
 	}
 	cout << "No se pudo eliminar el Juego." << endl;

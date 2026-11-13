@@ -7,6 +7,7 @@
 #include "UsuarioArchivo.h"
 #include "Usuario.h"
 #include "Utils.h"
+#include "rlutil.h"
 
 using namespace std;
 
@@ -16,35 +17,35 @@ void menuInicio() {
     int opcion;
 
     do {
-        system("cls");
-        cout << "PLATAFORMA DE VIDEOJUEGOS" << endl;
+        rlutil::cls();
+        mostrarTitulo("PLATAFORMA DE VIDEOJUEGOS");
         cout << "Opcion 1 : INGRESAR" << endl;
         cout << "Opcion 2 : REGISTRARSE" << endl;
         cout << "Opcion 0 : SALIR " << endl;
         cout << "Ingrese una opcion " << endl;
         opcion = leerEntero();
-        system("cls");
+        rlutil::cls();
         switch (opcion) {
         case 1: {
             int idUsuario = manager.iniciarSesion();
             if (idUsuario != -1) {
-                system("pause");
+                rlutil::anykey("Presione una tecla para continuar...\n");
                 menuSegunRol(idUsuario);
             } else {
-                system("pause");
+                rlutil::anykey("Presione una tecla para continuar...\n");
             }
             break;
         }
         case 2:
             manager.cargarUsuario();
-            system("pause");
+            rlutil::anykey("Presione una tecla para continuar...\n");
             break;
         case 0:
             cout << "Hasta luego!" << endl;
             break;
         default:
-            cout << "Opcion invalida." << endl;
-            system("pause");
+            mostrarError("Opcion invalida.");
+            rlutil::anykey("Presione una tecla para continuar...\n");
             break;
         }
 

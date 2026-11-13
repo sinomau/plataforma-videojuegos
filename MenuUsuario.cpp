@@ -5,6 +5,7 @@
 #include "ReseniaManager.h"
 #include "CompraManager.h"
 #include "Utils.h"
+#include "rlutil.h"
 
 using namespace std;
 
@@ -15,8 +16,8 @@ void menuUsuario(int idUsuario) {
     int opcion;
 
     do {
-        system("cls");
-        cout << "Menu Usuario" << endl;
+        rlutil::cls();
+        mostrarTitulo("MENU USUARIO");
         cout << "Opcion 1 : CARGAR SALDO" << endl;
         cout << "Opcion 2 : MIS DATOS" << endl;
         cout << "Opcion 3 : DEJAR RESENIA" << endl;
@@ -28,7 +29,7 @@ void menuUsuario(int idUsuario) {
         cout << "Opcion 0 : CERRAR SESION " << endl;
         cout << "Ingrese una opcion " << endl;
         opcion = leerEntero();
-        system("cls");
+        rlutil::cls();
         switch (opcion) {
         case 1:
             manager.cargarSaldo(idUsuario);
@@ -57,12 +58,12 @@ void menuUsuario(int idUsuario) {
         case 0:
             return;
         default:
-            cout << "Opcion invalida." << endl;
+            mostrarError("Opcion invalida.");
             break;
         }
 
         if (opcion != 0) {
-            system("pause");
+            rlutil::anykey("Presione una tecla para continuar...\n");
         }
 
     } while (opcion != 0);

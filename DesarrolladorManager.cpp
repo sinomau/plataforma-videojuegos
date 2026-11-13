@@ -39,7 +39,7 @@ bool DesarrolladorManager::cargarDesarrollador() {
 
     reg.cargar(id, nombre, pais, anioFundacion);
     if (archivo.escribirDisco(reg)) {
-        cout << "Desarrollador guardado correctamente." << endl;
+        mostrarExito("Desarrollador guardado correctamente.");
         return true;
     }
 
@@ -136,7 +136,7 @@ bool DesarrolladorManager::modificarDesarrollador() {
     reg.setAnioFundacion(anioFundacion);
 
     if (archivo.modificarDisco(reg, id)) {
-        cout << "Desarrollador modificado correctamente." << endl;
+        mostrarExito("Desarrollador modificado correctamente.");
         return true;
     }
 
@@ -163,7 +163,7 @@ bool DesarrolladorManager::eliminarDesarrollador() {
     reg.setEstado(false);
 
     if (archivo.modificarDisco(reg, id)) {
-        cout << "Desarrollador eliminado correctamente." << endl;
+        mostrarExito("Desarrollador eliminado correctamente.");
         return true;
     }
 

@@ -8,6 +8,7 @@
 #include "Consultas.h"
 #include "Informes.h"
 #include "Utils.h"
+#include "rlutil.h"
 #include <cstdlib>
 
 using namespace std;
@@ -18,8 +19,8 @@ void menuAdmin() {
     int opcion;
 
     do {
-        system("cls");
-        cout << "Menu Administrador" << endl;
+        rlutil::cls();
+        mostrarTitulo("MENU ADMINISTRADOR");
         cout << "Opcion 1 : CATEGORIAS" << endl;
         cout << "Opcion 2 : DESARROLLADORES" << endl;
         cout << "Opcion 3 : JUEGOS" << endl;
@@ -43,9 +44,9 @@ void menuAdmin() {
             menuJuegos();
             break;
         case 4:
-            system("cls");
+            rlutil::cls();
             compraManager.eliminarCompra();
-            system("pause");
+            rlutil::anykey("Presione una tecla para continuar...\n");
             break;
         case 5:
             menuListados();
@@ -59,8 +60,8 @@ void menuAdmin() {
         case 0:
             return;
         default:
-            cout << "Opcion invalida." << endl;
-            system("pause");
+            mostrarError("Opcion invalida.");
+            rlutil::anykey("Presione una tecla para continuar...\n");
             break;
         }
 
@@ -71,8 +72,8 @@ void menuCategorias() {
     int opcion;
 
     do {
-        system("cls");
-        cout << "Menu Categorias" << endl;
+        rlutil::cls();
+        mostrarTitulo("MENU CATEGORIAS");
         cout << "Opcion 1 : CARGAR CATEGORIA" << endl;
         cout << "Opcion 2 : MODIFICAR CATEGORIA" << endl;
         cout << "Opcion 3 : ELIMINAR CATEGORIA" << endl;
@@ -80,7 +81,7 @@ void menuCategorias() {
         cout << "Opcion 0 : SALIR " << endl;
         cout << "Ingrese una opcion " << endl;
         opcion = leerEntero();
-        system("cls");
+        rlutil::cls();
         switch (opcion) {
         case 1:
             manager.cargarCategoria();
@@ -97,12 +98,12 @@ void menuCategorias() {
         case 0:
             return;
         default:
-            cout << "Opcion invalida." << endl;
+            mostrarError("Opcion invalida.");
             break;
         }
 
         if(opcion != 0){
-            system("pause");
+            rlutil::anykey("Presione una tecla para continuar...\n");
         }
 
     } while (opcion != 0);
@@ -118,8 +119,8 @@ void menuDesarrolladores() {
     int opcion;
 
     do {
-        system("cls");
-        cout << "Menu Desarrolladores" << endl;
+        rlutil::cls();
+        mostrarTitulo("MENU DESARROLLADORES");
         cout << "Opcion 1 : CARGAR DESARROLLADORES" << endl;
         cout << "Opcion 2 : MODIFICAR DESARROLLADORES" << endl;
         cout << "Opcion 3 : ELIMINAR DESARROLLADORES" << endl;
@@ -127,7 +128,7 @@ void menuDesarrolladores() {
         cout << "Opcion 0 : SALIR " << endl;
         cout << "Ingrese una opcion " << endl;
         opcion = leerEntero();
-        system("cls");
+        rlutil::cls();
         switch (opcion) {
         case 1:
             manager.cargarDesarrollador();
@@ -144,12 +145,12 @@ void menuDesarrolladores() {
         case 0:
             return;
         default:
-            cout << "Opcion invalida." << endl;
+            mostrarError("Opcion invalida.");
             break;
         }
 
         if(opcion != 0){
-            system("pause");
+            rlutil::anykey("Presione una tecla para continuar...\n");
         }
 
     } while (opcion != 0);
@@ -164,8 +165,8 @@ void menuJuegos() {
     int opcion;
 
     do {
-        system("cls");
-        cout << "Menu Juegos" << endl;
+        rlutil::cls();
+        mostrarTitulo("MENU JUEGOS");
         cout << "Opcion 1 : CARGAR JUEGOS" << endl;
         cout << "Opcion 2 : MODIFICAR JUEGOS" << endl;
         cout << "Opcion 3 : ELIMINAR JUEGOS" << endl;
@@ -173,7 +174,7 @@ void menuJuegos() {
         cout << "Opcion 0 : SALIR " << endl;
         cout << "Ingrese una opcion " << endl;
         opcion = leerEntero();
-        system("cls");
+        rlutil::cls();
         switch (opcion) {
         case 1:
             manager.cargarJuego();
@@ -190,12 +191,12 @@ void menuJuegos() {
         case 0:
             return;
         default:
-            cout << "Opcion invalida." << endl;
+            mostrarError("Opcion invalida.");
             break;
         }
 
         if(opcion != 0){
-            system("pause");
+            rlutil::anykey("Presione una tecla para continuar...\n");
         }
 
     } while (opcion != 0);
@@ -208,8 +209,8 @@ void menuJuegos() {
 void menuListados() {
     int opcion;
     do {
-        system("cls");
-        cout << "Menu Listados" << endl;
+        rlutil::cls();
+        mostrarTitulo("MENU LISTADOS");
         cout << "Opcion 1 : USUARIOS ORDENADOS POR APELLIDO" << endl;
         cout << "Opcion 2 : USUARIOS ORDENADOS POR FECHA DE REGISTRO" << endl;
         cout << "Opcion 3 : JUEGOS ORDENADOS POR TITULO" << endl;
@@ -225,7 +226,7 @@ void menuListados() {
         cout << "Opcion 0 : SALIR " << endl;
         cout << "Ingrese una opcion " << endl;
         opcion = leerEntero();
-        system("cls");
+        rlutil::cls();
         switch (opcion) {
         case 1:
             usuariosPorApellido();
@@ -266,12 +267,12 @@ void menuListados() {
         case 0:
             return;
         default:
-            cout << "Opcion invalida." << endl;
+            mostrarError("Opcion invalida.");
             break;
         }
 
         if(opcion != 0){
-            system("pause");
+            rlutil::anykey("Presione una tecla para continuar...\n");
         }
 
     } while (opcion != 0);
@@ -282,8 +283,8 @@ void menuListados() {
 void menuConsultas() {
     int opcion;
     do {
-        system("cls");
-        cout << "Menu Consultas" << endl;
+        rlutil::cls();
+        mostrarTitulo("MENU CONSULTAS");
         cout << "Opcion 1 : USUARIOS POR NOMBRE DE USUARIO" << endl;
         cout << "Opcion 2 : USUARIOS POR RANGO DE FECHAS DE REGISTRO" << endl;
         cout << "Opcion 3 : JUEGOS POR CATEGORIAS" << endl;
@@ -298,7 +299,7 @@ void menuConsultas() {
         cout << "Opcion 0 : SALIR " << endl;
         cout << "Ingrese una opcion " << endl;
         opcion = leerEntero();
-        system("cls");
+        rlutil::cls();
         switch (opcion) {
         case 1:
 
@@ -336,12 +337,12 @@ void menuConsultas() {
         case 0:
             return;
         default:
-            cout << "Opcion invalida." << endl;
+            mostrarError("Opcion invalida.");
             break;
         }
 
         if(opcion != 0){
-            system("pause");
+            rlutil::anykey("Presione una tecla para continuar...\n");
         }
 
     } while (opcion != 0);
@@ -352,8 +353,8 @@ void menuConsultas() {
 void menuInformes() {
     int opcion;
     do {
-        system("cls");
-        cout << "Menu Informes" << endl;
+        rlutil::cls();
+        mostrarTitulo("MENU INFORMES");
         cout << "Opcion 1 : RECAUDACION POR CATEGORIAS" << endl;
         cout << "Opcion 2 : RECAUDACION POR JUEGO" << endl;
         cout << "Opcion 3 : VALORACION PROMEDIO POR JUEGO" << endl;
@@ -361,7 +362,7 @@ void menuInformes() {
         cout << "Opcion 0 : SALIR " << endl;
         cout << "Ingrese una opcion " << endl;
         opcion = leerEntero();
-        system("cls");
+        rlutil::cls();
         switch (opcion) {
         case 1:
             recaudacionPorCategoria();
@@ -378,12 +379,12 @@ void menuInformes() {
         case 0:
             return;
         default:
-            cout << "Opcion invalida." << endl;
+            mostrarError("Opcion invalida.");
             break;
         }
 
         if(opcion != 0){
-            system("pause");
+            rlutil::anykey("Presione una tecla para continuar...\n");
         }
 
     } while (opcion != 0);

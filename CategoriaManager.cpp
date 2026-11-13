@@ -28,7 +28,7 @@ bool CategoriaManager::cargarCategoria() {
 
     reg.cargar(id, nombre, descripcion);
     if (archivo.escribirDisco(reg)) {
-        cout << "Categoria guardada correctamente." << endl;
+        mostrarExito("Categoria guardada correctamente.");
         return true;
     }
 
@@ -114,7 +114,7 @@ bool CategoriaManager::modificarCategoria() {
     reg.setDescripcion(descripcion);
 
     if (archivo.modificarDisco(reg, id)) {
-        cout << "Categoria modificada correctamente." << endl;
+        mostrarExito("Categoria modificada correctamente.");
         return true;
     }
 
@@ -141,7 +141,7 @@ bool CategoriaManager::eliminarCategoria() {
     reg.setEstado(false);
 
     if (archivo.modificarDisco(reg, id)) {
-        cout << "Categoria eliminada correctamente." << endl;
+        mostrarExito("Categoria eliminada correctamente.");
         return true;
     }
 

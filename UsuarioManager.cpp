@@ -4,6 +4,7 @@
 #include "UsuarioArchivo.h"
 #include "Usuario.h"
 #include "Utils.h"
+#include "rlutil.h"
 
 using namespace std;
 
@@ -66,7 +67,7 @@ bool UsuarioManager::cargarUsuario() {
 
     reg.cargar(id, nombre, apellido, email, nombreUsuario, contrasenia, rol);
     if (archivo.escribirDisco(reg)) {
-        cout << "Usuario registrado correctamente." << endl;
+        mostrarExito("Usuario registrado correctamente.");
         return true;
     }
 
@@ -120,7 +121,10 @@ bool UsuarioManager::cargarSaldo(int idUsuario) {
     reg.setSaldo(reg.getSaldo() + monto);
 
     if (archivo.modificarDisco(reg, idUsuario)) {
+        rlutil::saveDefaultColor();
+        rlutil::setColor(rlutil::LIGHTGREEN);
         cout << "Saldo cargado correctamente. Saldo nuevo: $" << reg.getSaldo() << endl;
+        rlutil::resetColor();
         return true;
     }
 

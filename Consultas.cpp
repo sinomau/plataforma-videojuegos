@@ -36,7 +36,7 @@ void juegosPorCategoria() {
         categoriaValida = cat.getId() != -1 && cat.getEstado();
 
         if(!categoriaValida) {
-            cout << "Categoria inexistente o inactiva." << endl;
+            mostrarError("Categoria inexistente o inactiva.");
             cout << "Ingrese 0 para salir u otro numero para reintentar: ";
             if(leerEntero() == 0) {
                 return;
@@ -47,7 +47,7 @@ void juegosPorCategoria() {
 
     int cantidad = archivo.getCantidadRegistros();
     if(cantidad == 0) {
-        cout << "No hay juegos en los registros"<< endl;
+        mostrarError("No hay juegos en los registros");
         return;
     }
 
@@ -62,7 +62,7 @@ void juegosPorCategoria() {
     }
 
     if(contador == 0) {
-        cout << "No hay juegos de la categoria seleccionada"<< endl;
+        mostrarError("No hay juegos de la categoria seleccionada");
         delete[] vec;
         return;
     }
@@ -89,7 +89,7 @@ void juegosPorDesarrollador() {
     int cantidadDes = 0;
     cantidadDes = archDes.getCantidadRegistros();
     if(cantidadDes == 0) {
-        cout << "No hay desarrolladores disponibles"<< endl;
+        mostrarError("No hay desarrolladores disponibles");
         return;
     }
     for(int i = 0; i<cantidadDes; i++) {
@@ -108,7 +108,7 @@ void juegosPorDesarrollador() {
         Desarrollador des = archDes.buscarPorId(opcion);
         desarrolladorValido = des.getEstado() && des.getId() != -1;
         if(!desarrolladorValido) {
-            cout << "Desarrollador inexistente o inactivo." << endl;
+            mostrarError("Desarrollador inexistente o inactivo.");
             cout << "Ingrese 0 para salir u otro numero para reintentar: ";
             if(leerEntero() == 0) {
                 return;
@@ -119,7 +119,7 @@ void juegosPorDesarrollador() {
 
     int cantJuegos = archivo.getCantidadRegistros();
     if(cantJuegos == 0) {
-        cout << "No hay Juegos disponibles"<< endl;
+        mostrarError("No hay Juegos disponibles");
         return;
     }
 
@@ -129,7 +129,7 @@ void juegosPorDesarrollador() {
         reg = archivo.leerDisco(i);
         if(reg.getEstado() && reg.getIdDesarrollador() == opcion) {
             if(!hayJuegos) {
-                cout << "========= JUEGOS DEL DESARROLLADOR =========" << endl;
+                mostrarTitulo("JUEGOS DEL DESARROLLADOR");
                 hayJuegos = true;
             }
             cout << "============================================" << endl;
@@ -138,7 +138,7 @@ void juegosPorDesarrollador() {
     }
 
     if(!hayJuegos) {
-        cout << "No hay juegos del desarrollador seleccionado" << endl;
+        mostrarError("No hay juegos del desarrollador seleccionado");
     }
 }
 
@@ -155,7 +155,7 @@ void juegosPorRangoPrecio() {
     cantidad = archivo.getCantidadRegistros();
 
     if(cantidad == 0) {
-        cout << "No hay Juegos disponibles"<< endl;
+        mostrarError("No hay Juegos disponibles");
         return;
     }
     Juego *vec = new Juego[cantidad];
@@ -169,7 +169,7 @@ void juegosPorRangoPrecio() {
 
 
     if(contador == 0) {
-        cout << "No hay juegos activos" << endl;
+        mostrarError("No hay juegos activos");
         delete[] vec;
         return;
     }
@@ -193,12 +193,12 @@ void juegosPorRangoPrecio() {
     cout << "Ingrese el precio final"<<endl;
     vFinal = leerFloat();
     if(vInicial < 0 || vFinal < 0) {
-        cout << "Los precios no pueden ser negativos." << endl;
+        mostrarError("Los precios no pueden ser negativos.");
         delete[] vec;
         return;
     }
     if(vInicial > vFinal) {
-        cout << "El rango de precios es incorrecto." << endl;
+        mostrarError("El rango de precios es incorrecto.");
         delete[] vec;
         return;
     }
@@ -212,7 +212,7 @@ void juegosPorRangoPrecio() {
 
     }
     if(!encontrado) {
-        cout << "No hay juegos en ese rango de precios" << endl;
+        mostrarError("No hay juegos en ese rango de precios");
     }
     delete[]vec;
 
@@ -225,7 +225,7 @@ void juegosPorFechaLanzamiento() {
 
     int cantidad = archivo.getCantidadRegistros();
     if(cantidad == 0) {
-        cout << "No hay Juegos disponibles"<< endl;
+        mostrarError("No hay Juegos disponibles");
         return;
     }
 
@@ -241,7 +241,7 @@ void juegosPorFechaLanzamiento() {
     Fecha fecha(dia,mes,anio);
 
     if(!fecha.esValida(dia,mes,anio)) {
-        cout << "La fecha ingresada es incorrecta." << endl;
+        mostrarError("La fecha ingresada es incorrecta.");
         return;
     }
 
@@ -256,7 +256,7 @@ void juegosPorFechaLanzamiento() {
 
     }
     if(!encontrado) {
-        cout << "No hay juegos con la fecha de lanzamiento informada" << endl;
+        mostrarError("No hay juegos con la fecha de lanzamiento informada");
     }
 
 
@@ -276,18 +276,18 @@ void reseniasPorJuego() {
     int cantidad = archivo.getCantidadRegistros();
 
     if(cantidad == 0) {
-        cout << "No hay Resenias disponibles" << endl;
+        mostrarError("No hay Resenias disponibles");
         return;
     }
 
     int cantJuegos = archJuego.getCantidadRegistros();
 
     if(cantJuegos == 0) {
-        cout << "No hay Juegos disponibles" << endl;
+        mostrarError("No hay Juegos disponibles");
         return;
     }
 
-    cout << "======= JUEGOS =======" << endl;
+    mostrarTitulo("JUEGOS");
 
     for(int i = 0; i < cantJuegos; i++) {
         regJuego = archJuego.leerDisco(i);
@@ -304,14 +304,14 @@ void reseniasPorJuego() {
     opcion = leerEntero();
 
     if(!archJuego.existe(opcion)) {
-        cout << "El juego ingresado no existe" << endl;
+        mostrarError("El juego ingresado no existe");
         return;
     }
 
     regJuego = archJuego.buscarPorId(opcion);
 
     if(!regJuego.getEstado()) {
-        cout << "El juego esta inactivo" << endl;
+        mostrarError("El juego esta inactivo");
         return;
     }
 
@@ -324,7 +324,7 @@ void reseniasPorJuego() {
         if(regRes.getEstado() && regRes.getIdJuego() == opcion) {
 
             if(!encontrado) {
-                cout << "======= RESENIAS DEL JUEGO =======" << endl;
+                mostrarTitulo("RESENIAS DEL JUEGO");
                 cout << "Titulo Juego: " << regJuego.getTitulo() << endl;
             }
             cout << "Resenia Puntaje: " << regRes.getPuntaje() << endl;
@@ -336,7 +336,7 @@ void reseniasPorJuego() {
     }
 
     if(!encontrado) {
-        cout << "No existen resenias para el juego seleccionado" << endl;
+        mostrarError("No existen resenias para el juego seleccionado");
     }
 }
 
@@ -352,13 +352,13 @@ void reseniaPorUsuario() {
 
     int cantidadRes = archivoResenia.getCantidadRegistros();
     if(cantidadRes == 0) {
-        cout << "No hay resenias disponibles" << endl;
+        mostrarError("No hay resenias disponibles");
         return;
     }
 
     int cantUsuarios = archivoUsuario.getCantidadRegistros();
     if(cantUsuarios == 0) {
-        cout << "No hay Usuarios disponibles" << endl;
+        mostrarError("No hay Usuarios disponibles");
         return;
     }
 
@@ -376,14 +376,14 @@ void reseniaPorUsuario() {
 
 
     if(!archivoUsuario.existe(opcion)) {
-        cout << "Usuario ingresado no existe" << endl;
+        mostrarError("Usuario ingresado no existe");
         return;
     }
 
     regUsuario = archivoUsuario.buscarPorId(opcion);
 
     if(!regUsuario.getEstado()) {
-        cout << "El usuario esta inactivo" << endl;
+        mostrarError("El usuario esta inactivo");
         return;
     }
     //busco resenias.
@@ -407,7 +407,7 @@ void reseniaPorUsuario() {
 
     }
     if(!existeResenia) {
-        cout << "El usuario ingresado no ha reseniado ningun juego" << endl;
+        mostrarError("El usuario ingresado no ha reseniado ningun juego");
     }
 
 

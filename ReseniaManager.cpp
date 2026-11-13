@@ -66,7 +66,7 @@ bool ReseniaManager::cargarResenia(int idUsuario) {
 	fechaResenia.setFechaActual();
 	reg.cargar(id, idUsuario, idJuego, puntaje, comentario, fechaResenia);
 	if(archivo.escribirDisco(reg)) {
-		cout << "Resenia cargada correctamente." << endl;
+		mostrarExito("Resenia cargada correctamente.");
 		return true;
 	}
 	cout << "No se pudo cargar la resenia." << endl;
@@ -136,7 +136,7 @@ bool ReseniaManager::modificarResenia(int idUsuario) {
 	reg.setFechaResenia(fechaResenia);
 
 	if(archivo.modificarDisco(reg, id)) {
-		cout << "Resenia modificada correctamente." << endl;
+		mostrarExito("Resenia modificada correctamente.");
 		return true;
 	}
 	cout << "No se pudo modificar la resenia." << endl;
@@ -166,7 +166,7 @@ bool ReseniaManager::eliminarResenia(int idUsuario) {
 
 	reg.setEstado(false);
 	if(archivo.modificarDisco(reg, id)) {
-		cout << "Resenia eliminada correctamente." << endl;
+		mostrarExito("Resenia eliminada correctamente.");
 		return true;
 	}
 	cout << "No se pudo eliminar la resenia." << endl;

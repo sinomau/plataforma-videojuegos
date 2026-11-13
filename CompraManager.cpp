@@ -3,6 +3,7 @@
 #include "CompraArchivo.h"
 #include "Compra.h"
 #include "Utils.h"
+#include "rlutil.h"
 #include "JuegoArchivo.h"
 #include "Juego.h"
 #include "UsuarioArchivo.h"
@@ -81,7 +82,10 @@ bool CompraManager::cargarCompra(int idUsuario){
         return false;
     }
 
+    rlutil::saveDefaultColor();
+    rlutil::setColor(rlutil::LIGHTGREEN);
     cout << "Compra realizada. Saldo restante: $" << usuario.getSaldo() << endl;
+    rlutil::resetColor();
     return true;
 
 }
@@ -176,7 +180,10 @@ bool CompraManager::eliminarCompra(){
         return false;
     }
 
+    rlutil::saveDefaultColor();
+    rlutil::setColor(rlutil::LIGHTGREEN);
     cout << "Compra anulada. Se reintegraron $" << compra.getImporte()
          << " a " << usuario.getNombreUsuario() << endl;
+    rlutil::resetColor();
     return true;
 }

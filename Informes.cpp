@@ -36,7 +36,7 @@ void recaudacionPorCategoria() {
     }
 
     if(categoriasActivas == 0) {
-        cout << "No hay categorias activas" << endl;
+        mostrarError("No hay categorias activas");
         return;
     }
 
@@ -64,20 +64,17 @@ void recaudacionPorCategoria() {
         cout << "\nIngrese fecha final del periodo a seleccionar : "<< endl;
         fechaFinal.cargar();
     } else {
-        cout << "Opcion incorrecta." << endl;
+        mostrarError("Opcion incorrecta.");
         return;
     }
     if(fechaInicial.toInt() > fechaFinal.toInt()) {
-        cout << "La fecha inicial no puede ser mayor a la fecha final" << endl;
+        mostrarError("La fecha inicial no puede ser mayor a la fecha final");
         return;
     }
 
     int cantCompra = archCompra.getCantidadRegistros();
 
-    cout << "\n========================================" << endl;
-    cout << "RECAUDACION POR CATEGORIA ENTRE " << fechaInicial.toString()
-         << " AL " << fechaFinal.toString() << endl;
-    cout << "========================================" << endl;
+    mostrarTitulo("RECAUDACION POR CATEGORIA ENTRE " + fechaInicial.toString() + " AL " + fechaFinal.toString());
     cout << "CATEGORIA | TOTAL | CANTIDAD DE JUEGOS VENDIDOS" << endl;
     cout << "------------------------" << endl;
 
@@ -127,7 +124,7 @@ void recaudacionPorJuego() {
 
     int cantidadJuegos = archJuego.getCantidadRegistros();
     if(cantidadJuegos == 0) {
-        cout << "No hay juegos registrados" << endl;
+        mostrarError("No hay juegos registrados");
         return;
     }
 
@@ -155,20 +152,17 @@ void recaudacionPorJuego() {
         cout << "\nIngrese fecha final del periodo a seleccionar : "<< endl;
         fechaFinal.cargar();
     } else {
-        cout << "Opcion incorrecta." << endl;
+        mostrarError("Opcion incorrecta.");
         return;
     }
     if(fechaInicial.toInt() > fechaFinal.toInt()) {
-        cout << "La fecha inicial no puede ser mayor a la fecha final" << endl;
+        mostrarError("La fecha inicial no puede ser mayor a la fecha final");
         return;
     }
 
     int cantCompra = archCompra.getCantidadRegistros();
 
-    cout << "\n========================================" << endl;
-    cout << "RECAUDACION POR JUEGO ENTRE " << fechaInicial.toString()
-         << " AL " << fechaFinal.toString() << endl;
-    cout << "========================================" << endl;
+    mostrarTitulo("RECAUDACION POR JUEGO ENTRE " + fechaInicial.toString() + " AL " + fechaFinal.toString());
     cout << "TITULO | CATEGORIA | DESARROLLADOR | TOTAL | CANTIDAD" << endl;
     cout << "------------------------" << endl;
 
@@ -209,15 +203,13 @@ void valoracionPromedioPorJuego() {
 
     int cantidadJuegos = archJuego.getCantidadRegistros();
     if(cantidadJuegos == 0) {
-        cout << "No hay juegos registrados" << endl;
+        mostrarError("No hay juegos registrados");
         return;
     }
 
     int cantResenias = archResenia.getCantidadRegistros();
 
-    cout << "\n========================================" << endl;
-    cout << "     VALORACION PROMEDIO POR JUEGO" << endl;
-    cout << "========================================" << endl;
+    mostrarTitulo("VALORACION PROMEDIO POR JUEGO");
     cout << "TITULO | PUNTAJE PROMEDIO | CANTIDAD DE RESENIAS" << endl;
     cout << "------------------------" << endl;
 
