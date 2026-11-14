@@ -88,6 +88,14 @@ bool JuegoManager::cargarJuego() {
 	}
 	cout << "Ingrese la fecha de lanzamiento: ";
 	fechaLanzamiento.cargar();
+	Fecha anio;
+	const int ANIOMINIMO = 1958;
+	while (fechaLanzamiento.getAnio() > anio.getAnioActual()
+	       || fechaLanzamiento.getAnio() < ANIOMINIMO) {
+		mostrarError("Anio de lanzamiento invalido.");
+		cout << "Ingrese un anio menor o igual al actual y mayor 1958: ";
+		fechaLanzamiento.cargar();
+	}
 	reg.cargar(id, titulo, idCategoria, idDesarrollador, precio, fechaLanzamiento);
 	if(archivo.escribirDisco(reg)) {
 		mostrarExito("Juego guardado correctamente.");
@@ -236,6 +244,14 @@ bool JuegoManager::modificarJuego() {
 	}
 	cout << "Ingrese la fecha de lanzamiento: ";
 	fechaLanzamiento.cargar();
+	Fecha anio;
+	const int ANIOMINIMO = 1958;
+	while (fechaLanzamiento.getAnio() > anio.getAnioActual()
+	       || fechaLanzamiento.getAnio() < ANIOMINIMO) {
+		mostrarError("Anio de lanzamiento invalido.");
+		cout << "Ingrese un anio menor o igual al actual y mayor 1958: ";
+		fechaLanzamiento.cargar();
+	}
 	reg.setTitulo(titulo);
 	reg.setIdCategoria(idCategoria);
 	reg.setIdDesarrollador(idDesarrollador);
