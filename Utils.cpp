@@ -12,6 +12,10 @@ int leerEntero() {
         cin >> numero;
 
         if (!cin.fail()) {
+            // Descartar el resto de la linea: cin >> deja el '\n' en el buffer
+            // y cualquier getchar() posterior (rlutil::anykey) lo leeria como
+            // si fuera una tecla, sin esperar al usuario.
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
             return numero;
         }
 
@@ -30,6 +34,7 @@ float leerFloat() {
         cin >> numero;
 
         if (!cin.fail()) {
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
             return numero;
         }
 
@@ -43,10 +48,6 @@ float leerFloat() {
 
 
 void leerCadena(char destino[], int tamanio) {
-    if (cin.peek() == '\n') {
-        cin.ignore();
-    }
-
     cin.getline(destino, tamanio);
 
     if (cin.fail()) {
