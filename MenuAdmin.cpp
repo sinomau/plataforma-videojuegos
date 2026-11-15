@@ -205,18 +205,19 @@ void menuListados() {
     do {
         system("cls");
         cout << "Menu Listados" << endl;
-        cout << "Opcion 1 : JUEGOS POR ORDENADOS POR TITULO" << endl;
-        cout << "Opcion 2 : JUEGOS POR ORDENADOS POR PRECIO" << endl;
-        cout << "Opcion 3 : JUEGOS POR ORDENADOS POR FECHA DE LANZAMIENTO" << endl;
-        cout << "Opcion 4 : JUEGOS POR ORDENADOS POR CATEGORIA" << endl;
-        cout << "Opcion 5 : DESARROLLADORES ORDENADOS POR NOMBRE" << endl;
-        cout << "Opcion 6 : DESARROLLADORES ORDENADOS POR FECHA DE FUNDACION" << endl;
-        cout << "Opcion 7 : RESEÃ‘AS ORDENADAS POR PUNTAJE" << endl;
-        cout << "Opcion 8 : RESEÃ‘AS ORDENADAS POR FECHA" << endl;
-        cout << "Opcion 9 : CATEGORIAS ORDENADAS POR NOMBRE" << endl;
-        cout << "Opcion 10 : USUARIOS ORDENADOS POR APELLIDO" << endl;
-        cout << "Opcion 11 : USUARIOS ORDENADOS POR FECHA DE REGISTRO" << endl;
-        cout << "Opcion 0 : SALIR " << endl;
+        cout << "Opcion 1   : JUEGOS POR ORDENADOS POR TITULO" << endl;
+        cout << "Opcion 2   : JUEGOS POR ORDENADOS POR PRECIO" << endl;
+        cout << "Opcion 3   : JUEGOS POR ORDENADOS POR FECHA DE LANZAMIENTO" << endl;
+        cout << "Opcion 4   : JUEGOS POR ORDENADOS POR CATEGORIA" << endl;
+        cout << "Opcion 5   : DESARROLLADORES ORDENADOS POR NOMBRE" << endl;
+        cout << "Opcion 6   : DESARROLLADORES ORDENADOS POR FECHA DE FUNDACION" << endl;
+        cout << "Opcion 7   : RESEÃ‘AS ORDENADAS POR PUNTAJE" << endl;
+        cout << "Opcion 8   : RESEÃ‘AS ORDENADAS POR FECHA" << endl;
+        cout << "Opcion 9   : CATEGORIAS ORDENADAS POR NOMBRE" << endl;
+        cout << "Opcion 10  : USUARIOS ORDENADOS POR APELLIDO" << endl;
+        cout << "Opcion 11  : USUARIOS ORDENADOS POR FECHA DE REGISTRO" << endl;
+        cout << "Opcion 12  : COMPRAS POR FECHA" << endl;
+        cout << "Opcion 0   : SALIR " << endl;
         cout << "Ingresa una opcion " << endl;
         opcion = leerEntero();
         system("cls");
@@ -255,6 +256,9 @@ void menuListados() {
         case 11:
             usuariosPorFechaRegistro();
             break;
+        case 12:
+            comprasPorFecha();
+            break;
         case 0:
             return;
         default:
@@ -275,18 +279,18 @@ void menuConsultas() {
     do {
         system("cls");
         cout << "Menu Consultas" << endl;
-        cout << "Opcion 1 : USUARIOS POR NOMBRE DE USUARIO" << endl;
-        cout << "Opcion 2 : USUARIOS POR RANGO DE FECHAS DE REGISTRO" << endl;
-        cout << "Opcion 3 : JUEGOS POR CATEGORIAS" << endl;
-        cout << "Opcion 4 : JUEGOS POR DESARROLLADOR" << endl;
-        cout << "Opcion 5 : JUEGOS POR RANGO DE PRECIOS" << endl;
-        cout << "Opcion 6 : JUEGOS POR FECHA DE LANZAMIENTO" << endl;
-        cout << "Opcion 7 : COMPRAS POR RANGO DE FECHAS" << endl;
-        cout << "Opcion 8 : COMPRAS POR USUARIO" << endl;
-        cout << "Opcion 9 : COMPRAS POR JUEGO" << endl;
-        cout << "Opcion 10 : RESE¥AS POR JUEGO" << endl;
-        cout << "Opcion 11 : RESE¥AS POR USUARIO" << endl;
-        cout << "Opcion 0 : SALIR " << endl;
+        cout << "Opcion 1   : USUARIOS POR NOMBRE DE USUARIO" << endl;
+        cout << "Opcion 2   : USUARIOS POR RANGO DE FECHAS DE REGISTRO" << endl;
+        cout << "Opcion 3   : JUEGOS POR CATEGORIAS" << endl;
+        cout << "Opcion 4   : JUEGOS POR DESARROLLADOR" << endl;
+        cout << "Opcion 5   : JUEGOS POR RANGO DE PRECIOS" << endl;
+        cout << "Opcion 6   : JUEGOS POR FECHA DE LANZAMIENTO" << endl;
+        cout << "Opcion 7   : COMPRAS POR RANGO DE FECHAS" << endl;
+        cout << "Opcion 8   : COMPRAS POR USUARIO" << endl;
+        cout << "Opcion 9   : COMPRAS POR JUEGO" << endl;
+        cout << "Opcion 10  : RESE¥AS POR JUEGO" << endl;
+        cout << "Opcion 11  : RESE¥AS POR USUARIO" << endl;
+        cout << "Opcion 0   : SALIR " << endl;
         cout << "Ingresa una opcion " << endl;
         opcion = leerEntero();
         system("cls");
@@ -344,18 +348,18 @@ void menuInformes() {
     do {
         system("cls");
         cout << "Menu Informes" << endl;
-        cout << "Opcion 1 : RECAUDACION POR CATEGORIAS" << endl;
-        cout << "Opcion 2 : -" << endl;
-        cout << "Opcion 3 : -" << endl;
-        cout << "Opcion 4 : -" << endl;
-        cout << "Opcion 5 : -" << endl;
-        cout << "Opcion 6 : -" << endl;
-        cout << "Opcion 7 : -" << endl;
-        cout << "Opcion 8 : -" << endl;
-        cout << "Opcion 9 : -" << endl;
-        cout << "Opcion 10 : -" << endl;
-        cout << "Opcion 11 : -" << endl;
-        cout << "Opcion 0 : SALIR " << endl;
+        cout << "Opcion 1   : RECAUDACION POR CATEGORIAS" << endl;
+        cout << "Opcion 2   : -" << endl;
+        cout << "Opcion 3   : -" << endl;
+        cout << "Opcion 4   : -" << endl;
+        cout << "Opcion 5   : -" << endl;
+        cout << "Opcion 6   : -" << endl;
+        cout << "Opcion 7   : -" << endl;
+        cout << "Opcion 8   : -" << endl;
+        cout << "Opcion 9   : -" << endl;
+        cout << "Opcion 10  : -" << endl;
+        cout << "Opcion 11  : -" << endl;
+        cout << "Opcion 0   : SALIR " << endl;
         cout << "Ingresa una opcion " << endl;
         opcion = leerEntero();
         system("cls");

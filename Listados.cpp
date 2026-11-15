@@ -11,6 +11,8 @@
 #include "ReseniaArchivo.h"
 #include "Usuario.h"
 #include "UsuarioArchivo.h"
+#include "Compra.h"
+#include "CompraArchivo.h"
 #include <cstring>
 
 using namespace std;
@@ -582,6 +584,59 @@ void usuariosPorFechaRegistro() {
     for(int i = 0; i<contador; i++) {
         cout << "------------------------" << endl;
         vec[i].mostrar();
+    }
+
+    delete[]vec;
+
+}
+
+void comprasPorFecha() {
+    CompraArchivo arch;
+    Compra reg;
+
+    int cantidad = arch.getCantidadRegistros();
+    if(cantidad == 0) {
+        cout << "No hay compras registradas" << endl;
+        return;
+    }
+
+    int contador=0;
+    Compra *vec = new Compra[cantidad];
+    for(int i = 0; i<cantidad; i++) {
+        reg = arch.leerDisco(i);
+        if(reg.getEstado()) {
+            vec[contador] = reg;
+            contador++;
+        }
+    }
+    if(contador == 0) {
+        cout << "No hay compras" << endl;
+        delete[] vec;
+        return;
+    }
+
+    Compra aux;
+    for(int i = 0; i<contador -1; i++) {
+        for(int j = i+1 ; j<contador; j++) {
+            if(vec[i].getFechaCompra().toInt() > vec[j].getFechaCompra().toInt()) {
+                aux= vec[i];
+                vec[i]= vec[j];
+                vec[j] = aux;
+            }
+        }
+    }
+
+
+    UsuarioArchivo archUsuario;
+    JuegoArchivo archJuego;
+    for(int i = 0; i<contador; i++) {
+        Usuario usuario = archUsuario.buscarPorId(vec[i].getIdUsuario());
+        Juego juego = archJuego.buscarPorId(vec[i].getIdJuego());
+        cout << "------------------------" << endl;
+        cout << "Fecha: " << vec[i].getFechaCompra().toString() << endl;
+        cout << "Usuario: " << usuario.getNombreUsuario() << endl;
+        cout << "Juego: " << juego.getTitulo() << endl;
+        cout << "Importe: $" << vec[i].getImporte() << endl;
     }
 
     delete[]vec;

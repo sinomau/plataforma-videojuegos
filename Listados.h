@@ -28,4 +28,7 @@ void categoriasPorNombre();
 void usuariosPorApellido();
 void usuariosPorFechaRegistro();
 
+//Listados de compras
+void comprasPorFecha();
+
 #endif // LISTADOS_H_INCLUDED
