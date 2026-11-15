@@ -3,9 +3,8 @@
 #include "Persona.h"
 #include "Fecha.h"
 
-/// pense estos roles, despues los charlamos
-const int ROL_ADMIN = 1;
-const int ROL_USUARIO = 2;
+/// Roles de usuario. Se guardan como int (1 o 2) en usuarios.dat
+enum Rol { ROL_ADMIN = 1, ROL_USUARIO = 2 };
 
 class Usuario : public Persona
 {

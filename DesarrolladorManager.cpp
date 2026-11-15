@@ -22,13 +22,21 @@ bool DesarrolladorManager::cargarDesarrollador() {
 
     cout << "Ingrese el nombre del Desarrollador: ";
     leerCadena(nombre, 50);
-    while (archivo.existeNombre(nombre)) {
-        cout << "Ese nombre ya existe. Ingrese otro: ";
+    while (strlen(nombre) == 0 || archivo.existeNombre(nombre)) {
+        if (strlen(nombre) == 0) {
+            cout << "El nombre no puede estar vacio. Ingrese otro: ";
+        } else {
+            cout << "Ese nombre ya existe. Ingrese otro: ";
+        }
         leerCadena(nombre, 50);
     }
 
     cout << "Ingrese el pais del Desarrollador: ";
     leerCadena(pais, 30);
+    while (strlen(pais) == 0) {
+        cout << "El pais no puede estar vacio. Ingrese otro: ";
+        leerCadena(pais, 30);
+    }
 
     cout << "Ingrese el anio de fundacion: ";
     anioFundacion = leerEntero();
@@ -39,11 +47,11 @@ bool DesarrolladorManager::cargarDesarrollador() {
 
     reg.cargar(id, nombre, pais, anioFundacion);
     if (archivo.escribirDisco(reg)) {
-        cout << "Desarrollador guardado correctamente." << endl;
+        mostrarExito("Desarrollador guardado correctamente.");
         return true;
     }
 
-    cout << "No se pudo guardar el Desarrollador." << endl;
+    mostrarError("No se pudo guardar el Desarrollador.");
     return false;
 }
 
@@ -57,11 +65,11 @@ void DesarrolladorManager::buscarPorId() {
 
     Desarrollador reg = archivo.buscarPorId(id);
     if (reg.getId() == -1) {
-        cout << "No existe un Desarrollador con ese ID." << endl;
+        mostrarError("No existe un Desarrollador con ese ID.");
         return;
     }
     if (reg.getEstado() == false) {
-        cout << "El Desarrollador con ese ID esta dado de baja." << endl;
+        mostrarError("El Desarrollador con ese ID esta dado de baja.");
         return;
     }
 
@@ -89,7 +97,7 @@ void DesarrolladorManager::mostrarDesarrollador() {
         }
     }
 
-    cout << "No se encontro un Desarrollador con ese nombre." << endl;
+    mostrarError("No se encontro un Desarrollador con ese nombre.");
 }
 
 bool DesarrolladorManager::modificarDesarrollador() {
@@ -99,11 +107,11 @@ bool DesarrolladorManager::modificarDesarrollador() {
     int id = leerEntero();
     Desarrollador reg = archivo.buscarPorId(id);
     if (reg.getId() == -1) {
-        cout << "No existe un Desarrollador con ese ID." << endl;
+        mostrarError("No existe un Desarrollador con ese ID.");
         return false;
     }
     if (reg.getEstado() == false) {
-        cout << "No puede modificar un Desarrollador dado de baja." << endl;
+        mostrarError("No puede modificar un Desarrollador dado de baja.");
         return false;
     }
 
@@ -115,14 +123,22 @@ bool DesarrolladorManager::modificarDesarrollador() {
 
     cout << "Ingrese el nuevo nombre: ";
     leerCadena(nombre, 50);
-    while (archivo.existeNombre(nombre) &&
-            strcmp(reg.getNombre(), nombre) != 0) {
-        cout << "Ese nombre ya existe. Ingrese otro: ";
+    while (strlen(nombre) == 0 ||
+            (archivo.existeNombre(nombre) && strcmp(reg.getNombre(), nombre) != 0)) {
+        if (strlen(nombre) == 0) {
+            cout << "El nombre no puede estar vacio. Ingrese otro: ";
+        } else {
+            cout << "Ese nombre ya existe. Ingrese otro: ";
+        }
         leerCadena(nombre, 50);
     }
 
     cout << "Ingrese el nuevo pais: ";
     leerCadena(pais, 30);
+    while (strlen(pais) == 0) {
+        cout << "El pais no puede estar vacio. Ingrese otro: ";
+        leerCadena(pais, 30);
+    }
 
     cout << "Ingrese el nuevo anio de fundacion: ";
     anioFundacion = leerEntero();
@@ -136,11 +152,11 @@ bool DesarrolladorManager::modificarDesarrollador() {
     reg.setAnioFundacion(anioFundacion);
 
     if (archivo.modificarDisco(reg, id)) {
-        cout << "Desarrollador modificado correctamente." << endl;
+        mostrarExito("Desarrollador modificado correctamente.");
         return true;
     }
 
-    cout << "No se pudo modificar el Desarrollador." << endl;
+    mostrarError("No se pudo modificar el Desarrollador.");
     return false;
 }
 
@@ -152,22 +168,22 @@ bool DesarrolladorManager::eliminarDesarrollador() {
     int id = leerEntero();
     Desarrollador reg = archivo.buscarPorId(id);
     if (reg.getId() == -1) {
-        cout << "No existe un Desarrollador con ese ID." << endl;
+        mostrarError("No existe un Desarrollador con ese ID.");
         return false;
     }
     if (reg.getEstado() == false) {
-        cout << "Este Desarrollador ya se encuentra eliminado." << endl;
+        mostrarError("Este Desarrollador ya se encuentra eliminado.");
         return false;
     }
 
     reg.setEstado(false);
 
     if (archivo.modificarDisco(reg, id)) {
-        cout << "Desarrollador eliminado correctamente." << endl;
+        mostrarExito("Desarrollador eliminado correctamente.");
         return true;
     }
 
-    cout << "No se pudo eliminar el Desarrollador." << endl;
+    mostrarError("No se pudo eliminar el Desarrollador.");
     return false;
 }
 
@@ -186,6 +202,6 @@ void DesarrolladorManager::listarDesarrollador() {
     }
 
     if (mostrados == 0) {
-        cout << "No hay Desarrolladores cargados." << endl;
+        mostrarError("No hay Desarrolladores cargados.");
     }
 }

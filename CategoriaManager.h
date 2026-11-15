@@ -7,7 +7,7 @@ public:
     void buscarPorId();
     bool modificarCategoria();
     bool eliminarCategoria();
-    void listarCategoria();
+    int listarCategoria();
     void mostrarCategoria();
 protected:
 private:

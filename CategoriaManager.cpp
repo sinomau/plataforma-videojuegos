@@ -18,8 +18,12 @@ bool CategoriaManager::cargarCategoria() {
 
     cout << "Ingrese el nombre de la categoria: ";
     leerCadena(nombre, 50);
-    while (archivo.existeNombre(nombre)) {
-        cout << "Ese nombre ya existe. Ingrese otro: ";
+    while (strlen(nombre) == 0 || archivo.existeNombre(nombre)) {
+        if (strlen(nombre) == 0) {
+            cout << "El nombre no puede estar vacio. Ingrese otro: ";
+        } else {
+            cout << "Ese nombre ya existe. Ingrese otro: ";
+        }
         leerCadena(nombre, 50);
     }
 
@@ -28,11 +32,11 @@ bool CategoriaManager::cargarCategoria() {
 
     reg.cargar(id, nombre, descripcion);
     if (archivo.escribirDisco(reg)) {
-        cout << "Categoria guardada correctamente." << endl;
+        mostrarExito("Categoria guardada correctamente.");
         return true;
     }
 
-    cout << "No se pudo guardar la categoria." << endl;
+    mostrarError("No se pudo guardar la categoria.");
     return false;
 }
 
@@ -46,11 +50,11 @@ void CategoriaManager::buscarPorId() {
 
     Categoria reg = archivo.buscarPorId(id);
     if (reg.getId() == -1) {
-        cout << "No existe una categoria con ese ID." << endl;
+        mostrarError("No existe una categoria con ese ID.");
         return;
     }
     if (reg.getEstado() == false) {
-        cout << "La categoria con ese ID esta dada de baja." << endl;
+        mostrarError("La categoria con ese ID esta dada de baja.");
         return;
     }
 
@@ -78,7 +82,7 @@ void CategoriaManager::mostrarCategoria() {
         }
     }
 
-    cout << "No se encontro una categoria con ese nombre." << endl;
+    mostrarError("No se encontro una categoria con ese nombre.");
 }
 
 bool CategoriaManager::modificarCategoria() {
@@ -88,11 +92,11 @@ bool CategoriaManager::modificarCategoria() {
     int id = leerEntero();
     Categoria reg = archivo.buscarPorId(id);
     if (reg.getId() == -1) {
-        cout << "No existe una categoria con ese ID." << endl;
+        mostrarError("No existe una categoria con ese ID.");
         return false;
     }
     if (reg.getEstado() == false) {
-        cout << "No puede modificar una categoria dada de baja." << endl;
+        mostrarError("No puede modificar una categoria dada de baja.");
         return false;
     }
 
@@ -101,9 +105,13 @@ bool CategoriaManager::modificarCategoria() {
 
     cout << "Ingrese el nuevo nombre: ";
     leerCadena(nombre, 50);
-    while (archivo.existeNombre(nombre) &&
-            strcmp(reg.getNombre(), nombre) != 0) {
-        cout << "Ese nombre ya existe. Ingrese otro: ";
+    while (strlen(nombre) == 0 ||
+            (archivo.existeNombre(nombre) && strcmp(reg.getNombre(), nombre) != 0)) {
+        if (strlen(nombre) == 0) {
+            cout << "El nombre no puede estar vacio. Ingrese otro: ";
+        } else {
+            cout << "Ese nombre ya existe. Ingrese otro: ";
+        }
         leerCadena(nombre, 50);
     }
 
@@ -114,11 +122,11 @@ bool CategoriaManager::modificarCategoria() {
     reg.setDescripcion(descripcion);
 
     if (archivo.modificarDisco(reg, id)) {
-        cout << "Categoria modificada correctamente." << endl;
+        mostrarExito("Categoria modificada correctamente.");
         return true;
     }
 
-    cout << "No se pudo modificar la categoria." << endl;
+    mostrarError("No se pudo modificar la categoria.");
     return false;
 }
 
@@ -130,26 +138,26 @@ bool CategoriaManager::eliminarCategoria() {
     int id = leerEntero();
     Categoria reg = archivo.buscarPorId(id);
     if (reg.getId() == -1) {
-        cout << "No existe una categoria con ese ID." << endl;
+        mostrarError("No existe una categoria con ese ID.");
         return false;
     }
     if (reg.getEstado() == false) {
-        cout << "Esta categoria ya se encuentra eliminada." << endl;
+        mostrarError("Esta categoria ya se encuentra eliminada.");
         return false;
     }
 
     reg.setEstado(false);
 
     if (archivo.modificarDisco(reg, id)) {
-        cout << "Categoria eliminada correctamente." << endl;
+        mostrarExito("Categoria eliminada correctamente.");
         return true;
     }
 
-    cout << "No se pudo eliminar la categoria." << endl;
+    mostrarError("No se pudo eliminar la categoria.");
     return false;
 }
 
-void CategoriaManager::listarCategoria() {
+int CategoriaManager::listarCategoria() {
     CategoriaArchivo archivo;
     int cantidad = archivo.getCantidadRegistros();
     int mostrados = 0;
@@ -164,6 +172,8 @@ void CategoriaManager::listarCategoria() {
     }
 
     if (mostrados == 0) {
-        cout << "No hay categorias cargadas." << endl;
+        mostrarError("No hay categorias cargadas.");
     }
+
+    return mostrados;
 }

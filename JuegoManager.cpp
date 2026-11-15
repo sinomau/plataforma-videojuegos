@@ -30,8 +30,12 @@ bool JuegoManager::cargarJuego() {
 	float precio = 0;
 	cout << "Ingrese el titulo del Juego: ";
 	leerCadena(titulo, 50);
-	while(archivo.existeTitulo(titulo)) {
-		cout << "Ese titulo ya existe. Ingrese otro: ";
+	while(strlen(titulo) == 0 || archivo.existeTitulo(titulo)) {
+		if(strlen(titulo) == 0) {
+			cout << "El titulo no puede estar vacio. Ingrese otro: ";
+		} else {
+			cout << "Ese titulo ya existe. Ingrese otro: ";
+		}
 		leerCadena(titulo, 50);
 	}
 	int cantidad = archCat.getCantidadRegistros();
@@ -47,7 +51,7 @@ bool JuegoManager::cargarJuego() {
 		Categoria cat = archCat.buscarPorId(idCategoria);
 		categoriaValida = cat.getId() != -1 && cat.getEstado();
 		if(!categoriaValida) {
-			cout << "Categoria inexistente o inactiva." << endl;
+			mostrarError("Categoria inexistente o inactiva.");
 			cout << "Ingrese 0 para salir u otro numero para reintentar: ";
 			if(leerEntero() == 0) {
 				cout << "Carga cancelada." << endl;
@@ -68,7 +72,7 @@ bool JuegoManager::cargarJuego() {
 		Desarrollador des = archDes.buscarPorId(idDesarrollador);
 		desarrolladorValido = des.getId() != -1 && des.getEstado();
 		if(!desarrolladorValido) {
-			cout << "Desarrollador inexistente o inactivo." << endl;
+			mostrarError("Desarrollador inexistente o inactivo.");
 			cout << "Ingrese 0 para salir u otro numero para reintentar: ";
 			if(leerEntero() == 0) {
 				cout << "Carga cancelada." << endl;
@@ -84,12 +88,20 @@ bool JuegoManager::cargarJuego() {
 	}
 	cout << "Ingrese la fecha de lanzamiento: ";
 	fechaLanzamiento.cargar();
+	Fecha anio;
+	const int ANIOMINIMO = 1958;
+	while (fechaLanzamiento.getAnio() > anio.getAnioActual()
+	       || fechaLanzamiento.getAnio() < ANIOMINIMO) {
+		mostrarError("Anio de lanzamiento invalido.");
+		cout << "Ingrese un anio menor o igual al actual y mayor 1958: ";
+		fechaLanzamiento.cargar();
+	}
 	reg.cargar(id, titulo, idCategoria, idDesarrollador, precio, fechaLanzamiento);
 	if(archivo.escribirDisco(reg)) {
-		cout << "Juego guardado correctamente." << endl;
+		mostrarExito("Juego guardado correctamente.");
 		return true;
 	}
-	cout << "No se pudo guardar el Juego." << endl;
+	mostrarError("No se pudo guardar el Juego.");
 	return false;
 }
 
@@ -104,11 +116,11 @@ void JuegoManager::buscarPorId() {
 	int id = leerEntero();
 	Juego reg = archivo.buscarPorId(id);
 	if(reg.getId() == -1) {
-		cout << "No existe un Juego con ese ID." << endl;
+		mostrarError("No existe un Juego con ese ID.");
 		return;
 	}
 	if(reg.getEstado() == false) {
-		cout << "El Juego con ese ID esta dado de baja." << endl;
+		mostrarError("El Juego con ese ID esta dado de baja.");
 		return;
 	}
 	reg.mostrar();
@@ -142,7 +154,7 @@ void JuegoManager::mostrarJuego() {
 			return;
 		}
 	}
-	cout << "No se encontro un Juego con ese titulo." << endl;
+	mostrarError("No se encontro un Juego con ese titulo.");
 	return;
 }
 
@@ -161,11 +173,11 @@ bool JuegoManager::modificarJuego() {
 	int id = leerEntero();
 	Juego reg = archivo.buscarPorId(id);
 	if(reg.getId() == -1) {
-		cout << "No existe un Juego con ese ID." << endl;
+		mostrarError("No existe un Juego con ese ID.");
 		return false;
 	}
 	if(reg.getEstado() == false) {
-		cout << "No puede modificar un Juego dado de baja." << endl;
+		mostrarError("No puede modificar un Juego dado de baja.");
 		return false;
 	}
 	char titulo[50];
@@ -173,8 +185,13 @@ bool JuegoManager::modificarJuego() {
 	float precio = 0;
 	cout << "Ingrese el titulo del Juego: ";
 	leerCadena(titulo, 50);
-	while(archivo.existeTitulo(titulo) && strcmp(titulo, reg.getTitulo()) != 0) {
-		cout << "Ese titulo ya existe. Ingrese otro: ";
+	while(strlen(titulo) == 0 ||
+			(archivo.existeTitulo(titulo) && strcmp(titulo, reg.getTitulo()) != 0)) {
+		if(strlen(titulo) == 0) {
+			cout << "El titulo no puede estar vacio. Ingrese otro: ";
+		} else {
+			cout << "Ese titulo ya existe. Ingrese otro: ";
+		}
 		leerCadena(titulo, 50);
 	}
 	int cantidad = archCat.getCantidadRegistros();
@@ -190,7 +207,7 @@ bool JuegoManager::modificarJuego() {
 		Categoria cat = archCat.buscarPorId(idCategoria);
 		categoriaValida = cat.getId() != -1 && cat.getEstado();
 		if(!categoriaValida) {
-			cout << "Categoria inexistente o inactiva." << endl;
+			mostrarError("Categoria inexistente o inactiva.");
 			cout << "Ingrese 0 para salir u otro numero para reintentar: ";
 			if(leerEntero() == 0) {
 				cout << "Modificacion cancelada." << endl;
@@ -211,7 +228,7 @@ bool JuegoManager::modificarJuego() {
 		Desarrollador des = archDes.buscarPorId(idDesarrollador);
 		desarrolladorValido = des.getId() != -1 && des.getEstado();
 		if(!desarrolladorValido) {
-			cout << "Desarrollador inexistente o inactivo." << endl;
+			mostrarError("Desarrollador inexistente o inactivo.");
 			cout << "Ingrese 0 para salir u otro numero para reintentar: ";
 			if(leerEntero() == 0) {
 				cout << "Modificacion cancelada." << endl;
@@ -227,16 +244,24 @@ bool JuegoManager::modificarJuego() {
 	}
 	cout << "Ingrese la fecha de lanzamiento: ";
 	fechaLanzamiento.cargar();
+	Fecha anio;
+	const int ANIOMINIMO = 1958;
+	while (fechaLanzamiento.getAnio() > anio.getAnioActual()
+	       || fechaLanzamiento.getAnio() < ANIOMINIMO) {
+		mostrarError("Anio de lanzamiento invalido.");
+		cout << "Ingrese un anio menor o igual al actual y mayor 1958: ";
+		fechaLanzamiento.cargar();
+	}
 	reg.setTitulo(titulo);
 	reg.setIdCategoria(idCategoria);
 	reg.setIdDesarrollador(idDesarrollador);
 	reg.setPrecio(precio);
 	reg.setFechaLanzamiento(fechaLanzamiento);
 	if(archivo.modificarDisco(reg, id)) {
-		cout << "Juego modificado correctamente." << endl;
+		mostrarExito("Juego modificado correctamente.");
 		return true;
 	}
-	cout << "No se pudo modificar el Juego." << endl;
+	mostrarError("No se pudo modificar el Juego.");
 	return false;
 }
 
@@ -250,19 +275,19 @@ bool JuegoManager::eliminarJuego() {
 	int id = leerEntero();
 	Juego reg = archivo.buscarPorId(id);
 	if(reg.getId() == -1) {
-		cout << "No existe un Juego con ese ID." << endl;
+		mostrarError("No existe un Juego con ese ID.");
 		return false;
 	}
 	if(reg.getEstado() == false) {
-		cout << "Este Juego ya se encuentra eliminado." << endl;
+		mostrarError("Este Juego ya se encuentra eliminado.");
 		return false;
 	}
 	reg.setEstado(false);
 	if(archivo.modificarDisco(reg, id)) {
-		cout << "Juego eliminado correctamente." << endl;
+		mostrarExito("Juego eliminado correctamente.");
 		return true;
 	}
-	cout << "No se pudo eliminar el Juego." << endl;
+	mostrarError("No se pudo eliminar el Juego.");
 	return false;
 }
 

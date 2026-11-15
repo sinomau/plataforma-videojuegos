@@ -4,6 +4,7 @@
 #include "UsuarioArchivo.h"
 #include "Usuario.h"
 #include "Utils.h"
+#include "rlutil.h"
 
 using namespace std;
 
@@ -66,11 +67,11 @@ bool UsuarioManager::cargarUsuario() {
 
     reg.cargar(id, nombre, apellido, email, nombreUsuario, contrasenia, rol);
     if (archivo.escribirDisco(reg)) {
-        cout << "Usuario registrado correctamente." << endl;
+        mostrarExito("Usuario registrado correctamente.");
         return true;
     }
 
-    cout << "No se pudo registrar el usuario." << endl;
+    mostrarError("No se pudo registrar el usuario.");
     return false;
 }
 
@@ -81,7 +82,7 @@ int UsuarioManager::iniciarSesion() {
     char contrasenia[30];
 
     if (archivo.getCantidadRegistros() == 0) {
-        cout << "Todavia no hay usuarios registrados. Registrese primero." << endl;
+        mostrarError("Todavia no hay usuarios registrados. Registrese primero.");
         return -1;
     }
 
@@ -92,7 +93,7 @@ int UsuarioManager::iniciarSesion() {
 
     Usuario reg = archivo.buscarPorNombreUsuario(nombreUsuario);
     if (reg.getId() == -1 || strcmp(reg.getContrasenia(), contrasenia) != 0) {
-        cout << "Usuario o contrasenia incorrectos." << endl;
+        mostrarError("Usuario o contrasenia incorrectos.");
         return -1;
     }
 
@@ -105,7 +106,7 @@ bool UsuarioManager::cargarSaldo(int idUsuario) {
     Usuario reg = archivo.buscarPorId(idUsuario);
 
     if (reg.getId() == -1 || reg.getEstado() == false) {
-        cout << "No se encontro el usuario." << endl;
+        mostrarError("No se encontro el usuario.");
         return false;
     }
 
@@ -120,11 +121,14 @@ bool UsuarioManager::cargarSaldo(int idUsuario) {
     reg.setSaldo(reg.getSaldo() + monto);
 
     if (archivo.modificarDisco(reg, idUsuario)) {
+        rlutil::saveDefaultColor();
+        rlutil::setColor(rlutil::LIGHTGREEN);
         cout << "Saldo cargado correctamente. Saldo nuevo: $" << reg.getSaldo() << endl;
+        rlutil::resetColor();
         return true;
     }
 
-    cout << "No se pudo cargar el saldo." << endl;
+    mostrarError("No se pudo cargar el saldo.");
     return false;
 }
 
@@ -133,7 +137,7 @@ void UsuarioManager::mostrarDatos(int idUsuario) {
     Usuario reg = archivo.buscarPorId(idUsuario);
 
     if (reg.getId() == -1) {
-        cout << "No se encontro el usuario." << endl;
+        mostrarError("No se encontro el usuario.");
         return;
     }
 

@@ -1,11 +1,17 @@
 #include <iostream>
+#include <iomanip>
 #include "Informes.h"
 #include "CategoriaArchivo.h"
 #include "Categoria.h"
+#include "DesarrolladorArchivo.h"
+#include "Desarrollador.h"
 #include "Juego.h"
 #include "JuegoArchivo.h"
 #include "CompraArchivo.h"
 #include "Compra.h"
+#include "ReseniaArchivo.h"
+#include "Resenia.h"
+#include "Fecha.h"
 #include "Utils.h"
 
 using namespace std;
@@ -16,94 +22,229 @@ void recaudacionPorCategoria() {
     CategoriaArchivo archCat;
     Juego regJuego;
     JuegoArchivo archJuego;
+    Compra regCompra;
     CompraArchivo archCompra;
 
     int cantidadCat = archCat.getCantidadRegistros();
-    if(cantidadCat == 0) {
-        cout << "No hay categorias activas" << endl;
-        return;
-    }
-    cout << "\n";
-    cout << "========================================" << endl;
-    cout << "       CATEGORIAS ACTIVAS PARA INFORME" << endl;
-    cout << "========================================" << endl;
+    int categoriasActivas = 0;
 
-    for (int i = 0; i < cantidadCat; i++) {
+    for(int i = 0; i < cantidadCat; i++) {
         regCat = archCat.leerDisco(i);
 
-        if (regCat.getEstado()) {
-            cout << "  [" << regCat.getId() << "] "
-                 << regCat.getNombre() << endl;
+        if(regCat.getEstado()) {
+            categoriasActivas++;
         }
     }
 
-    cout << "========================================" << endl;
-
-    int idCategoria;
-    cout << "\nIngrese el numero de la categoria que desea seleccionar: ";
-    idCategoria = leerEntero();
-
-
-
-
-
-    if(!archCat.existe(idCategoria)) {
-        cout<<"El id de categoria ingresado no existe"<< endl;
+    if(categoriasActivas == 0) {
+        mostrarError("No hay categorias activas");
         return;
     }
 
-    regCat = archCat.buscarPorId(idCategoria);
+    Fecha fechaInicial,fechaFinal;
 
-    if(!regCat.getEstado()) {
-        cout << "La categoria no esta activa" << endl;
+    cout << "\nSeleccione el periodo:" << endl;
+    cout << "0. Anio actual" << endl;
+    cout << "1. Ingresar periodo personalizado" << endl;
+    cout << "Opcion: ";
+    int opcion = leerEntero();
+
+    if(opcion == 0) {
+        int anio = fechaInicial.getAnioActual();
+
+        fechaInicial.setDia(1);
+        fechaInicial.setMes(1);
+        fechaInicial.setAnio(anio);
+
+        fechaFinal.setDia(31);
+        fechaFinal.setMes(12);
+        fechaFinal.setAnio(anio);
+    } else if(opcion == 1) {
+        cout << "\nIngrese fecha inicial del periodo a seleccionar "<< endl;
+        fechaInicial.cargar();
+        cout << "\nIngrese fecha final del periodo a seleccionar : "<< endl;
+        fechaFinal.cargar();
+    } else {
+        mostrarError("Opcion incorrecta.");
+        return;
+    }
+    if(fechaInicial.toInt() > fechaFinal.toInt()) {
+        mostrarError("La fecha inicial no puede ser mayor a la fecha final");
         return;
     }
 
     int cantCompra = archCompra.getCantidadRegistros();
-    if(cantCompra == 0) {
-        cout << "No hay compras registradas" << endl;
-        return;
-    }
 
+    mostrarTitulo("RECAUDACION POR CATEGORIA ENTRE " + fechaInicial.toString() + " AL " + fechaFinal.toString());
+    cout << left << setw(14) << "CATEGORIA" << setw(14) << "TOTAL"
+         << "CANTIDAD DE JUEGOS VENDIDOS" << endl;
+    cout << "------------------------" << endl;
 
-    int cantJuegos = archJuego.getCantidadRegistros();
-    if(cantJuegos == 0) {
-        cout << "No hay juegos registrados" << endl;
-        return;
-    }
-    float recaudacion = 0;
-
-//todas las compras, falta ver qeu juegos y que categorias son.
-    for(int i = 0 ; i < cantCompra ; i++) {
-        Compra regCompra = archCompra.leerDisco(i);
-        if(!regCompra.getEstado()) {
-            continue;   // las compras anuladas no suman
+    for(int i = 0; i < cantidadCat; i++) {
+        regCat = archCat.leerDisco(i);
+        if(!regCat.getEstado()) {
+            continue;
         }
 
-        for(int j = 0 ; j < cantJuegos ; j++ ) {
-            regJuego = archJuego.leerDisco(j);
-            if(regJuego.getId() == regCompra.getIdJuego()) {
-                if(regJuego.getIdCategoria() == idCategoria) {
-                    recaudacion += regCompra.getImporte();
-                }
-                break;
+        float recaudacion = 0;
+        int cantidad = 0;
+
+        for(int j = 0; j < cantCompra; j++) {
+            regCompra = archCompra.leerDisco(j);
+            if(!regCompra.getEstado()) {
+                continue;   // las compras anuladas no suman
+            }
+            if(regCompra.getFechaCompra().toInt() < fechaInicial.toInt() ||
+                    regCompra.getFechaCompra().toInt() > fechaFinal.toInt()) {
+                continue;
+            }
+
+            regJuego = archJuego.buscarPorId(regCompra.getIdJuego());
+            if(regJuego.getIdCategoria() == regCat.getId()) {
+                recaudacion += regCompra.getImporte();
+                cantidad++;
             }
         }
 
-
+        cout << left << setw(14) << regCat.getNombre()
+             << "$" << setw(13) << recaudacion << cantidad << endl;
     }
-    cout << "\n========================================" << endl;
-    cout << "          INFORME DE RECAUDACION" << endl;
     cout << "========================================" << endl;
-    cout << "Categoria: " << regCat.getNombre() << endl;
-    cout << "Recaudacion total: $" << recaudacion << endl;
-    cout << "========================================" << endl;
-
-
-
-
-
-
-
 }
 
+
+
+
+void recaudacionPorJuego() {
+    Juego regJuego;
+    JuegoArchivo archJuego;
+    Categoria regCat;
+    CategoriaArchivo archCat;
+    Desarrollador regDes;
+    DesarrolladorArchivo archDes;
+    Compra regCompra;
+    CompraArchivo archCompra;
+
+    int cantidadJuegos = archJuego.getCantidadRegistros();
+    if(cantidadJuegos == 0) {
+        mostrarError("No hay juegos registrados");
+        return;
+    }
+
+    Fecha fechaInicial,fechaFinal;
+
+    cout << "\nSeleccione el periodo:" << endl;
+    cout << "0. Anio actual" << endl;
+    cout << "1. Ingresar periodo personalizado" << endl;
+    cout << "Opcion: ";
+    int opcion = leerEntero();
+
+    if(opcion == 0) {
+        int anio = fechaInicial.getAnioActual();
+
+        fechaInicial.setDia(1);
+        fechaInicial.setMes(1);
+        fechaInicial.setAnio(anio);
+
+        fechaFinal.setDia(31);
+        fechaFinal.setMes(12);
+        fechaFinal.setAnio(anio);
+    } else if(opcion == 1) {
+        cout << "\nIngrese fecha inicial del periodo a seleccionar "<< endl;
+        fechaInicial.cargar();
+        cout << "\nIngrese fecha final del periodo a seleccionar : "<< endl;
+        fechaFinal.cargar();
+    } else {
+        mostrarError("Opcion incorrecta.");
+        return;
+    }
+    if(fechaInicial.toInt() > fechaFinal.toInt()) {
+        mostrarError("La fecha inicial no puede ser mayor a la fecha final");
+        return;
+    }
+
+    int cantCompra = archCompra.getCantidadRegistros();
+
+    mostrarTitulo("RECAUDACION POR JUEGO ENTRE " + fechaInicial.toString() + " AL " + fechaFinal.toString());
+    cout << left << setw(12) << "TITULO" << setw(14) << "CATEGORIA"
+         << setw(14) << "DESARROLLADOR" << setw(12) << "TOTAL" << "CANTIDAD" << endl;
+    cout << "------------------------" << endl;
+
+    for(int i = 0; i < cantidadJuegos; i++) {
+        regJuego = archJuego.leerDisco(i);
+        if(!regJuego.getEstado()) {
+            continue;
+        }
+
+        float recaudacion = 0;
+        int cantidad = 0;
+
+        for(int j = 0; j < cantCompra; j++) {
+            regCompra = archCompra.leerDisco(j);
+            if(regCompra.getEstado() && regCompra.getIdJuego() == regJuego.getId() &&
+                    regCompra.getFechaCompra().toInt() >= fechaInicial.toInt() &&
+                    regCompra.getFechaCompra().toInt() <= fechaFinal.toInt()) {
+                recaudacion += regCompra.getImporte();
+                cantidad++;
+            }
+        }
+
+        regCat = archCat.buscarPorId(regJuego.getIdCategoria());
+        regDes = archDes.buscarPorId(regJuego.getIdDesarrollador());
+
+        cout << left << setw(12) << regJuego.getTitulo()
+             << setw(14) << regCat.getNombre()
+             << setw(14) << regDes.getNombre()
+             << "$" << setw(11) << recaudacion
+             << cantidad << endl;
+    }
+    cout << "========================================" << endl;
+}
+
+
+void valoracionPromedioPorJuego() {
+    Juego regJuego;
+    JuegoArchivo archJuego;
+    Resenia regResenia;
+    ReseniaArchivo archResenia;
+
+    int cantidadJuegos = archJuego.getCantidadRegistros();
+    if(cantidadJuegos == 0) {
+        mostrarError("No hay juegos registrados");
+        return;
+    }
+
+    int cantResenias = archResenia.getCantidadRegistros();
+
+    mostrarTitulo("VALORACION PROMEDIO POR JUEGO");
+    cout << left << setw(12) << "TITULO" << setw(18) << "PUNTAJE PROMEDIO"
+         << "CANTIDAD DE RESENIAS" << endl;
+    cout << "------------------------" << endl;
+
+    for(int i = 0; i < cantidadJuegos; i++) {
+        regJuego = archJuego.leerDisco(i);
+        if(!regJuego.getEstado()) {
+            continue;
+        }
+
+        int suma = 0;
+        int cantidad = 0;
+
+        for(int j = 0; j < cantResenias; j++) {
+            regResenia = archResenia.leerDisco(j);
+            if(regResenia.getEstado() && regResenia.getIdJuego() == regJuego.getId()) {
+                suma += regResenia.getPuntaje();
+                cantidad++;
+            }
+        }
+
+        cout << left << setw(12) << regJuego.getTitulo();
+        if(cantidad == 0) {
+            cout << setw(18) << "Sin valoracion";
+        } else {
+            cout << setw(18) << (float)suma / cantidad;
+        }
+        cout << cantidad << endl;
+    }
+    cout << "========================================" << endl;
+}

@@ -1,6 +1,7 @@
 #include "Utils.h"
 #include <iostream>
 #include <limits>
+#include "rlutil.h"
 
 using namespace std;
 
@@ -11,6 +12,10 @@ int leerEntero() {
         cin >> numero;
 
         if (!cin.fail()) {
+            // Descartar el resto de la linea: cin >> deja el '\n' en el buffer
+            // y cualquier getchar() posterior (rlutil::anykey) lo leeria como
+            // si fuera una tecla, sin esperar al usuario.
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
             return numero;
         }
 
@@ -29,6 +34,7 @@ float leerFloat() {
         cin >> numero;
 
         if (!cin.fail()) {
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
             return numero;
         }
 
@@ -42,10 +48,6 @@ float leerFloat() {
 
 
 void leerCadena(char destino[], int tamanio) {
-    if (cin.peek() == '\n') {
-        cin.ignore();
-    }
-
     cin.getline(destino, tamanio);
 
     if (cin.fail()) {
@@ -55,3 +57,25 @@ void leerCadena(char destino[], int tamanio) {
 }
 
 
+
+void mostrarTitulo(string titulo) {
+    rlutil::saveDefaultColor();
+    rlutil::setColor(rlutil::LIGHTCYAN);
+    cout << titulo << endl;
+    cout << "========================================" << endl;
+    rlutil::resetColor();
+}
+
+void mostrarError(string mensaje) {
+    rlutil::saveDefaultColor();
+    rlutil::setColor(rlutil::LIGHTRED);
+    cout << mensaje << endl;
+    rlutil::resetColor();
+}
+
+void mostrarExito(string mensaje) {
+    rlutil::saveDefaultColor();
+    rlutil::setColor(rlutil::LIGHTGREEN);
+    cout << mensaje << endl;
+    rlutil::resetColor();
+}
