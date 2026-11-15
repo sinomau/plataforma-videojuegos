@@ -108,6 +108,7 @@ void CompraManager::verBiblioteca(int idUsuario){
             Categoria categoria = archivoCategoria.buscarPorId(juego.getIdCategoria());
 
             cout << "------------------------" << endl;
+            cout << "ID: " << juego.getId() << endl;
             cout << "Titulo: " << juego.getTitulo() << endl;
             cout << "Categoria: " << categoria.getNombre() << endl;
             cout << "Fecha de compra: " << compra.getFechaCompra().toString() << endl;
