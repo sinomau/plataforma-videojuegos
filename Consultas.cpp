@@ -13,6 +13,8 @@
 #include "Usuario.h"
 #include "UsuarioArchivo.h"
 #include "Fecha.h"
+#include "Compra.h"
+#include "CompraArchivo.h"
 #include "Utils.h"
 
 
@@ -287,7 +289,7 @@ void juegosPorFechaLanzamiento() {
     if(encontrados == 0) {
         mostrarError("No hay juegos con la fecha de lanzamiento informada");
     } else {
-        cout << encontrados << (encontrados == 1 ? " juego encontrado." : " juegos encontrados.") << endl;
+        cout << encontrados << (encontrados == 1 ? " juego encontrado" : " juegos encontrados") << endl;
     }
 
 
@@ -364,7 +366,7 @@ void reseniasPorJuego() {
     if(encontrados == 0) {
         mostrarError("No existen resenias para el juego seleccionado");
     } else {
-        cout << encontrados << (encontrados == 1 ? " resenia encontrada." : " resenias encontradas.") << endl;
+        cout << encontrados << (encontrados == 1 ? " resenia encontrada" : " resenias encontradas") << endl;
     }
 }
 
@@ -452,11 +454,199 @@ void reseniaPorUsuario() {
     if(encontrados == 0) {
         mostrarError("El usuario ingresado no ha reseniado ningun juego");
     } else {
-        cout << encontrados << (encontrados == 1 ? " resenia encontrada." : " resenias encontradas.") << endl;
+        cout << encontrados << (encontrados == 1 ? " resenia encontrada" : " resenias encontradas") << endl;
     }
 
 
 
+}
+
+void usuariosPorNombreUsuario(){
+UsuarioArchivo archivo;
+
+if (archivo.getCantidadRegistros()==0){
+    mostrarError("No hay usuarios registrados");
+    return;
+}
+char nombre[30];
+cout<<"Ingresa el nombre del usuario a buscar: ";
+leerCadena(nombre, 30);
+
+Usuario reg = archivo.buscarPorNombreUsuario(nombre);
+if(reg.getId()==-1){
+    mostrarError("No existe un usuario con ese nombre");
+    return;
+}
+mostrarTitulo("Usuario encontrado");
+reg.mostrar();
+}
+
+void usuariosPorRangoFechaRegistro(){
+UsuarioArchivo archivo;
+int cantidad = archivo.getCantidadRegistros();
+    if(cantidad == 0) {
+        mostrarError("No hay usuarios registrados");
+        return;
+    }
+Fecha desde, hasta;
+ cout << "Fecha DESDE" << endl;
+ desde.cargar();
+ cout << "Fecha HASTA" << endl;
+ hasta.cargar();
+
+ if(desde.toInt()>hasta.toInt()){
+    mostrarError("La fecha desde no puede ser posterior a la fecha hasta.");
+    return;
+ }
+ mostrarTitulo("USUARIOS REGISTRADOS ENTRE " + desde.toString() + " Y " + hasta.toString());
+
+ int encontrados = 0;
+    for(int i = 0; i < cantidad; i++) {
+        Usuario reg = archivo.leerDisco(i);
+        int fecha = reg.getFechaRegistro().toInt();
+        if(reg.getEstado() && fecha >= desde.toInt() && fecha <= hasta.toInt()) {
+            cout << "------------------------" << endl;
+            reg.mostrar();
+            encontrados++;
+        }
+    }
+
+    if(encontrados == 0) {
+        mostrarError("No hay usuarios registrados en ese rango.");
+    } else {
+        cout << encontrados << (encontrados == 1 ? " usuario encontrado" : " usuarios encontrados") << endl;
+    }
+
+}
+
+// INICIO CONSULTAS COMPRAS
+void mostrarDetalleCompra(Compra compra) {
+    UsuarioArchivo archUsuario;
+    JuegoArchivo archJuego;
+    Usuario usuario = archUsuario.buscarPorId(compra.getIdUsuario());
+    Juego juego = archJuego.buscarPorId(compra.getIdJuego());
+
+    cout << "------------------------" << endl;
+    cout << "Fecha: " << compra.getFechaCompra().toString() << endl;
+    cout << "Usuario: " << usuario.getNombreUsuario() << endl;
+    cout << "Juego: " << juego.getTitulo() << endl;
+    cout << "Importe: $" << compra.getImporte() << endl;
+}
+
+void comprasPorRangoFecha(){
+CompraArchivo archivo;
+int cantidad = archivo.getCantidadRegistros();
+    if(cantidad == 0) {
+        mostrarError("No hay compras registradas");
+        return;
+    }
+Fecha desde, hasta;
+ cout << "Fecha DESDE" << endl;
+ desde.cargar();
+ cout << "Fecha HASTA" << endl;
+ hasta.cargar();
+
+ if(desde.toInt()>hasta.toInt()){
+    mostrarError("La fecha desde no puede ser posterior a la fecha hasta");
+    return;
+ }
+ mostrarTitulo("COMPRAS REALIZADAS ENTRE " + desde.toString() + " Y " + hasta.toString());
+
+ int encontrados = 0;
+    for(int i = 0; i < cantidad; i++) {
+        Compra reg = archivo.leerDisco(i);
+        int fecha = reg.getFechaCompra().toInt();
+        if(reg.getEstado() && fecha >= desde.toInt() && fecha <= hasta.toInt()) {
+            mostrarDetalleCompra(reg);
+            encontrados++;
+        }
+    }
+
+    if(encontrados == 0) {
+        mostrarError("No hay compras en ese rango");
+    } else {
+        cout << encontrados << (encontrados == 1 ? " compra encontrada" : " compras encontradas") << endl;
+    }
+
+
+
+}
+
+void comprasPorUsuario(){
+CompraArchivo archivo;
+int cantidad = archivo.getCantidadRegistros();
+if(cantidad==0){
+    mostrarError("No hay compras realizadas");
+    return;
+}
+
+UsuarioArchivo archUsuario;
+char nombre [30];
+cout<<"Ingresa el nombre del usuario: ";
+leerCadena(nombre, 30);
+Usuario usuario = archUsuario.buscarPorNombreUsuario(nombre);
+if(usuario.getId()== -1){
+    mostrarError("No existe un usuario con ese nombre");
+    return;
+}
+
+mostrarTitulo("COMPRAS DE " + string(usuario.getNombreUsuario()));
+
+int encontrados=0;
+float total =0;
+for(int x=0;x<cantidad;x++){
+    Compra reg = archivo.leerDisco(x);
+    if(reg.getEstado()&&reg.getIdUsuario()==usuario.getId()){
+        mostrarDetalleCompra(reg);
+        total+=reg.getImporte();
+        encontrados++;
+    }
+}
+
+if(encontrados == 0) {
+        mostrarError("El usuario no tiene compras");
+    } else {
+        cout << encontrados << (encontrados == 1 ? " compra encontrada" : " compras encontradas") << endl;
+        cout << "Total gastado: $" << total << endl;
+    }
+}
+
+void comprasPorJuego(){
+    CompraArchivo archivo;
+    int cantidad = archivo.getCantidadRegistros();
+    if(cantidad == 0) {
+        mostrarError("No hay compras realizadas");
+        return;
+    }
+
+    JuegoArchivo archJuego;
+    cout << "Ingrese el ID del juego: ";
+    int idJuego = leerEntero();
+    Juego juego = archJuego.buscarPorId(idJuego);
+    if(juego.getId() == -1) {
+        mostrarError("No existe un juego con ese ID");
+        return;
+    }
+
+    mostrarTitulo("COMPRAS DE " + string(juego.getTitulo()));
+
+    int encontrados = 0;
+    float total = 0;
+    for(int x = 0; x < cantidad; x++) {
+        Compra reg = archivo.leerDisco(x);
+        if(reg.getEstado() && reg.getIdJuego() == idJuego) {
+            mostrarDetalleCompra(reg);
+            total += reg.getImporte();
+            encontrados++;
+        }
+    }
+
+    if(encontrados == 0) {
+        mostrarError("El juego no tiene compras");
+    } else {
+        cout << encontrados << (encontrados == 1 ? " compra encontrada" : " compras encontradas") << endl;
+        cout << "Total recaudado: $" << total << endl;
+    }
 }
 
 

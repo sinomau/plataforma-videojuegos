@@ -7,11 +7,20 @@ void juegosPorCategoria();
 void juegosPorDesarrollador();
 void juegosPorRangoPrecio();
 void juegosPorFechaLanzamiento();
+void comprasPorJuego();
 
 
 //Consultas de rese¤as
 void reseniasPorJuego();
 void reseniaPorUsuario();
+
+//Consultas de usuario
+void usuariosPorNombreUsuario();
+void comprasPorUsuario();
+
+//Consultas por fecha
+void usuariosPorRangoFechaRegistro();
+void comprasPorRangoFecha();
 
 
 

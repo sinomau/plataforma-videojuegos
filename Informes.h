@@ -5,6 +5,7 @@
 void recaudacionPorCategoria();
 void recaudacionPorJuego();
 void valoracionPromedioPorJuego();
+void recaudacionAnual();
 
 
 

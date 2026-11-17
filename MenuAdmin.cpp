@@ -253,7 +253,7 @@ void menuListados() {
             desarrolladoresPorFecha();
             break;
         case 9:
-
+            comprasPorFecha();
             break;
         case 10:
             reseniasPorPuntaje();
@@ -302,10 +302,10 @@ void menuConsultas() {
         rlutil::cls();
         switch (opcion) {
         case 1:
-
+            usuariosPorNombreUsuario();
             break;
         case 2:
-
+            usuariosPorRangoFechaRegistro();
             break;
         case 3:
             juegosPorCategoria();
@@ -320,13 +320,13 @@ void menuConsultas() {
             juegosPorFechaLanzamiento();
             break;
         case 7:
-
+            comprasPorRangoFecha();
             break;
         case 8:
-
+            comprasPorUsuario();
             break;
         case 9:
-
+            comprasPorJuego();
             break;
         case 10:
             reseniasPorJuego();
@@ -374,7 +374,7 @@ void menuInformes() {
             valoracionPromedioPorJuego();
             break;
         case 4:
-
+            recaudacionAnual();
             break;
         case 0:
             return;

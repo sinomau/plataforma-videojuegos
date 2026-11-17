@@ -248,3 +248,57 @@ void valoracionPromedioPorJuego() {
     }
     cout << "========================================" << endl;
 }
+
+void recaudacionAnual(){
+CompraArchivo archivo;
+int cantidad = archivo.getCantidadRegistros();
+if(cantidad==0){
+    mostrarError("No hay compras registradas");
+    return;
+}
+
+Fecha hoy;
+cout << "Ingrese el anio a consultar (0 = anio actual): ";
+    int anio = leerEntero();
+    if(anio == 0) {
+        anio = hoy.getAnioActual();
+    }
+    if(anio < 1958 || anio > hoy.getAnioActual()) {
+        mostrarError("Anio invalido");
+        return;
+    }
+float recaudacionMes[12]={};
+int ventasMes[12]={};
+
+for(int x=0;x<cantidad;x++){
+    Compra reg = archivo.leerDisco(x);
+    if(!reg.getEstado()){
+        continue;
+    }
+    Fecha fecha = reg.getFechaCompra();
+    if(fecha.getAnio()!=anio){
+        continue;
+    }
+    recaudacionMes[fecha.getMes()-1] += reg.getImporte();
+    ventasMes[fecha.getMes()-1]++;
+}
+const char* meses[12] = {"Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
+                             "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"};
+
+    mostrarTitulo("RECAUDACION ANUAL");
+    cout << "Anio: " << anio << endl << endl;
+    cout << left << setw(14) << "MES" << setw(14) << "VENTAS" << "RECAUDADO" << endl;
+    cout << "------------------------------------" << endl;
+
+    float total = 0;
+    int totalVentas = 0;
+    for(int m = 0; m < 12; m++) {
+        cout << left << setw(14) << meses[m] << setw(14) << ventasMes[m] << "$" << recaudacionMes[m] << endl;
+        total += recaudacionMes[m];
+        totalVentas += ventasMes[m];
+    }
+
+    cout << "------------------------------------" << endl;
+    cout << left << setw(14) << "TOTAL" << setw(14) << totalVentas << "$" << total << endl;
+
+}
