@@ -380,7 +380,7 @@ void reseniasPorPuntaje() {
         }
     }
     if(contador == 0) {
-        mostrarError("No hay reseï¿½as activas");
+        mostrarError("No hay rese¤as activas");
         delete[] vec;
         return;
     }
@@ -429,7 +429,7 @@ void reseniasPorFecha() {
     }
 
     if(contador == 0) {
-        mostrarError("No hay reseÃ±as activas");
+        mostrarError("No hay rese¤as activas");
         delete[] vec;
         return;
     }
@@ -458,7 +458,7 @@ void reseniasPorFecha() {
 
 //INICIO LISTADOS CATEGORIAS
 
-void categoriasPorNombre(){
+void categoriasPorNombre() {
     mostrarTitulo("CATEGORIAS ORDENADAS POR NOMBRE");
 
     CategoriaArchivo archivo;
@@ -472,9 +472,9 @@ void categoriasPorNombre(){
     int contador = 0;
     Categoria *vec = new Categoria[cantidad];
 
-    for(int i = 0 ; i < cantidad ;i++){
+    for(int i = 0 ; i < cantidad ; i++) {
         reg = archivo.leerDisco(i);
-        if(reg.getEstado()){
+        if(reg.getEstado()) {
             vec[contador] = reg;
             contador ++;
         }
@@ -486,17 +486,17 @@ void categoriasPorNombre(){
         return;
     }
     Categoria aux;
-    for(int i = 0; i < contador; i++){
-        for(int j = i + 1 ; j < contador ; j++){
-            if(strcmp(vec[i].getNombre(),vec[j].getNombre()) > 0 ){
-            aux = vec[i];
-            vec[i] = vec[j];
-            vec[j] = aux;
+    for(int i = 0; i < contador; i++) {
+        for(int j = i + 1 ; j < contador ; j++) {
+            if(strcmp(vec[i].getNombre(),vec[j].getNombre()) > 0 ) {
+                aux = vec[i];
+                vec[i] = vec[j];
+                vec[j] = aux;
             }
         }
     }
 
-    for(int i = 0 ; i < contador ; i++){
+    for(int i = 0 ; i < contador ; i++) {
         cout << "------------------------" << endl;
 
         vec[i].mostrar();
@@ -622,7 +622,7 @@ void comprasPorFecha() {
 
     int cantidad = arch.getCantidadRegistros();
     if(cantidad == 0) {
-        cout << "No hay compras registradas" << endl;
+        mostrarError("No hay compras registradas");
         return;
     }
 

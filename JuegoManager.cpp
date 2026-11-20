@@ -328,6 +328,6 @@ void JuegoManager::listarJuego() {
 	}
 
 	cout << "Total de juegos: " << mostrados << endl;
-	if(mostrados == 0) cout << "No hay Juegos cargados." << endl;
+	if(mostrados == 0)  mostrarError("No hay Juegos cargados.");
 	return;
 }

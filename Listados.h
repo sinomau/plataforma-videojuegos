@@ -9,7 +9,7 @@ void juegosPorPrecio();
 void juegosPorFecha();
 void juegosListadosPorCategoria();
 
-//Listados de desarrolladores: nombre y Ordenados por aï¿½o de fundaciï¿½n
+//Listados de desarrolladores: nombre y Ordenados por a¤o de fundaci¤n
 
 void desarrolladoresPorNombre();
 void desarrolladoresPorFecha();

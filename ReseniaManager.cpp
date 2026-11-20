@@ -43,7 +43,7 @@ bool ReseniaManager::cargarResenia(int idUsuario) {
 	}
 
     if(!archCompra.existeCompra(idUsuario,idJuego)){
-        mostrarError("No puede dejar una rese√±a en un juego que no haya comprado.");
+        mostrarError("No puede dejar una rese§a en un juego que no haya comprado.");
 		return false;
     }
 
