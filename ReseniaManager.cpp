@@ -181,6 +181,7 @@ void ReseniaManager::listarResenias() {
 	Resenia reg;
 	bool hayResenias = false;
 	int cantidad = archivo.getCantidadRegistros();
+	mostrarTitulo("LISTADO DE RESE¥AS");
 	for(int i = 0; i < cantidad; ++i) {
 		reg = archivo.leerDisco(i);
 		if(reg.getEstado() == true) {

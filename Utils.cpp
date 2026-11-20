@@ -2,8 +2,14 @@
 #include <iostream>
 #include <limits>
 #include "rlutil.h"
-
+#include <cstdlib>
 using namespace std;
+
+
+
+void limpiarPantalla() {
+    system("cls");   // si algun dia lo corres en Linux/Mac: system("clear");
+}
 
 int leerEntero() {
     int numero;

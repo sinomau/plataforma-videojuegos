@@ -16,7 +16,7 @@ void menuUsuario(int idUsuario) {
     int opcion;
 
     do {
-        rlutil::cls();
+        limpiarPantalla();
         mostrarTitulo("MENU USUARIO");
         cout << "Opcion 1 : CARGAR SALDO" << endl;
         cout << "Opcion 2 : MIS DATOS" << endl;
@@ -29,7 +29,7 @@ void menuUsuario(int idUsuario) {
         cout << "Opcion 0 : CERRAR SESION " << endl;
         cout << "Ingrese una opcion " << endl;
         opcion = leerEntero();
-        rlutil::cls();
+        limpiarPantalla();
         switch (opcion) {
         case 1:
             manager.cargarSaldo(idUsuario);

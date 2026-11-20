@@ -16,12 +16,14 @@
 #include "Compra.h"
 #include "CompraArchivo.h"
 #include "Utils.h"
+#include "rlutil.h"
 
 
 using namespace std;
 
 // INICIO CONSULTAS JUEGOS
 void juegosPorCategoria() {
+    system("cls");
     JuegoArchivo archivo;
     Juego reg;
 
@@ -87,6 +89,7 @@ void juegosPorCategoria() {
 
 
 void juegosPorDesarrollador() {
+    system("cls");
     JuegoArchivo archivo;
     Juego reg;
     DesarrolladorArchivo archDes;
@@ -166,6 +169,7 @@ void juegosPorDesarrollador() {
 
 
 void juegosPorRangoPrecio() {
+    system("cls");
     JuegoArchivo archivo;
     Juego reg;
     int cantidad = 0;
@@ -246,6 +250,7 @@ void juegosPorRangoPrecio() {
 }
 
 void juegosPorFechaLanzamiento() {
+    system("cls");
     JuegoArchivo archivo;
     Juego reg;
 
@@ -301,6 +306,7 @@ void juegosPorFechaLanzamiento() {
 
 
 void reseniasPorJuego() {
+    system("cls");
     ReseniaArchivo archivo;
     Resenia regRes;
     JuegoArchivo archJuego;
@@ -372,7 +378,7 @@ void reseniasPorJuego() {
 
 
 void reseniaPorUsuario() {
-
+    system("cls");
     ReseniaArchivo archivoResenia;
     Resenia regResenia;
     UsuarioArchivo archivoUsuario;
@@ -462,7 +468,8 @@ void reseniaPorUsuario() {
 }
 
 void usuariosPorNombreUsuario(){
-UsuarioArchivo archivo;
+    system("cls");
+    UsuarioArchivo archivo;
 
 if (archivo.getCantidadRegistros()==0){
     mostrarError("No hay usuarios registrados");
@@ -521,6 +528,7 @@ Fecha desde, hasta;
 
 // INICIO CONSULTAS COMPRAS
 void mostrarDetalleCompra(Compra compra) {
+    system("cls");
     UsuarioArchivo archUsuario;
     JuegoArchivo archJuego;
     Usuario usuario = archUsuario.buscarPorId(compra.getIdUsuario());
@@ -573,6 +581,7 @@ Fecha desde, hasta;
 }
 
 void comprasPorUsuario(){
+    system("cls");
 CompraArchivo archivo;
 int cantidad = archivo.getCantidadRegistros();
 if(cantidad==0){
@@ -612,6 +621,7 @@ if(encontrados == 0) {
 }
 
 void comprasPorJuego(){
+    system("cls");
     CompraArchivo archivo;
     int cantidad = archivo.getCantidadRegistros();
     if(cantidad == 0) {

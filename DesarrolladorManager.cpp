@@ -191,7 +191,7 @@ void DesarrolladorManager::listarDesarrollador() {
     DesarrolladorArchivo archivo;
     int cantidad = archivo.getCantidadRegistros();
     int mostrados = 0;
-
+    mostrarTitulo("LISTADO DE DESARROLLADORES");
     for (int i = 0; i < cantidad; i++) {
         Desarrollador reg = archivo.leerDisco(i);
         if (reg.getEstado()) {

@@ -19,7 +19,7 @@ void menuAdmin() {
     int opcion;
 
     do {
-        rlutil::cls();
+        limpiarPantalla();
         mostrarTitulo("MENU ADMINISTRADOR");
         cout << "Opcion 1 : CATEGORIAS" << endl;
         cout << "Opcion 2 : DESARROLLADORES" << endl;
@@ -44,7 +44,7 @@ void menuAdmin() {
             menuJuegos();
             break;
         case 4:
-            rlutil::cls();
+            limpiarPantalla();
             compraManager.eliminarCompra();
             rlutil::anykey("Presione una tecla para continuar...\n");
             break;
@@ -72,7 +72,7 @@ void menuCategorias() {
     int opcion;
 
     do {
-        rlutil::cls();
+        limpiarPantalla();
         mostrarTitulo("MENU CATEGORIAS");
         cout << "Opcion 1 : CARGAR CATEGORIA" << endl;
         cout << "Opcion 2 : MODIFICAR CATEGORIA" << endl;
@@ -81,7 +81,7 @@ void menuCategorias() {
         cout << "Opcion 0 : SALIR " << endl;
         cout << "Ingrese una opcion " << endl;
         opcion = leerEntero();
-        rlutil::cls();
+        limpiarPantalla();
         switch (opcion) {
         case 1:
             manager.cargarCategoria();
@@ -119,7 +119,7 @@ void menuDesarrolladores() {
     int opcion;
 
     do {
-        rlutil::cls();
+        limpiarPantalla();
         mostrarTitulo("MENU DESARROLLADORES");
         cout << "Opcion 1 : CARGAR DESARROLLADORES" << endl;
         cout << "Opcion 2 : MODIFICAR DESARROLLADORES" << endl;
@@ -128,7 +128,7 @@ void menuDesarrolladores() {
         cout << "Opcion 0 : SALIR " << endl;
         cout << "Ingrese una opcion " << endl;
         opcion = leerEntero();
-        rlutil::cls();
+        limpiarPantalla();
         switch (opcion) {
         case 1:
             manager.cargarDesarrollador();
@@ -165,7 +165,7 @@ void menuJuegos() {
     int opcion;
 
     do {
-        rlutil::cls();
+        limpiarPantalla();
         mostrarTitulo("MENU JUEGOS");
         cout << "Opcion 1 : CARGAR JUEGOS" << endl;
         cout << "Opcion 2 : MODIFICAR JUEGOS" << endl;
@@ -174,7 +174,7 @@ void menuJuegos() {
         cout << "Opcion 0 : SALIR " << endl;
         cout << "Ingrese una opcion " << endl;
         opcion = leerEntero();
-        rlutil::cls();
+        limpiarPantalla();
         switch (opcion) {
         case 1:
             manager.cargarJuego();
@@ -209,7 +209,7 @@ void menuJuegos() {
 void menuListados() {
     int opcion;
     do {
-        rlutil::cls();
+        limpiarPantalla();
         mostrarTitulo("MENU LISTADOS");
         cout << "Opcion 1 : USUARIOS ORDENADOS POR APELLIDO" << endl;
         cout << "Opcion 2 : USUARIOS ORDENADOS POR FECHA DE REGISTRO" << endl;
@@ -226,7 +226,7 @@ void menuListados() {
         cout << "Opcion 0 : SALIR " << endl;
         cout << "Ingrese una opcion " << endl;
         opcion = leerEntero();
-        rlutil::cls();
+        limpiarPantalla();
         switch (opcion) {
         case 1:
             usuariosPorApellido();
@@ -283,7 +283,7 @@ void menuListados() {
 void menuConsultas() {
     int opcion;
     do {
-        rlutil::cls();
+        limpiarPantalla();
         mostrarTitulo("MENU CONSULTAS");
         cout << "Opcion 1 : USUARIOS POR NOMBRE DE USUARIO" << endl;
         cout << "Opcion 2 : USUARIOS POR RANGO DE FECHAS DE REGISTRO" << endl;
@@ -299,7 +299,7 @@ void menuConsultas() {
         cout << "Opcion 0 : SALIR " << endl;
         cout << "Ingrese una opcion " << endl;
         opcion = leerEntero();
-        rlutil::cls();
+        limpiarPantalla();
         switch (opcion) {
         case 1:
             usuariosPorNombreUsuario();
@@ -353,7 +353,7 @@ void menuConsultas() {
 void menuInformes() {
     int opcion;
     do {
-        rlutil::cls();
+        limpiarPantalla();
         mostrarTitulo("MENU INFORMES");
         cout << "Opcion 1 : RECAUDACION POR CATEGORIAS" << endl;
         cout << "Opcion 2 : RECAUDACION POR JUEGO" << endl;
@@ -362,7 +362,7 @@ void menuInformes() {
         cout << "Opcion 0 : SALIR " << endl;
         cout << "Ingrese una opcion " << endl;
         opcion = leerEntero();
-        rlutil::cls();
+        limpiarPantalla();
         switch (opcion) {
         case 1:
             recaudacionPorCategoria();

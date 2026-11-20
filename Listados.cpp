@@ -20,6 +20,9 @@ using namespace std;
 
 // LISTADOS JUEGOS EMPIEZA
 void juegosPorTitulo() {
+
+    mostrarTitulo("JUEGOS ORDENADOS POR TITULO");
+
     JuegoArchivo arch;
     Juego reg;
     Juego aux;
@@ -77,6 +80,8 @@ void juegosPorTitulo() {
 
 void juegosPorPrecio() {
 
+    mostrarTitulo("JUEGOS ORDENADOS POR PRECIO");
+
     JuegoArchivo archivo;
     Juego reg;
 
@@ -128,6 +133,8 @@ void juegosPorPrecio() {
 
 
 void juegosPorFecha() {
+    mostrarTitulo("JUEGOS ORDENADOS POR FECHA DE LANZAMIENTO");
+
     JuegoArchivo archivo;
     Juego reg;
 
@@ -177,6 +184,8 @@ void juegosPorFecha() {
 
 
 void juegosListadosPorCategoria() {
+    mostrarTitulo("JUEGOS ORDENADOS POR CATEGORIA");
+
     JuegoArchivo archivo;
     CategoriaArchivo archCat;
 
@@ -249,6 +258,8 @@ void juegosListadosPorCategoria() {
 //LISTADO DESARROLLADORES EMPIEZA
 
 void desarrolladoresPorNombre() {
+    mostrarTitulo("DESARROLLADORES ORDENADOS POR NOMBRE");
+
     DesarrolladorArchivo archivo;
     Desarrollador reg;
 
@@ -293,6 +304,8 @@ void desarrolladoresPorNombre() {
 }
 
 void desarrolladoresPorFecha() {
+
+    mostrarTitulo("DESARROLLADORES ORDENADOS POR FECHA DE FUNDACION");
 
     DesarrolladorArchivo archivo;
     Desarrollador reg;
@@ -346,6 +359,8 @@ void desarrolladoresPorFecha() {
 
 void reseniasPorPuntaje() {
 
+    mostrarTitulo("RESENIAS ORDENADAS POR PUNTAJE");
+
     ReseniaArchivo archivo;
     Resenia reg;
 
@@ -392,6 +407,8 @@ void reseniasPorPuntaje() {
 }
 
 void reseniasPorFecha() {
+    mostrarTitulo("RESENIAS ORDENADAS POR FECHA");
+
     ReseniaArchivo archivo;
     Resenia reg;
 
@@ -442,6 +459,8 @@ void reseniasPorFecha() {
 //INICIO LISTADOS CATEGORIAS
 
 void categoriasPorNombre(){
+    mostrarTitulo("CATEGORIAS ORDENADAS POR NOMBRE");
+
     CategoriaArchivo archivo;
     Categoria reg;
 
@@ -491,6 +510,8 @@ void categoriasPorNombre(){
 //INICIO LISTADOS USUARIOS
 
 void usuariosPorApellido() {
+    mostrarTitulo("USUARIOS ORDENADOS POR APELLIDO");
+
     UsuarioArchivo arch;
     Usuario reg;
     Usuario aux;
@@ -546,6 +567,8 @@ void usuariosPorApellido() {
 }
 
 void usuariosPorFechaRegistro() {
+    mostrarTitulo("USUARIOS ORDENADOS POR FECHA DE REGISTRO");
+
     UsuarioArchivo arch;
     Usuario reg;
 
@@ -592,6 +615,8 @@ void usuariosPorFechaRegistro() {
 }
 
 void comprasPorFecha() {
+    mostrarTitulo("COMPRAS ORDENADAS POR FECHA");
+
     CompraArchivo arch;
     Compra reg;
 

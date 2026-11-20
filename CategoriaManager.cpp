@@ -161,7 +161,7 @@ int CategoriaManager::listarCategoria() {
     CategoriaArchivo archivo;
     int cantidad = archivo.getCantidadRegistros();
     int mostrados = 0;
-
+    mostrarTitulo("LISTADO DE CATEGORIAS");
     for (int i = 0; i < cantidad; i++) {
         Categoria reg = archivo.leerDisco(i);
         if (reg.getEstado()) {

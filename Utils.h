@@ -9,7 +9,7 @@ void leerCadena(char destino[], int tamanio);
 void mostrarTitulo(std::string titulo);
 void mostrarError(std::string mensaje);
 void mostrarExito(std::string mensaje);
-
+void limpiarPantalla();
 
 
 #endif // UTILS_H_INCLUDED

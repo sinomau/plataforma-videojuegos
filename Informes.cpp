@@ -166,10 +166,9 @@ void recaudacionPorJuego() {
     int cantCompra = archCompra.getCantidadRegistros();
 
     mostrarTitulo("RECAUDACION POR JUEGO ENTRE " + fechaInicial.toString() + " AL " + fechaFinal.toString());
-    cout << left << setw(12) << "TITULO" << setw(14) << "CATEGORIA"
-         << setw(14) << "DESARROLLADOR" << setw(12) << "TOTAL" << "CANTIDAD" << endl;
-    cout << "------------------------" << endl;
-
+    cout << left << setw(30) << "TITULO" << setw(25) << "CATEGORIA"
+         << setw(25) << "DESARROLLADOR" << setw(25) << "TOTAL" << "CANTIDAD" << endl;
+    cout << string(113, '-') << endl;
     for(int i = 0; i < cantidadJuegos; i++) {
         regJuego = archJuego.leerDisco(i);
         if(!regJuego.getEstado()) {
@@ -192,13 +191,13 @@ void recaudacionPorJuego() {
         regCat = archCat.buscarPorId(regJuego.getIdCategoria());
         regDes = archDes.buscarPorId(regJuego.getIdDesarrollador());
 
-        cout << left << setw(12) << regJuego.getTitulo()
-             << setw(14) << regCat.getNombre()
-             << setw(14) << regDes.getNombre()
-             << "$" << setw(11) << recaudacion
+        cout << left << setw(30) << regJuego.getTitulo()
+             << setw(25) << regCat.getNombre()
+             << setw(25) << regDes.getNombre()
+             << "$" << setw(25) << recaudacion
              << cantidad << endl;
     }
-    cout << "========================================" << endl;
+    cout << string(113, '=') << endl;
 }
 
 
@@ -217,9 +216,9 @@ void valoracionPromedioPorJuego() {
     int cantResenias = archResenia.getCantidadRegistros();
 
     mostrarTitulo("VALORACION PROMEDIO POR JUEGO");
-    cout << left << setw(12) << "TITULO" << setw(18) << "PUNTAJE PROMEDIO"
+    cout << left << setw(30) << "TITULO" << setw(30) << "PUNTAJE PROMEDIO"
          << "CANTIDAD DE RESENIAS" << endl;
-    cout << "------------------------" << endl;
+    cout << string(113, '-') << endl;
 
     for(int i = 0; i < cantidadJuegos; i++) {
         regJuego = archJuego.leerDisco(i);
@@ -238,15 +237,15 @@ void valoracionPromedioPorJuego() {
             }
         }
 
-        cout << left << setw(12) << regJuego.getTitulo();
+        cout << left << setw(30) << regJuego.getTitulo();
         if(cantidad == 0) {
-            cout << setw(18) << "Sin valoracion";
+            cout << setw(30) << "Sin valoracion";
         } else {
-            cout << setw(18) << (float)suma / cantidad;
+            cout << setw(30) << (float)suma / cantidad;
         }
         cout << cantidad << endl;
     }
-    cout << "========================================" << endl;
+    cout << string(113, '=') << endl;
 }
 
 void recaudacionAnual(){

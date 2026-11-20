@@ -17,14 +17,14 @@ void menuInicio() {
     int opcion;
 
     do {
-        rlutil::cls();
+        limpiarPantalla();
         mostrarTitulo("PLATAFORMA DE VIDEOJUEGOS");
         cout << "Opcion 1 : INGRESAR" << endl;
         cout << "Opcion 2 : REGISTRARSE" << endl;
         cout << "Opcion 0 : SALIR " << endl;
         cout << "Ingrese una opcion " << endl;
         opcion = leerEntero();
-        rlutil::cls();
+        limpiarPantalla();
         switch (opcion) {
         case 1: {
             int idUsuario = manager.iniciarSesion();

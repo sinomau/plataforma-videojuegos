@@ -98,7 +98,7 @@ void CompraManager::verBiblioteca(int idUsuario){
     int cantidad = archivoCompra.getCantidadRegistros();
     int mostrados = 0;
 
-    cout << "Mi biblioteca" << endl;
+    mostrarTitulo("MI BIBLIOTECA");
     for(int x = 0; x < cantidad; x++)
     {
         Compra compra = archivoCompra.leerDisco(x);

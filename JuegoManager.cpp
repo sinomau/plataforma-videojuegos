@@ -301,6 +301,7 @@ void JuegoManager::listarJuego() {
 	Desarrollador des;
 	DesarrolladorArchivo archDes;
 	int cantidad = archivo.getCantidadRegistros(), mostrados = 0;
+	mostrarTitulo("LISTADO DE JUEGOS");
 	for(int i = 0; i < cantidad; ++i) {
 		Juego reg = archivo.leerDisco(i);
 		if(reg.getEstado()) {
@@ -325,6 +326,8 @@ void JuegoManager::listarJuego() {
 			++mostrados;
 		}
 	}
+
+	cout << "Total de juegos: " << mostrados << endl;
 	if(mostrados == 0) cout << "No hay Juegos cargados." << endl;
 	return;
 }
