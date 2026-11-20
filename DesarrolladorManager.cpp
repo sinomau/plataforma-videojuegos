@@ -103,7 +103,7 @@ void DesarrolladorManager::mostrarDesarrollador() {
 bool DesarrolladorManager::modificarDesarrollador() {
     DesarrolladorArchivo archivo;
     listarDesarrollador();
-    mostrarTitulo("Ingrese el id del Desarrollador a modificar");
+    cout << "Ingrese el id del Desarrollador a modificar" << endl;
     int id = leerEntero();
     Desarrollador reg = archivo.buscarPorId(id);
     if (reg.getId() == -1) {
@@ -164,7 +164,7 @@ bool DesarrolladorManager::modificarDesarrollador() {
 bool DesarrolladorManager::eliminarDesarrollador() {
     DesarrolladorArchivo archivo;
     listarDesarrollador();
-    mostrarTitulo("Ingrese el id del Desarrollador a eliminar");
+    cout << "Ingrese el id del Desarrollador a eliminar" << endl;
 
     int id = leerEntero();
     Desarrollador reg = archivo.buscarPorId(id);

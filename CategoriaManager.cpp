@@ -89,7 +89,7 @@ bool CategoriaManager::modificarCategoria() {
     CategoriaArchivo archivo;
     listarCategoria();
 
-    mostrarTitulo("Ingrese el id de la categoria a modificar");
+    cout << "Ingrese el id de la categoria a modificar" << endl;
     int id = leerEntero();
     Categoria reg = archivo.buscarPorId(id);
     if (reg.getId() == -1) {
@@ -135,7 +135,7 @@ bool CategoriaManager::modificarCategoria() {
 bool CategoriaManager::eliminarCategoria() {
     CategoriaArchivo archivo;
     listarCategoria();
-     mostrarTitulo("Ingrese el id de la categoria a eliminar");
+     cout << "Ingrese el id de la categoria a eliminar" << endl;
     int id = leerEntero();
     Categoria reg = archivo.buscarPorId(id);
     if (reg.getId() == -1) {

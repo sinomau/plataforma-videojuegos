@@ -640,7 +640,7 @@ void comprasPorJuego(){
         }
     }
 
-    mostrarTitulo("Ingrese el ID del juego: ") ;
+    cout << "Ingrese el ID del juego: " ;
     int idJuego = leerEntero();
     Juego juego = archJuego.buscarPorId(idJuego);
     if(juego.getId() == -1) {

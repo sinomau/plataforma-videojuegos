@@ -167,7 +167,7 @@ bool JuegoManager::modificarJuego() {
 	Desarrollador des;
 	DesarrolladorArchivo archDes;
 	listarJuego();
-	mostrarTitulo("Ingrese el id del Juego a modificar");
+	cout << "Ingrese el id del Juego a modificar" << endl;
 
 	int id = leerEntero();
 	Juego reg = archivo.buscarPorId(id);
@@ -271,7 +271,7 @@ bool JuegoManager::modificarJuego() {
 bool JuegoManager::eliminarJuego() {
 	JuegoArchivo archivo;
 	listarJuego();
-	mostrarTitulo("Ingrese el id del Juego a eliminar");
+	cout << "Ingrese el id del Juego a eliminar" << endl;
 	int id = leerEntero();
 	Juego reg = archivo.buscarPorId(id);
 	if(reg.getId() == -1) {
