@@ -38,6 +38,7 @@ void menuUsuario(int idUsuario) {
             manager.mostrarDatos(idUsuario);
             break;
         case 3:
+            compraManager.verBiblioteca(idUsuario);
             reseniaManager.cargarResenia(idUsuario);
             break;
         case 4:
