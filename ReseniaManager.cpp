@@ -201,6 +201,14 @@ void ReseniaManager::listarResenias() {
 void ReseniaManager::mostrarReseniasJuego() {
 	ReseniaArchivo archivo;
 	JuegoArchivo archJuego;
+
+	 mostrarTitulo("JUEGOS DISPONIBLES");
+	int cantJuegos = archJuego.getCantidadRegistros();
+	for(int i = 0; i < cantJuegos; i++) {
+		Juego j = archJuego.leerDisco(i);
+		if(j.getEstado()) cout << j.getId() << " - " << j.getTitulo() << endl;
+	}
+
 	cout << "Ingrese el ID del juego: ";
 	int idJuego = leerEntero();
 	Juego juego = archJuego.buscarPorId(idJuego);
@@ -208,7 +216,7 @@ void ReseniaManager::mostrarReseniasJuego() {
 		mostrarError("Juego inexistente o inactivo.");
 		return;
 	}
-
+    mostrarTitulo("Rese¤a de juego seleccionado");
 	cout << "Rese¤as de " << juego.getTitulo() << ":" << endl;
 	int cantidad = archivo.getCantidadRegistros();
 	int mostradas = 0;
