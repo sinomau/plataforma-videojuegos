@@ -57,7 +57,7 @@ void menuSegunRol(int idUsuario) {
     Usuario reg = archivo.buscarPorId(idUsuario);
 
     if (reg.getRol() == ROL_ADMIN) {
-        menuAdmin();
+        menuAdmin(idUsuario);
     } else {
         menuUsuario(idUsuario);
     }

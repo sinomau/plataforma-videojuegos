@@ -2,7 +2,7 @@
 #define MENUADMIN_H_INCLUDED
 
 
-void menuAdmin();
+void menuAdmin(int idUsuario);
 void menuCategorias();
 void menuDesarrolladores();
 void menuJuegos();

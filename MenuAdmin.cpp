@@ -4,6 +4,7 @@
 #include "DesarrolladorManager.h"
 #include "JuegoManager.h"
 #include "CompraManager.h"
+#include "ReseniaManager.h"
 #include "Listados.h"
 #include "Consultas.h"
 #include "Informes.h"
@@ -14,8 +15,9 @@
 using namespace std;
 
 
-void menuAdmin() {
+void menuAdmin(int idUsuario) {
     CompraManager compraManager;
+    ReseniaManager reseniaManager;
     int opcion;
 
     do {
@@ -28,6 +30,7 @@ void menuAdmin() {
         cout << "Opcion 5 : LISTADOS" << endl;
         cout << "Opcion 6 : CONSULTAS" << endl;
         cout << "Opcion 7 : INFORMES" << endl;
+        cout << "Opcion 8 : ELIMINAR RESE¥A" << endl;
         cout << "Opcion 0 : CERRAR SESION" << endl;
         cout << "Ingrese una opcion" << endl;
 
@@ -56,6 +59,12 @@ void menuAdmin() {
             break;
         case 7:
             menuInformes();
+            break;
+        case 8:
+            limpiarPantalla();
+            reseniaManager.listarResenias();
+            reseniaManager.eliminarResenia(idUsuario);
+            rlutil::anykey("Presione una tecla para continuar...\n");
             break;
         case 0:
             return;
