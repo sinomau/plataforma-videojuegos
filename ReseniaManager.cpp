@@ -143,10 +143,10 @@ bool ReseniaManager::modificarResenia(int idUsuario) {
 	return false;
 }
 
-/// El usuario elimina sus propias resenias; el administrador puede eliminar cualquiera.
 bool ReseniaManager::eliminarResenia(int idUsuario) {
 	ReseniaArchivo archivo;
 	UsuarioArchivo archUsuario;
+	listarReseniasPorUsuario(idUsuario);
 	cout << "Ingrese el ID de la rese¤a a eliminar: ";
 	int id = leerEntero();
 	Resenia reg = archivo.buscarPorId(id);
@@ -173,9 +173,7 @@ bool ReseniaManager::eliminarResenia(int idUsuario) {
 	return false;
 }
 
-/**
- *
- */
+
 void ReseniaManager::listarResenias() {
 	ReseniaArchivo archivo;
 	Resenia reg;
@@ -197,7 +195,25 @@ void ReseniaManager::listarResenias() {
 	return;
 }
 
-/// Muestra todas las resenias activas de un juego.
+void ReseniaManager::listarReseniasPorUsuario(int idUsuario) {
+	ReseniaArchivo archivo;
+	Resenia reg;
+	int cantidad = archivo.getCantidadRegistros();
+	bool hayResenias = false;
+	mostrarTitulo("MIS RESE¥AS");
+	for(int i = 0; i < cantidad; i++) {
+		reg = archivo.leerDisco(i);
+		if(reg.getEstado() && reg.getIdUsuario() == idUsuario) {
+			cout << "------------------------" << endl;
+			reg.mostrar();
+			hayResenias = true;
+		}
+	}
+	if(hayResenias == false) {
+		mostrarError("No tiene rese¤as cargadas.");
+	}
+}
+
 void ReseniaManager::mostrarReseniasJuego() {
 	ReseniaArchivo archivo;
 	JuegoArchivo archJuego;

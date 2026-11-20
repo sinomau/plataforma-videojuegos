@@ -8,6 +8,7 @@ public:
     bool modificarResenia(int idUsuario);
     bool eliminarResenia(int idUsuario);
     void listarResenias();
+    void listarReseniasPorUsuario(int idUsuario);
     void mostrarReseniasJuego();
 
 

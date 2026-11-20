@@ -42,6 +42,7 @@ void menuUsuario(int idUsuario) {
             reseniaManager.cargarResenia(idUsuario);
             break;
         case 4:
+            reseniaManager.listarReseniasPorUsuario(idUsuario);
             reseniaManager.modificarResenia(idUsuario);
             break;
         case 5:
