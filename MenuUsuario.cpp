@@ -20,10 +20,10 @@ void menuUsuario(int idUsuario) {
         mostrarTitulo("MENU USUARIO");
         cout << "Opcion 1 : CARGAR SALDO" << endl;
         cout << "Opcion 2 : MIS DATOS" << endl;
-        cout << "Opcion 3 : DEJAR RESENIA" << endl;
-        cout << "Opcion 4 : MODIFICAR RESENIA" << endl;
-        cout << "Opcion 5 : ELIMINAR RESENIA" << endl;
-        cout << "Opcion 6 : VER RESENIAS DE UN JUEGO" << endl;
+        cout << "Opcion 3 : DEJAR RESE¥A" << endl;
+        cout << "Opcion 4 : MODIFICAR RESE¥A" << endl;
+        cout << "Opcion 5 : ELIMINAR RESE¥A" << endl;
+        cout << "Opcion 6 : VER RESE¥AS DE UN JUEGO" << endl;
         cout << "Opcion 7 : COMPRAR JUEGO" << endl;
         cout << "Opcion 8 : MI BIBLIOTECA" << endl;
         cout << "Opcion 0 : CERRAR SESION " << endl;

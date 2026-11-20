@@ -359,14 +359,14 @@ void desarrolladoresPorFecha() {
 
 void reseniasPorPuntaje() {
 
-    mostrarTitulo("RESENIAS ORDENADAS POR PUNTAJE");
+    mostrarTitulo("RESE¥AS ORDENADAS POR PUNTAJE");
 
     ReseniaArchivo archivo;
     Resenia reg;
 
     int cantidad = archivo.getCantidadRegistros();
     if(cantidad == 0) {
-        mostrarError("No hay Resenias registradas");
+        mostrarError("No hay Rese¤as registradas");
         return;
     }
 
@@ -407,14 +407,14 @@ void reseniasPorPuntaje() {
 }
 
 void reseniasPorFecha() {
-    mostrarTitulo("RESENIAS ORDENADAS POR FECHA");
+    mostrarTitulo("RESE¥AS ORDENADAS POR FECHA");
 
     ReseniaArchivo archivo;
     Resenia reg;
 
     int cantidad = archivo.getCantidadRegistros();
     if(cantidad == 0) {
-        mostrarError("No hay Resenias registradas");
+        mostrarError("No hay Rese¤as registradas");
         return;
     }
 

@@ -315,7 +315,7 @@ void reseniasPorJuego() {
     int cantidad = archivo.getCantidadRegistros();
 
     if(cantidad == 0) {
-        mostrarError("No hay Resenias disponibles");
+        mostrarError("No hay Rese¤as disponibles");
         return;
     }
 
@@ -354,7 +354,7 @@ void reseniasPorJuego() {
     }
 
     // Buscamos las resenias del juego seleccionado
-    mostrarTitulo("RESENIAS DEL JUEGO");
+    mostrarTitulo("RESE¥AS DEL JUEGO");
     cout << "Titulo :" << regJuego.getTitulo() << endl;
 
     int encontrados = 0;
@@ -370,9 +370,9 @@ void reseniasPorJuego() {
     }
 
     if(encontrados == 0) {
-        mostrarError("No existen resenias para el juego seleccionado");
+        mostrarError("No existen rese¤as para el juego seleccionado");
     } else {
-        cout << encontrados << (encontrados == 1 ? " resenia encontrada" : " resenias encontradas") << endl;
+        cout << encontrados << (encontrados == 1 ? " rese¤a encontrada" : " rese¤as encontradas") << endl;
     }
 }
 
@@ -388,7 +388,7 @@ void reseniaPorUsuario() {
 
     int cantidadRes = archivoResenia.getCantidadRegistros();
     if(cantidadRes == 0) {
-        mostrarError("No hay resenias disponibles");
+        mostrarError("No hay rese¤as disponibles");
         return;
     }
 
@@ -436,7 +436,7 @@ void reseniaPorUsuario() {
         return;
     }
     //busco resenias.
-    mostrarTitulo("RESENIAS DEL USUARIO");
+    mostrarTitulo("RESE¥AS DEL USUARIO");
     cout << "Usuario :" << regUsuario.getNombreUsuario() << endl;
 
     int encontrados = 0;
@@ -458,9 +458,9 @@ void reseniaPorUsuario() {
 
     }
     if(encontrados == 0) {
-        mostrarError("El usuario ingresado no ha reseniado ningun juego");
+        mostrarError("El usuario ingresado no ha rese¤ado ningun juego");
     } else {
-        cout << encontrados << (encontrados == 1 ? " resenia encontrada" : " resenias encontradas") << endl;
+        cout << encontrados << (encontrados == 1 ? " rese¤a encontrada" : " rese¤as encontradas") << endl;
     }
 
 

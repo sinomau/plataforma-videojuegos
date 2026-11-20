@@ -48,7 +48,7 @@ bool ReseniaManager::cargarResenia(int idUsuario) {
     }
 
 	if(archivo.existeResenia(idUsuario, idJuego)) {
-		mostrarError("Ya existe una resenia suya para ese juego.");
+		mostrarError("Ya existe una rese¤a suya para ese juego.");
 		return false;
 	}
 	cout << "Ingrese el puntaje (1 a 5): ";
@@ -66,10 +66,10 @@ bool ReseniaManager::cargarResenia(int idUsuario) {
 	fechaResenia.setFechaActual();
 	reg.cargar(id, idUsuario, idJuego, puntaje, comentario, fechaResenia);
 	if(archivo.escribirDisco(reg)) {
-		mostrarExito("Resenia cargada correctamente.");
+		mostrarExito("Rese¤a cargada correctamente.");
 		return true;
 	}
-	mostrarError("No se pudo cargar la resenia.");
+	mostrarError("No se pudo cargar la rese¤a.");
 	return false;
 }
 
@@ -79,15 +79,15 @@ bool ReseniaManager::cargarResenia(int idUsuario) {
 void ReseniaManager::buscarPorId() {
 	ReseniaArchivo archivo;
 	Resenia reg;
-	cout << "Ingrese el identificador de la Resenia a buscar" << endl;
+	cout << "Ingrese el identificador de la Rese¤a a buscar" << endl;
 	int id = leerEntero();
 	reg = archivo.buscarPorId(id);
 	if(reg.getId() == -1) {
-		mostrarError("No existe una Resenia con ese ID.");
+		mostrarError("No existe una Rese¤a con ese ID.");
 		return;
 	}
 	if(reg.getEstado() == false) {
-		mostrarError("La Resenia con ese ID esta dada de baja.");
+		mostrarError("La Rese¤a con ese ID esta dada de baja.");
 		return;
 	}
 	reg.mostrar();
@@ -97,19 +97,19 @@ void ReseniaManager::buscarPorId() {
 /// Solo el autor de la resenia puede modificarla. El juego no se cambia.
 bool ReseniaManager::modificarResenia(int idUsuario) {
 	ReseniaArchivo archivo;
-	cout << "Ingrese el ID de la resenia a modificar: ";
+	cout << "Ingrese el ID de la rese¤a a modificar: ";
 	int id = leerEntero();
 	Resenia reg = archivo.buscarPorId(id);
 	if(reg.getId() == -1) {
-		mostrarError("No existe una resenia con ese ID.");
+		mostrarError("No existe una rese¤a con ese ID.");
 		return false;
 	}
 	if(reg.getEstado() == false) {
-		mostrarError("La resenia con ese ID esta dada de baja.");
+		mostrarError("La rese¤a con ese ID esta dada de baja.");
 		return false;
 	}
 	if(reg.getIdUsuario() != idUsuario) {
-		mostrarError("Solo puede modificar sus propias resenias.");
+		mostrarError("Solo puede modificar sus propias rese¤as.");
 		return false;
 	}
 
@@ -136,10 +136,10 @@ bool ReseniaManager::modificarResenia(int idUsuario) {
 	reg.setFechaResenia(fechaResenia);
 
 	if(archivo.modificarDisco(reg, id)) {
-		mostrarExito("Resenia modificada correctamente.");
+		mostrarExito("Rese¤a modificada correctamente.");
 		return true;
 	}
-	mostrarError("No se pudo modificar la resenia.");
+	mostrarError("No se pudo modificar la rese¤a.");
 	return false;
 }
 
@@ -147,29 +147,29 @@ bool ReseniaManager::modificarResenia(int idUsuario) {
 bool ReseniaManager::eliminarResenia(int idUsuario) {
 	ReseniaArchivo archivo;
 	UsuarioArchivo archUsuario;
-	cout << "Ingrese el ID de la resenia a eliminar: ";
+	cout << "Ingrese el ID de la rese¤a a eliminar: ";
 	int id = leerEntero();
 	Resenia reg = archivo.buscarPorId(id);
 	if(reg.getId() == -1) {
-		mostrarError("No existe una resenia con ese ID.");
+		mostrarError("No existe una rese¤a con ese ID.");
 		return false;
 	}
 	if(reg.getEstado() == false) {
-		mostrarError("Esta resenia ya se encuentra eliminada.");
+		mostrarError("Esta rese¤a ya se encuentra eliminada.");
 		return false;
 	}
 	bool esAdmin = archUsuario.buscarPorId(idUsuario).getRol() == ROL_ADMIN;
 	if(!esAdmin && reg.getIdUsuario() != idUsuario) {
-		mostrarError("Solo puede eliminar sus propias resenias.");
+		mostrarError("Solo puede eliminar sus propias rese¤as.");
 		return false;
 	}
 
 	reg.setEstado(false);
 	if(archivo.modificarDisco(reg, id)) {
-		mostrarExito("Resenia eliminada correctamente.");
+		mostrarExito("Rese¤a eliminada correctamente.");
 		return true;
 	}
-	mostrarError("No se pudo eliminar la resenia.");
+	mostrarError("No se pudo eliminar la rese¤a.");
 	return false;
 }
 
@@ -191,7 +191,7 @@ void ReseniaManager::listarResenias() {
 		}
 	}
 	if(hayResenias == false) {
-		mostrarError("No hay Resenias en el archivo");
+		mostrarError("No hay Rese¤as en el archivo");
 		return;
 	}
 	return;
@@ -209,7 +209,7 @@ void ReseniaManager::mostrarReseniasJuego() {
 		return;
 	}
 
-	cout << "Resenias de " << juego.getTitulo() << ":" << endl;
+	cout << "Rese¤as de " << juego.getTitulo() << ":" << endl;
 	int cantidad = archivo.getCantidadRegistros();
 	int mostradas = 0;
 	for(int i = 0; i < cantidad; i++) {
@@ -221,6 +221,6 @@ void ReseniaManager::mostrarReseniasJuego() {
 		}
 	}
 	if(mostradas == 0) {
-		mostrarError("Ese juego todavia no tiene resenias.");
+		mostrarError("Ese juego todavia no tiene rese¤as.");
 	}
 }

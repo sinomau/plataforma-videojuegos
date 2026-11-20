@@ -217,7 +217,7 @@ void valoracionPromedioPorJuego() {
 
     mostrarTitulo("VALORACION PROMEDIO POR JUEGO");
     cout << left << setw(30) << "TITULO" << setw(30) << "PUNTAJE PROMEDIO"
-         << "CANTIDAD DE RESENIAS" << endl;
+         << "CANTIDAD DE RESE¥AS" << endl;
     cout << string(113, '-') << endl;
 
     for(int i = 0; i < cantidadJuegos; i++) {
