@@ -628,9 +628,19 @@ void comprasPorJuego(){
         mostrarError("No hay compras realizadas");
         return;
     }
-
     JuegoArchivo archJuego;
-    cout << "Ingrese el ID del juego: ";
+    Juego regJuego;
+
+    int cantJuegos = archJuego.getCantidadRegistros();
+    for(int i = 0 ; i < cantJuegos ; i++){
+        regJuego = archJuego.leerDisco(i);
+        if(regJuego.getEstado()){
+            cout<< "Id: "<< regJuego.getId();
+            cout<< " - Titulo : " << regJuego.getTitulo() << endl;
+        }
+    }
+
+    mostrarTitulo("Ingrese el ID del juego: ") ;
     int idJuego = leerEntero();
     Juego juego = archJuego.buscarPorId(idJuego);
     if(juego.getId() == -1) {

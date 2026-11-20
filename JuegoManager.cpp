@@ -158,10 +158,7 @@ void JuegoManager::mostrarJuego() {
 	return;
 }
 
-/**
- *
- * @return
- */
+
 bool JuegoManager::modificarJuego() {
 	Fecha fechaLanzamiento;
 	JuegoArchivo archivo;
@@ -169,7 +166,9 @@ bool JuegoManager::modificarJuego() {
 	CategoriaArchivo archCat;
 	Desarrollador des;
 	DesarrolladorArchivo archDes;
-	cout << "Ingrese el id del Juego a modificar" << endl;
+	listarJuego();
+	mostrarTitulo("Ingrese el id del Juego a modificar");
+
 	int id = leerEntero();
 	Juego reg = archivo.buscarPorId(id);
 	if(reg.getId() == -1) {
@@ -271,7 +270,8 @@ bool JuegoManager::modificarJuego() {
  */
 bool JuegoManager::eliminarJuego() {
 	JuegoArchivo archivo;
-	cout << "Ingrese el id del Juego a eliminar" << endl;
+	listarJuego();
+	mostrarTitulo("Ingrese el id del Juego a eliminar");
 	int id = leerEntero();
 	Juego reg = archivo.buscarPorId(id);
 	if(reg.getId() == -1) {
